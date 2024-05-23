@@ -194,7 +194,6 @@ g <- player_df %>%
 
 ggplotly(g)
 ```
-Sadly I could not make it interactive because ggplotly() produces the following error message: _Error in `add_html_caption()`_
 
 The table below shows the median, mean and max winning streaks summarized by titles.
 ```{r}

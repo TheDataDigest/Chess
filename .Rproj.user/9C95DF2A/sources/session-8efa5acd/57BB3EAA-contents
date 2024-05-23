@@ -1,0 +1,370 @@
+---
+title: "Titled Tuesday - 2023 Awards"
+title-block-banner: "#f0f3f5"
+title-block-banner-color: "black"
+subtitle: "A Tournament that happens every Tuesday on chess.com" 
+description: "This document is was created as an example for the Productive R Workflow course by Yan Holtz"
+
+author: 
+  name: "TheDataDigest"
+  affiliation: "https://www.youtube.com/c/TheDataDigest"
+  email: contact@thedatadigest.email
+
+keywords: "Quarto, Chess.com, Data Analysis, Titled Tuesday"
+date: today
+
+fig-cap-location: margin
+format: 
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+    toc: true
+    toc-title: " "
+    toc-location: left
+    toc-expand: true
+    toc-depth: 2
+    number-sections: true
+editor: source
+---
+
+::: {.callout-caution collapse="true"}
+## A few consideration about this doc
+
+This Quarto document serves as a practical illustration of the concepts covered in the productive workflow online course. It's designed primarily for *educational purposes*, so the focus is on demonstrating Quarto techniques rather than on the rigor of its scientific content.
+:::
+
+## Introduction
+
+This document offers a summary of my analysis for the Titled Tuesday 2023 Awards. Based on the tournament results on chess.com It is designed to complement the [Productive R Workflow](https://www.productive-r-workflow.com) online course.
+
+You can visit the tournament [here](https://www.chess.com/tournament/live/titled-tuesdays).
+
+```{r, message=F, warning=F}
+# load helper functions
+source("../R/2_helper_functions.R")
+
+# load the tidyverse
+library(tidyverse)
+library(patchwork)     # combine charts together
+library(DT)            # interactive tables
+library(knitr)         # static table with the kable() function
+library(plotly)        # interactive graphs
+```
+
+# Setup
+
+## Loading data
+
+The dataset has already been loaded and cleaned in the previous steps of this pipeline. Let's load the clean version, together with specific data sets with regards to the players and results.
+
+```{r}
+# Read the clean dataset
+TT <- readRDS(file = "../input/TitledTuesday_2023_df.RDS")
+player_df <- readRDS(file = "../input/player_2023_df.RDS")
+matches_df <- readRDS(file = "../input/matches_2023_df.RDS")
+results_df <- readRDS(file = "../input/results_2023_df.RDS")
+tournament_streak <- readRDS(file = "../input/tournament_streak_2023_df.RDS")
+winning_streak <- readRDS(file = "../input/winning_streak_2023_df.RDS")
+week_streak <- readRDS(file = "../input/week_streak_2023_df.RDS")
+```
+
+In 2023 there where `r length(unique(TT$file_name))` Titled Tuesday tournaments with a total of `r nrow(player_df)` players participating.
+
+
+# 2023 AWARDS
+
+I created 8 different Award categories:
+
+## Most tournament wins and prize money
+
+This is the code to sort the players by the number of first places and total tournament prize money earned in 2023:
+```{r}
+#| layout-ncol: 2
+
+most_TT_wins <- player_df %>% select(name, title, fed, N_1st, N_participations) %>% 
+ arrange(desc(N_1st)) %>% 
+ slice_head(n=20)
+           
+kable(most_TT_wins)
+
+highest_TT_prize <- player_df %>% select(name, title, fed, total_prize, N_participations) %>% 
+ arrange(desc(total_prize)) %>% 
+ slice_head(n=20)
+kable(highest_TT_prize)
+```
+
+Hikaru Nakamura wins the Award for most Tournament wins and the biggest prize money earned in 2023.
+
+And this is a summary image:
+
+![](images/Folie1.png){fig-alt="An image showing Nakamura, Carlsen and Andreikin" fig-align="left" width=354 height=630 fig-caption="Hikaru Nakamura wins the Award for most Tournament wins and the biggest prize money earned in 2023"}
+
+## Most participations and longest participation streak
+Sergei Zhigalko participated in 100 out of 103 tournaments. 76 participations in a row, playing both the early and late tournament edition over several weeks.
+
+```{r}
+#| layout-ncol: 2
+
+most_participations <- player_df %>% select(name, title, fed,  N_participations) %>% 
+ arrange(desc(N_participations)) %>% 
+ slice_head(n=20)
+  
+kable(most_participations)
+
+longest_participation_streak <- tournament_streak %>% 
+ slice_head(n=20)
+kable(longest_participation_streak)
+```
+
+![](images/Folie2.png){fig-alt="An image showing Zhigalko, Golubev and Vlassov" fig-align="left" width=354 height=630 fig-caption="Sergei Zhigalko wins the Award for most Tournament participaitions and longest participation streak"}
+
+
+
+## Longest winning streak including perfect (11/11) tournament performances
+It is not easy to establish a winning streak in the titled tournament.
+The chart below show the histograms of Grand Masters, International Masters and Fide Masters.
+As you can see, only the Grand Masters manage to accomplish winning streaks of 4-5 games.
+The best of them even make it to 12 wins in a row sometimes.
+
+```{r, fig.align = "center", fig.width=6, fig.height=7, warning=FALSE, fig.cap="Winning streaks by title of player"}
+
+winning_streak %>%
+  filter(title %in% c("GM", "IM", "FM")) %>% 
+  count(title, winning_streak) %>% 
+  ggplot(aes(x = winning_streak, y = n, fill = title)) +
+    geom_col(show.legend = FALSE) +
+    labs(x = "Length of winning streak in games",
+         y = "",
+         subtitle = paste("Winning streaks by title of players:")) + 
+  facet_wrap(~ title, ncol = 1, scales = "free_y") +
+  theme_light()
+```
+
+The table below shows the median, mean and max winning streaks summarized by titles.
+```{r}
+streak_results <- winning_streak %>%
+  filter(title %in% c("GM", "IM", "FM", "CM", "NM")) %>% 
+  group_by(title) %>% 
+  summarize(median = median(winning_streak),
+            mean = round(mean(winning_streak), 2),
+            max = max(winning_streak),
+            `No. of players` = n())
+
+kable(streak_results, caption = "Winning streaks for different titles")
+```
+
+The only players that accomplished a perfect game in 2023 where Hikaru Nakamura and Magnus Carlsen.
+
+```{r}
+perfect_day <- TT %>% filter(score == 11) %>% 
+  select(date_time, name, title, fed, score)
+  
+kable(perfect_day)
+```
+
+This allowed them to get to 15 and 17 wins respectively.
+
+
+```{r}
+longest_wins <- winning_streak %>% select(name, title, fed, winning_streak) %>% 
+ slice_head(n=29)
+  
+kable(longest_wins)
+```
+
+![](images/Folie3.png){fig-align="center" width=354 height=630 fig-caption="test"}
+
+## Lowest rated player to win the tournament
+It is not easy to beat the competition of the highly rated super GMs that participate in this tournament.
+The plot below shows the average rating and average tournament score of all players (in grey), <span style="color: #E69F00;">international masters</span> and <span style="color: #0072B2;">grandmasters</span> that participated in at least ten Titled Tuesday Tournaments.
+
+```{r, fig.align = "center", fig.width=6, fig.height=6, warning=FALSE, fig.cap="average score vs. best rating of players"}
+g <- player_df %>% 
+  filter(N_participations >= 10,
+         title_ordered %in% c("GM", "IM", "FM", "CM", "NM")) %>% 
+  ggplot(aes(x = rating_best, y = score, label = name)) +
+  geom_point(color = "grey", alpha = 0.5) +
+  geom_point(data = player_df %>% filter(N_participations >= 10, title_ordered %in% c("IM")),
+             mapping = aes(x = rating_best, y = score), color = "#E69F00", alpha = 0.6) + 
+  geom_point(data = player_df %>% filter(N_participations >= 10, title_ordered %in% c("GM")),
+             mapping = aes(x = rating_best, y = score), color = "#0072B2", alpha = 0.7) + 
+  theme_light() +
+  scale_y_continuous(breaks = c(0,2,4,6,8,10), limits = c(0, 9)) + 
+  labs(x="best rating", y="average score")
+
+ggplotly(g)
+```
+
+The table below shows the median, mean and max winning streaks summarized by titles.
+```{r}
+lowest_rated_winner <- TT %>%
+  filter(number == 1) %>% 
+  arrange(rating) %>% 
+  select(number, name, title, fed, rating, date_time) %>% 
+  slice_head(n=12)
+
+kable(lowest_rated_winner, caption = 'Winning with a "relatively low" rating')
+```
+
+![](images/Folie4.png){fig-align="center" width=354 height=630}
+
+## Award for the best positioned non-Grand master
+
+The table below shows the players that are not Grand Masters but managed to place second in a tournament
+```{r}
+non_GM_best_place <- TT %>%
+  filter(title != "GM") %>% 
+  arrange(number) %>% 
+  select(number, name, title, fed, rating, date_time) %>% 
+  slice_head(n=20)
+
+kable(non_GM_best_place, caption = 'Best placement of a non-GM')
+```
+
+![](images/Folie5.png){fig-align="center" width=354 height=630}
+
+## Award to sweeping the day (winning early and late tournament)
+6 players accomplished this feat in 2023, winning both, the early and late event on the same day:
+
+```{r}
+sweep <- TT %>% filter(number == 1) %>% 
+  count(date, username, name, title, fed, rating) %>% 
+  filter(n == 2) %>% 
+  select(date, username, name, title, fed, rating) %>% 
+  left_join(player_df %>% select(name, N_participations))
+
+kable(sweep)
+```
+
+![](images/Folie6.png){fig-align="center" width=354 height=630}
+
+Wesley So and Maxime Vachier-Lagrave accomplished this with only 22 and 25 participations respectively.
+
+When we look even deeper into it and check how often a player participated in both the early and late tournament we get the following result:
+
+```{r}
+temp_dates <- TT %>% filter(number == 1) %>% 
+  count(name, date) %>% 
+  filter(n == 2) %>% 
+  arrange(date) %>% pull(date)
+
+temp_names <- TT %>% filter(date %in% temp_dates,
+              number %in% 1) %>% # show second place? 
+  arrange(date, time) %>% 
+  select(date, time, number, fed, title, name, username, score) %>% 
+  pull(name) %>% unique()
+
+same_day_part <- TT %>% filter(name %in% temp_names) %>% 
+  count(name, date) %>% # show line by line
+  filter(n == 2) %>% count(name, sort = TRUE) %>% 
+  arrange(n)
+
+kable(same_day_part)
+```
+Wesley So only participated three times in both events of the same day and managed to sweep the day once. Jose Martinez needed 39 attempts to accomplish this feat.
+
+Additionally 3 players came close to sweeping the day a 2nd time:
+
+* 11 July: Hikaru Nakamura won the early tournament but only placed second in the late event
+* 1 August: Magnus Carlsen won the early tournament but only placed second in the late event
+* 3 October: Hikaru Nakamura won the early tournament but only placed second in the late event
+* 21 November: Magnus Carlsen won the early tournament but only placed second in the late event
+* 19 December: Hikaru placed second in the early tournament and won the late event
+* 26 December: Jose Martinez placed second twice, in the early and late event on that day
+
+```{r}
+win_both <- TT %>% filter(number == 1) %>% 
+  count(date, username, name) %>% 
+  filter(n == 2) %>% pull(date)
+
+win_both2 <- TT %>% filter(number %in% 1:2) %>% 
+  count(date, username, name) %>% 
+  filter(n == 2) %>% arrange(date) %>% pull(date)
+
+came_close <- win_both2[!win_both2 %in% win_both]
+
+coming_close <- TT %>% filter(date %in% came_close, number %in% 1:2) %>% 
+  select(date, time, number, name, score, buchholz_cut_1)
+
+kable(coming_close)
+```
+
+
+## Best woman
+It is not easy to rate which women performed the best in 2023. We can sort them by different criteria and then judge how often one ranked higher than the others.
+
+First we can look at the price money they earned. The highest placed women earns $100 in each tournament
+```{r}
+#| layout-ncol: 1
+women <- TT %>% filter(gender == "Women") %>% pull(name) %>% unique()
+
+women_prize_df <- TT %>% filter(name %in% women) %>% 
+  arrange(file_name, number) %>% 
+  group_by(file_name) %>% slice_head(n = 1) %>% ungroup() %>% 
+  count(name, sort = TRUE) %>% 
+  mutate(women_prize_money = n * 100) %>% 
+  select(-n)
+
+player_df <- player_df %>% left_join(women_prize_df, by = "name")
+player_df$women_prize_money[is.na(player_df$women_prize_money)] <- 0
+
+kable(x = player_df %>% filter(name %in% women, women_prize_money > 0) %>% arrange(desc(women_prize_money)) %>% select(name, title, fed, women_prize_money, N_participations))
+```
+
+We can also sort by other metrics like, highest rating, average score, best place and number of tournaments:
+
+```{r}
+women_df <- player_df %>% filter(name %in% women) %>% 
+  select(name, title, fed, best_Place, score, rating_best, N_participations) %>% 
+  arrange(best_Place)
+
+DT::datatable(women_df)
+```
+
+
+![](images/Folie7.png){fig-align="center" width=354 height=630}
+
+## Biggest draw
+
+Something unusual happened on 18 April in the late event. There was a draw with 8 players having the same score of 9 points.
+```{r}
+draw1 <- TT %>% filter(date == "2023-04-18", time == "late",
+              number %in% 1:10) %>% 
+  select(date, time, name, title, fed, score, buchholz_cut_1, rating, games_played)
+
+kable(draw1)
+```
+
+
+Something even more unusual happened on 8 August in the early event. There was a draw with 12 players having the same score.
+Mahdi Gholami Orimi, an International Master from Iran missed the first game. With another half point he would have been the sole winner and the only non-GM to win a titled Tuesday tournament in 2023.
+
+
+```{r}
+draw2 <- TT %>% filter(date == "2023-08-08", time == "early",
+              number %in% 1:14) %>% 
+  select(date, time, name, title, fed, score, buchholz_cut_1, rating, games_played)
+
+kable(draw2)
+```
+
+Here is the distribution of shared top scores.
+
+```{r, warning=FALSE, message=FALSE}
+# How often is the first place tied, and what was the most common tie?
+draw_distribution <- TT %>% group_by(file_name) %>% 
+  filter(score == max(score)) %>% 
+  count(file_name) %>% ungroup() %>% 
+  count(n) %>% 
+  mutate(percent = round((nn / sum(nn) * 100),1))
+
+names(draw_distribution) <- c("Player with same score", "N", "%")
+
+kable(draw_distribution)
+```
+
+54% of the time a single player has the highest score and no tie-break (Buchholz System Cut 1) is necessary.
+27% of the time 2 players have the same highest score and ~12% of the time it is shared by 3 players. Ties with 4 players or more are rather rare (5% and lower).
+
+
+

@@ -1,0 +1,5 @@
+"0","tournament_streak %>% group_by(name) %>% 
+  summarize(longest_tour_streak = longest_sequence(a)) %>% 
+  arrange(desc(longest_tour_streak)) %>% left_join(TT %>% select(name, title, fed) %>% distinct())
+"
+"2","Joining with `by = join_by(name)`"

@@ -1,0 +1,705 @@
+---
+title: "Magnus vs Hikaru at Titled Tuesday 2023 analysis"
+author: "Torsten Blass aka https://www.youtube.com/c/TheDataDigest"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: yes
+    toc_depth: 2
+    number_sections: yes
+  word_document:
+    toc: yes
+    toc_depth: '2'
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+---
+
+
+```{r setup, include=TRUE, cache=FALSE, message=FALSE, echo=FALSE}
+#knitr::opts_chunk$set(cache.extra = 1) 
+Sys.setenv(lang = "en_US")
+knitr::opts_chunk$set(echo = TRUE)
+
+rm(list=ls())
+
+
+#setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+setwd(dir = "E:/The Data Digest/YouTube/Videos/43_Magnus_Hikaru_MVL_Alireza")
+load(file = "E:/The Data Digest/YouTube/Videos/43_Magnus_Hikaru_MVL_Alireza/TitledTuesday.RData")
+
+player_df$name[player_df$name== "Платон Гальперин"] <- "Platon Galperin"
+
+```
+
+```{r load-packages, include=TRUE, cache=FALSE, message=FALSE, echo=FALSE}
+#install.packages("kableExtra")
+library(dplyr)
+library(magrittr)
+library(knitr)
+library(tidyverse)
+library(forcats)
+library(kableExtra)
+library(glue) 
+
+theme_set(new = theme_light())
+```
+
+
+```{r TT_long_rating, include=TRUE, message=FALSE, echo=FALSE}
+## ALL players encounters ----
+TT_long <- TT %>% 
+  select(file_name, date_time, number, username, rating, fed, title, rnd1:rnd11) %>% 
+  pivot_longer(cols = -c(file_name:title)) %>% 
+  mutate(last_letter = substr(x = value, start = nchar(value), stop = nchar(value)),
+         first_letter = substr(x = value, start = 1, stop = 1),
+         color = if_else(last_letter == "W", "white", "black"),
+         opponent_number = gsub(pattern = "[^0-9]", replacement = "", x = value),
+         date_time_number = paste0(date_time, "_", number),
+         date_time_opponent = paste0(date_time, "_", opponent_number)) %>% 
+  left_join(data.frame(first_letter = c("W", "L", "D"), 
+                       result = c("win", "lose", "draw")), by = "first_letter")  
+
+names(TT_long)[8] <- "round"
+
+opponent_df <- TT_long %>% select(date_time_number, username, rating)
+TT$opponent_username <- TT$username ## what doing?
+TT_long$opponent_username <- opponent_df$username[match(TT_long$date_time_opponent, opponent_df$date_time_number)]
+TT_long$opponent_rating <- opponent_df$rating[match(TT_long$date_time_opponent, opponent_df$date_time_number)]
+
+TT_opponent_names_df <- TT %>% select(opponent_username, name) %>% distinct()
+TT_hero_names_df <- TT %>% select(username, name) %>% distinct()
+names(TT_hero_names_df)[2] <- "hero_name"
+
+TT_long <- TT_long %>% 
+  left_join(TT_opponent_names_df, by = "opponent_username") %>% 
+  na.omit()
+
+TT_long <- TT_long %>% 
+  left_join(TT_hero_names_df, by = "username")
+
+names(TT_long)[17] <- "opponent_username"
+names(TT_long)[19] <- "opponent_name"
+names(TT_long)[5] <- "hero_rating"
+
+```
+
+# Introduction
+
+In this article we are looking into the two dots of the top right corner of this scatter plot that shows players (in grey), <span style="color: #E69F00;">international masters</span> and <span style="color: #0072B2;">grandmasters</span> that participated in at least ten Titled Tuesday Tournaments with their average rating and average score (x out of 11).
+The top right corner is reserved for Hikaru Nakamura and Magnus Carlsen.
+
+```{r rating_vs_score, cache=TRUE, echo=FALSE, message=FALSE, fig.height=4, fig.width=6, fig.align='center', fig.cap= "Fig.1 - Scatterplot"}
+library(tidyverse)
+player_df$title <- TT$title_ordered[match(player_df$username, TT$username)]
+
+player_df %>% 
+    filter(N_participations >= 10) %>% 
+  # filter(N_participations >= 10,
+  #        title_ordered %in% c("GM", "IM", "FM", "CM", "NM")) %>% 
+  ggplot(aes(x = rating_avg, y = avg_score)) +
+  geom_point(aes(x=3280, y=8.56), size=12, shape=21, color = "black") + 
+  geom_point(color = "grey", alpha = 0.5) +
+  geom_point(data = player_df %>% filter(N_participations >= 10, title %in% c("IM")),
+             mapping = aes(x = rating_avg, y = avg_score), color = "#E69F00", alpha = 0.6) + 
+  geom_point(data = player_df %>% filter(N_participations >= 10, title %in% c("GM")),
+             mapping = aes(x = rating_avg, y = avg_score), color = "#0072B2", alpha = 0.7) + 
+#  geom_point(data = player_df %>% filter(username %in% c("Hikaru", "MagnusCarlsen")),
+#             mapping = aes(x = rating_avg, y = avg_score), color = "darkblue", alpha = 1, size = 2) + 
+  scale_y_continuous(breaks = c(0,2,4,6,8,10), limits = c(0, 9)) + 
+  labs(x="Average player rating", y="Average player score") +
+  theme_light()
+
+```
+
+We can look at the total prize money earned throughout 2023 to find Hikaru (\$29,000) winning almost twice as much as Magnus (\$15,850). Nakamural also won the tournament twice as often as Carlsen (18 vs 9 wins), but this is mostly due to the fact that he participated almost twice as often (74 vs 39).
+See chart below for the top 10 players from Titled Tuesday 2023 tournaments with regards to their prize money won based on the places 1-5.
+
+```{r top10 with money, echo = FALSE, cache=TRUE, message=FALSE, fig.height=6, fig.width=8, fig.align='center', fig.cap= "Fig.2 - Winning the tournament, placing top 5, total prize money"}
+
+library(scales)
+top10_money <- player_df %>% 
+  mutate(label_N_usd = paste0(dollar(total_prize), ",\n", N_participations, " participations"),
+         second_fifth = N_Top5 - N_1st) %>% 
+  select(name, N_participations, total_prize, N_1st, second_fifth, label_N_usd, N_Top5) %>% 
+  arrange(desc(total_prize)) %>% 
+  slice_head(n = 10) %>% 
+  pivot_longer(cols = -c(name, N_participations, total_prize, label_N_usd, N_Top5), names_to = "places", values_to = "N")  
+
+top10_money$places <- gsub(pattern = "N_1st", replacement = "1st place", x = top10_money$places)
+top10_money$places <- gsub(pattern = "second_fifth", replacement = "2nd-5th place", x = top10_money$places)
+
+top10_money$name = factor(top10_money$name, levels = unique(top10_money$name))
+top10_money$places = factor(top10_money$places, levels = c("2nd-5th place", "1st place"))
+#top10_money <- top10_money %>% group_by(name) %>% add_count(wt = N)
+
+top10_money %>% 
+  ggplot(aes(x = name, y = N, fill = places, label = N)) +
+  geom_col(position = "stack") +
+  geom_text(size = 3, position = position_stack(vjust = 0.5)) + 
+  geom_text(data = top10_money, aes(x = name, y = N_Top5, label = label_N_usd), nudge_y = 7, size = 3) + 
+  coord_flip() + 
+  scale_y_continuous(limits = c(0, 50)) +
+  scale_x_discrete(limits=rev) +
+  labs(x = "", y = "# Winning the tournament or placing Top5, N participations, Total prize money",
+       fill = "Position:") +
+  guides(fill = guide_legend(reverse=T)) +
+  theme_light() +
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
+
+```
+
+# Winning Chance and money per participation
+To find out if one of the players was actually out performing the other we have to check their "per tournament statistics".
+
+Hikaru won 18 out of 74 tournaments (`r round(18/74*100, 1)`%) and is slightly ahead of Magnus, who won 9 out of 39 tournaments (`r round(9/39*100, 1)`%). 
+
+Honorable mention of Liem Le who one 3 out of 10 tournaments (30%) and the 4th place Maxime Vachier-Lagrave, who won 5 out of 25 tournaments (20%).
+
+```{r winning chance, results = 'asis', eval=TRUE, echo=FALSE, cache = TRUE}
+player_df %>% arrange(desc(winning_chance)) %>% 
+  slice_head(n=10) %>% 
+  mutate(winning_pct = paste0(round(winning_chance*100, 1), "%")) %>% 
+  select(name, N_participations, N_1st, winning_pct) %>%
+  knitr::kable(caption = "Table 1: Winning chance (First places/Tournament participations)", digits = 0) %>%
+  kableExtra::kable_styling(bootstrap_options = "striped", full_width = FALSE)
+``` 
+
+
+With regards to the average prize money per participation Magnus (\$406) holds a slight edge over Hikaru ($401).
+
+```{r average prize, results = 'asis', eval=TRUE, echo=FALSE, cache = TRUE}
+player_df %>% arrange(desc(avg_prize)) %>% 
+  slice_head(n=10) %>% 
+  mutate(total_prize = dollar(total_prize),
+         avg_prize = dollar(avg_prize)) %>% 
+  select(name, avg_prize, N_participations, total_prize, rating_best) %>%
+  knitr::kable(caption = "Table 2: Average prize per tournament", digits = 0) %>%
+  kableExtra::kable_styling(bootstrap_options = "striped", full_width = FALSE)
+``` 
+
+# Winning with white or black pieces
+```{r color calculations, echo = FALSE, cache = TRUE, message=FALSE}
+# 7) Winning % with white/black
+games_color <- results_df %>% pivot_longer(cols = -c(username, games_w_White, games_w_Black)) %>% 
+  mutate(percent_white = value / games_w_White,
+         percent_black = value / games_w_Black,
+         color = factor(gsub(pattern = ".+_", x = name, replacement = ""), levels = c("White", "Black")),
+         result = factor(gsub(pattern = "_.+", x = name, replacement = ""), levels = c("lose", "draw", "win"))) 
+names(games_color)[4] <- "result_color"
+
+# make a stacked barchart for top 10 players (how common is it in this tournament)
+top20 <- player_df %>% filter(N_participations > 10) %>% arrange(desc(avg_score)) %>% head(20) %>% pull(username)
+
+## 7a) wins with white ----
+games_color_N20 <- games_color %>% filter(username %in% top20)
+games_color_N20$name <- player_df$name[match(games_color_N20$username, player_df$username)]
+
+player_white_win <- games_color_N20 %>% filter(color == "White", result == "win") %>% arrange(percent_white) %>% pull(name)
+player_white_loss <- games_color_N20 %>% filter(color == "White", result == "lose") %>% arrange(percent_white) %>% pull(name)
+
+games_color_N20$name_win_White <- factor(games_color_N20$name, levels = player_white_win)
+games_color_N20$result_win <- factor(games_color_N20$result, levels = c("lose", "draw", "win"))
+# sort by lowest loss-% and by highest win-%
+
+#player_df %>% filter(username %in% top20) %>% select(username, name) %>% right_join(games_color_N20)
+
+p_white_win <- games_color_N20 %>% filter(color == "White") %>% 
+  ggplot(aes(x = percent_white, fill = result_win, y = name_win_White)) +
+  geom_col(position = "stack") +  
+  scale_x_continuous(labels = scales::percent, expand = c(0, 0)) +
+  geom_text(data = games_color_N20 %>% filter(color == "White" & result == "win"),
+            aes(label = paste0(round(percent_white*100, 1),"%")), 
+            position = position_stack(vjust = 0.5), 
+            size = 3, color = "white") +
+  scale_fill_manual(values = c("#F8766D", "#619CFF", "#00BA38")) +
+  labs(x = "", y = "", fill = "Result:") +
+  theme_light()
+
+games_color_N20$name_lose_White <- factor(games_color_N20$name, levels = rev(player_white_loss))
+games_color_N20$result_lose <- factor(games_color_N20$result, levels = c("win", "draw", "lose"))
+p_white_loss <- games_color_N20 %>% filter(color == "White") %>% 
+  ggplot(aes(x = percent_white, fill = result_lose, y = name_lose_White)) +
+  geom_col(position = "stack") +  
+  scale_x_continuous(labels = scales::percent, expand = c(0, 0)) +
+  geom_text(data = games_color_N20 %>% filter(color == "White" & result == "lose"),
+            aes(label = paste0(round(percent_white*100, 1),"%")), 
+            position = position_stack(vjust = 0.7), 
+            size = 3, color = "white") +
+  theme_light() +
+  scale_fill_manual(values = c("#00BA38", "#619CFF", "#F8766D")) +
+  labs(x = "", y = "", fill = "Result:")
+
+
+## 7b) repeat for black ----
+player_black_win <- games_color_N20 %>% filter(color == "Black", result == "win") %>% arrange(percent_black) %>% pull(name)
+player_black_loss <- games_color_N20 %>% filter(color == "Black", result == "lose") %>% arrange(percent_black) %>% pull(name)
+
+games_color_N20$name_win_Black <- factor(games_color_N20$name, levels = player_black_win)
+games_color_N20$result <- factor(games_color_N20$result, levels = c("lose", "draw", "win"))
+# sort by lowest loss-% and by highest win-%
+p_black_win <- games_color_N20 %>% filter(color == "Black") %>% 
+  ggplot(aes(x = percent_black, fill = result, y = name_win_Black)) +
+  geom_col(position = "stack") +  
+  scale_x_continuous(labels = scales::percent, expand = c(0, 0)) +
+  geom_text(data = games_color_N20 %>% filter(color == "Black" & result == "win"),
+            aes(label = paste0(round(percent_black*100, 1),"%")), 
+            position = position_stack(vjust = 0.5), 
+            size = 3, color = "white") +
+  theme_light() +
+  scale_fill_manual(values = c("#F8766D", "#619CFF", "#00BA38")) +
+  labs(x = "", y = "", fill = "Result:")
+
+# interesting - draw is most common over the table classical chess, but least likely in 3min events
+
+## stacked bar charts wins, draws, losses in percent, facet_wrap black and white or by player split (facet grid)
+# top 10 players black and white side by side (grid)
+games_color_N20$percent <- games_color_N20$percent_white
+games_color_N20$percent[games_color_N20$color == "Black"] <- games_color_N20$percent_black[games_color_N20$color == "Black"]
+
+games_color_N20$name_lose_Black <- factor(games_color_N20$name, levels = rev(player_black_loss))
+games_color_N20$result <- factor(games_color_N20$result, levels = c("win", "draw", "lose"))
+p_black_loss <- games_color_N20 %>% filter(color == "Black") %>% 
+  ggplot(aes(x = percent_black, fill = result, y = name_lose_Black)) +
+  geom_col(position = "stack") +  
+  scale_x_continuous(labels = scales::percent, expand = c(0, 0)) +
+  geom_text(data = games_color_N20 %>% filter(color == "Black" & result == "lose"),
+            aes(label = paste0(round(percent_black*100, 1),"%")), 
+            position = position_stack(vjust = 0.5), 
+            size = 3, color = "white") +
+  theme_light() +
+  scale_fill_manual(values = c("#00BA38", "#619CFF", "#F8766D")) +
+  labs(x = "", y = "", fill = "Result:")
+
+
+
+# player_winning_chance <- player_df %>% filter(name %in% games_color_N20$name) %>% arrange(desc(winning_chance)) %>%   pull(name) %>% unique()
+# games_color_N20$name_best <- factor(games_color_N20$name, levels = rev(player_winning_chance))
+
+# games_color_N20 %>% 
+#   mutate(result2 = factor(result, levels = c("lose", "draw", "win"))) %>% 
+#   ggplot(aes(x = percent, fill = result2, y = name_best)) +
+#   geom_col(position = "stack") +  
+#   scale_x_continuous(labels = scales::percent, expand = c(0, 0)) +
+#   geom_text(aes(label = paste0(round(percent*100, 1),"%")), 
+#             position = position_stack(vjust = 0.5), 
+#             size = 3, color = "white") +
+#   facet_wrap(~color) +
+#   theme_light() +
+#   scale_fill_manual(values = rev(c("#00BA38", "#619CFF", "#F8766D"))) +
+#   labs(fill = "Result:", x= "", y="")
+
+
+
+```
+
+When we look at players that participated in 10 or more Titled Tuesday tournaments (to have a somewhat solid foundation for winning percentages). We see that Magnus Carlsen has the highest winning percentage of all players (80% with white pieces and 72.7% with black pieces).
+Hikaru is ranked 5th for winning with the white pieces (77.4% of the time) and ranked 3rd with the black pieces (70.1%).
+
+```{r winning percent, echo=FALSE, cache=TRUE, fig.height=6, fig.width=10, fig.align='center', fig.cap= "Fig.3 - Winning with white and black pieces", message =FALSE}
+
+library(gridExtra)
+grid.arrange(p_white_win + theme(legend.position = "none"), 
+             p_black_win + theme(legend.position = "none"), ncol=2)
+
+```
+However Hikaru is really hard to beat. With the black pieces he is slightly ahead of Magnus (only losing 13.4% of the games with black, compared to Magnus 13.9%).
+Magnus only lost 6.3% of the games with white. A statistics that is far ahead of the competition.
+
+```{r losing percent, echo=FALSE, cache=TRUE, fig.height=6, fig.width=10, fig.align='center', fig.cap= "Fig.4 - Losing with white and black pieces", message=FALSE}
+
+library(gridExtra)
+grid.arrange(p_white_loss + theme(legend.position = "none"), 
+             p_black_loss + theme(legend.position = "none"), ncol=2)
+
+```
+
+# Winning streaks
+The table below shows all players with a winning streak of 11 and higher.
+
+```{r, results = 'asis', eval=TRUE, echo=FALSE, cache=TRUE}
+streak_res %>% ungroup() %>% 
+  filter(winning_streak >= 11) %>% 
+  arrange(desc(winning_streak)) %>% 
+  slice_head(n=30) %>% 
+  knitr::kable(caption = "Table 5: Player with a winning streak of 11 or higher", digits = 2) %>%
+  kableExtra::kable_styling(bootstrap_options = "striped", full_width = FALSE)
+```  
+
+*Magnus won round 10 and 11 in the late tournament on June 27. Then he won all games in the late TT on July 4 and the first 4 games in the late TT on July 11 (2+11+4=17)*
+
+*Hikaru won round 11 in the early tournament on August 22. Then he won all games in the late TT the same day and the first 3 rounds in the early TT on September 5 (1+11+3=15)*
+
+# Winning both tournaments ("Sweeping the day")
+In 2023 there were 6 players who accomplished to win both events on that day.
+Attempts refers to the times a player participated in the early and late tournament on the same day.
+
+```{r sweepers, results = 'asis', eval=TRUE, echo=FALSE, cache=TRUE}
+sweep_df <- TT %>% filter(number == 1) %>% 
+  count(date, username, name) %>% 
+  filter(n == 2) %>% select(-n)
+sweep_df$attempts <- c(3, 34, 6, 23, 38, 9)
+
+sweep_df %>% 
+  knitr::kable(caption = "Table 6: Player who won both tournaments on the same day", digits = 0) %>%
+  kableExtra::kable_styling(bootstrap_options = "striped", full_width = FALSE)
+``` 
+
+__Hikaru came close to a second sweep on 3 occasions.__
+
+* July 11: winning the early tournament but placing "only" second on the late event behind Magnus Carlsen
+* October 3: again winning the early tournament but placing second behind Oleksandr Bortnyk on the late event.
+* December 19: winning the late event but placing second on the early one behind Magnus Carlsen.
+  
+__Magnus came close on 2 more occasions.__
+
+* August 1: winning the early event but placing second behind Alexander Grischuk.
+* November 21: winning the early event but placing second behind Liem Le on the late event.
+
+
+# Direct comparisons
+In 2023 Hikaru Nakamura faced Magnus Carlsen 10 times:
+  + twice with the black pieces (drawing both games)
+  + and 8 times playing with white (2 draws, 3 wins, 3 losses)
+
+Therefore this point is a draw with a slight advantage for Magnus, because he played black 8 out of 10 times.
+
+In the 2nd segment of the chess speed championship, (3-minute games) Magnus won 5:4 games.
+
+Link to the chess-com video on youtube (https://www.youtube.com/live/CbJSYohWnoc?si=74LgbhWh0EpRpUCr&t=8598).
+
+
+## Top match-ups for Hikaru
+```{r Hikaru encounters, echo=FALSE, fig.height=5, fig.width=7, fig.align='center', fig.cap= "Fig.5 - Hikarus results against most common encounters", message = FALSE, cache = TRUE, message =FALSE}
+
+# stacked bar chart / put (n) in parenthesis for encounters, sort thusly
+Hikaru_results <- TT_long %>% filter(hero_name == "Hikaru Nakamura") %>% 
+  group_by(opponent_name) %>% 
+  count(result) %>% 
+  add_count(wt = n) %>% 
+  filter(nn > 2) %>% 
+  mutate(pct = n / nn) %>% 
+  mutate(name_N = glue('{opponent_name} ({nn})'))
+  
+Hikaru_results$result <- factor(Hikaru_results$result, levels = c("win", "draw", "lose"))  
+  
+top16 <- Hikaru_results %>% select(opponent_name, nn) %>% distinct() %>% arrange(desc(nn)) %>% head(16) %>% pull(opponent_name)
+
+Hikaru_results %>% filter(opponent_name %in% top16) %>% 
+  ggplot(aes(y = fct_reorder(name_N, nn), x = pct, 
+             label = pct, fill = result)) +
+  geom_col(position = "stack") +  
+  scale_x_continuous(labels = scales::percent, expand = c(0, 0)) +
+  geom_text(aes(label = paste0(round(pct*100, 1),"%")), 
+            position = position_stack(vjust = 0.5), 
+            size = 3, color = "white") +
+  theme_light() +
+  scale_fill_manual(values = c("#00BA38", "#619CFF", "#F8766D")) +
+  labs(x = "", y = "", fill = "Result:", subtitle = "Hikaru Nakamuras most common encounters in 2023\nTitled Tuesday Tournaments") 
+```
+As you can see Hikarus best result is against Jose Alcantara (10 wins in 12 games). He also did not lose against Maksim Chigaev, Jeffery Xiong, Vugar Rasulov and Bogdan Daniel Deac. All players that he faced 7 or more times.
+But Hikaru could not beat Fabiano Caruana in any of the 9 encounters in 2023 Titled Tuesday Tournaments.
+
+Other opponents that he faced 3 or more times and could not gain a point advantage on are:
+```{r Hikaru resistance, results = 'asis', eval=TRUE, echo=FALSE, message =FALSE}
+options(knitr.kable.NA = '')
+library(tidyverse)
+temp_h <- Hikaru_results %>% select(opponent_name, result, n) %>% pivot_wider(names_from = "result", values_from = "n")
+
+hikaru2 <- temp_h %>% filter(opponent_name %in% c("Fabiano Caruana", "Dmitrij Kollars", "Maxim Matlakov", "Shant Sargsyan", "Anton Korobov", "Nihal Sarin")) %>% select(opponent_name, win, draw, lose)
+
+hikaru2 %>% 
+  knitr::kable(caption = "Table 7: Opponents that had a positive score against Hikaru", digits = 0) %>%
+  kableExtra::kable_styling(bootstrap_options = "striped", full_width = FALSE)
+``` 
+
+
+
+## Top match-ups for Magnus
+```{r Magnus encounters, echo=FALSE, fig.height=5, fig.width=7, fig.align='center', fig.cap="Fig.6 - Magnus' results against most common encounters", message = FALSE}
+library(tidyverse)
+library(glue)
+# stacked bar chart / put (n) in parenthesis for encounters, sort thusly
+Magnus_results <- TT_long %>% filter(hero_name == "Magnus Carlsen") %>% 
+  group_by(opponent_name) %>% 
+  count(result) %>% 
+  add_count(wt = n) %>% 
+#  filter(nn > 5) %>% 
+  mutate(pct = n / nn) %>% 
+  mutate(name_N = glue('{opponent_name} ({nn})'))
+  
+Magnus_results$result <- factor(Magnus_results$result, levels = c("win", "draw", "lose"))  
+  
+top12 <- Magnus_results %>% select(opponent_name, nn) %>% distinct() %>% arrange(desc(nn)) %>% head(12) %>% pull(opponent_name)
+
+Magnus_results %>% filter(opponent_name %in% top12) %>% 
+  ggplot(aes(y = fct_reorder(name_N, nn), x = pct, 
+             label = pct, fill = result)) +
+  geom_col(position = "stack") +  
+  scale_x_continuous(labels = scales::percent, expand = c(0, 0)) +
+  geom_text(aes(label = paste0(round(pct*100, 1),"%")), 
+            position = position_stack(vjust = 0.5), 
+            size = 3, color = "white") +
+  theme_light() +
+  scale_fill_manual(values = c("#00BA38", "#619CFF", "#F8766D")) +
+  labs(x = "", y = "", fill = "Result:", subtitle = "Magnus Carlsens most common encounters in 2023\nTitled Tuesday Tournaments") 
+```
+The table below shows opponents that played against Magnus 3 or more times in 2023 and came out ahead.
+
+
+```{r Magnus resistance, results = 'asis', eval=TRUE, echo=FALSE, message =FALSE}
+options(knitr.kable.NA = '')
+temp_m <- Magnus_results %>% select(opponent_name, result, n) %>% pivot_wider(names_from = "result", values_from = "n")
+
+magnus2 <- temp_m %>% filter(opponent_name %in% c("Fabiano Caruana", "Dimitry Andreikin", "Maksim Chigaev", "Maxime Vachier-Lagrave", "Pranav V")) %>% select(opponent_name, win, draw, lose)
+
+magnus2 %>% 
+  knitr::kable(caption = "Table 8: Opponents that had a positive score against Magnus Carlsen", digits = 0) %>%
+  kableExtra::kable_styling(bootstrap_options = "striped", full_width = FALSE)
+``` 
+
+In summary we can state that eventhough Hikaru and Magnus were the best Titled Tuesday players in 2023, Fabiano Caruana won half his games against Magnus and 5 out of 9 against Hikaru.
+
+# Distribution of players rating they faced (total and minus their own rating)
+Hikaru played a total of 791 games in his 74 Titled Tuesday tournaments in 2023. He faced 394 different opponents.
+The figure below shows the rating of his opponents:
+
+```{r Hikaru rating histogram, echo=FALSE, fig.height=4, fig.width=6, fig.align='center', fig.cap= "Fig.7 - Histogram of Hikarus' opponents ratings", message = FALSE}
+
+library(tidyverse)
+TT_long %>% filter(hero_name == "Hikaru Nakamura") %>% 
+  ggplot(aes(x = opponent_rating)) +
+  geom_histogram(color = "darkgrey", fill = "lightgrey") +
+  labs(y = "", x = "Rating of Hikaru's opponenets") +
+  theme_light()
+```
+
+We can make a similar chart for Magnus Carlsen who participated in 39 tournaments, played 399 games against 239 different opponents.
+
+```{r Magnus rating histogram, echo=FALSE, fig.height=4, fig.width=6, fig.align='center', fig.cap= "Fig.8 - Histogram of Magnus' opponents ratings", message = FALSE}
+
+TT_long %>% filter(hero_name == "Magnus Carlsen") %>% 
+  ggplot(aes(x = opponent_rating)) +
+  geom_histogram(color = "darkgrey", fill = "lightgrey") +
+  labs(y = "", x = "Rating of Magnus's opponenets") +
+  theme_light()
+```
+We see a similar pattern for both players. There are a few opponents with a rating below 2500, which come from the early stages of the tournament were players are matched randomly.
+
+As the score increases, which is usually the case for these super GMs, the players they face in later rounds also have high scores and high ratings.
+
+We can compare the distribution of opponent ratings for both players with a density chart.
+It makes both players comparable regardless of the fact that Hikaru played twice as many tournaments.
+The area under the red and blue line adds up to 100% respectively.
+We can see that on average Magnus had to play higher rated players a bit more often.
+Because the blue line is shifted to the rigth.
+Hikarus average rating throughout 2023 was 3289 compared to Magnus' 3268.
+* The average rating of Hikarus opponents were (mean: 2853 and median: 2890)
+* The average rating of Magnus' opponents were (mean: 2871 and median: 2910)
+
+_A statistical test (t-test) does not find this difference to be significant_
+
+```{r Rating density chart, echo=FALSE, fig.height=4, fig.width=6, fig.align='center', fig.cap= "Fig.9 - Density chart of rating differences", cache = TRUE, message = FALSE}
+
+TT_long %>% 
+  filter(hero_name %in% c("Hikaru Nakamura", "Magnus Carlsen")) %>% 
+  ggplot(aes(x = opponent_rating, color = hero_name)) +
+  geom_density(size = 1) +
+  labs(y = "", x = "Rating of Hikarus' and Magnus' opponents", color = "Player:") +
+  theme(axis.ticks.y = element_blank(), axis.text.y = element_blank()) +
+  theme_light()
+```
+
+
+
+```{r Rating differences density chart, include = FALSE, echo=FALSE, fig.height=4, fig.width=6, fig.align='center', fig.cap= "Fig.9b - Density chart of rating differences", cache = TRUE}
+# And we can transform the rating of the opponent to a rating difference by substracting the rating of Hikaru and Magnus respectively.
+# Hikarus average rating throughout 2023 was 3289 compared to Magnus' 3268.
+# The average (mean and median) rating difference for Hikaru Nakamuras games was (436 and 397).
+# The average (mean and median) rating difference for Magnus Carlsens games was (397 and 358).
+# 
+# There are some negative values for both. 
+# The negative rating come exclusively from the cases where they faced each other.
+# In 9 out of these 10 encounters Magnus had a slightly smaller rating than Hikaru.
+
+
+TT_long <- TT_long %>% 
+  mutate(rating_difference = hero_rating - opponent_rating)
+
+# TT_long %>% 
+#   filter(hero_name %in% c("Hikaru Nakamura", "Magnus Carlsen")) %>% 
+#   ggplot(aes(x = rating_difference, color = hero_name, fill = hero_name)) +
+#   geom_density(alpha = 0.05) +
+#   labs(y = "", x = "Rating differences for Hikarus' and Magnus' opponenets")
+
+TT_long %>% 
+  filter(hero_name %in% c("Hikaru Nakamura", "Magnus Carlsen")) %>% 
+  ggplot(aes(x = rating_difference, color = hero_name)) +
+  geom_density(size = 1) +
+  labs(y = "", x = "Rating differences for Hikarus' and Magnus' opponents", color = "Player:") +
+  theme(axis.ticks.y = element_blank(), axis.text.y = element_blank()) +
+  theme_light()
+```
+
+
+
+# Linear model
+Let's see if a linear model can decide which player was better throughout 2023.
+We can try to predict the score (1-win, 0.5-draw, 0-loss) of each game based on the rating of the opponent, and the pieces (black/white).
+
+```{r general model, echo=FALSE, include = FALSE, fig.height=4, fig.width=6, fig.align='center', fig.cap= "Fig.8 - Hikaru vs Magnus overall"}
+score_df <- data.frame(result = c("win", "draw", "lose"),
+                       score = c(1, 0.5, 0))
+TT_long <- TT_long %>% left_join(score_df)
+
+TT_long %>% 
+  filter(hero_name %in% c("Hikaru Nakamura", "Magnus Carlsen")) %>% 
+  ggplot(aes(x = rating_difference, y = score, color = hero_name)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", se = 0) + 
+  labs(y = "", x = "opponents rating difference", 
+       subtitle = "Predicting the score for Hikaru and Magnus based on rating differences of their opponents", 
+       color = "Player:")  +
+  theme_light()
+```
+
+```{r including pieces model, include = FALSE, echo=FALSE, fig.height=4, fig.width=6, fig.align='center', fig.cap= "Fig.9 - Hikaru vs Magnus with pieces color"}
+
+TT_long %>% 
+  filter(hero_name %in% c("Hikaru Nakamura", "Magnus Carlsen")) %>% 
+  ggplot(aes(x = rating_difference, y = score, color = hero_name)) +
+  geom_point(alpha = 0.5) +
+  facet_wrap(~ color) + 
+  geom_smooth(method = "lm", se = 0) + 
+  labs(y = "", x = "opponents rating difference", 
+       subtitle = "Predicting the score for Hikaru and Magnus based on starting color\nand rating differences of their opponents", 
+       color = "Player:")  +
+  theme_light()
+```
+
+The line of best fit is above 0.5 for both players even on the right side of the chart where opponents have really high ratings. We knew this because both players have ~75% winning chance overall.
+But the line for Magnus is above the line from Hikaru which means that a linear model adds some points for the former player.
+
+```{r general model 2, echo=FALSE, fig.height=4, fig.width=6, fig.align='center', fig.cap= "Fig.10 - Hikaru vs Magnus overall"}
+score_df <- data.frame(result = c("win", "draw", "lose"),
+                       score = c(1, 0.5, 0))
+TT_long <- TT_long %>% left_join(score_df)
+
+TT_long %>% 
+  filter(hero_name %in% c("Hikaru Nakamura", "Magnus Carlsen")) %>% 
+  ggplot(aes(x = opponent_rating, y = score, color = hero_name)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", se = 0) + 
+  labs(y = "", x = "opponents rating", 
+       subtitle = "Predicting the score for Hikaru and Magnus based on rating of their opponents", 
+       color = "Player:")  +
+  theme_light()
+```
+
+If we look into the details based on the starting pieces we see that both players have higher lines with white pieces and that Magnus is still ahead of Hikaru, especially when playing with white.
+
+```{r including pieces model 2, echo=FALSE, fig.height=4, fig.width=6, fig.align='center', fig.cap= "Fig.11 - Hikaru vs Magnus with pieces color"}
+
+TT_long %>% 
+  filter(hero_name %in% c("Hikaru Nakamura", "Magnus Carlsen")) %>% 
+  ggplot(aes(x = opponent_rating, y = score, color = hero_name)) +
+  geom_point(alpha = 0.5) +
+  facet_wrap(~ color) + 
+  geom_smooth(method = "lm", se = 0) + 
+  labs(y = "", x = "opponents rating difference", 
+       subtitle = "Predicting the score for Hikaru and Magnus based on starting color\nand rating of their opponents", 
+       color = "Player:")  +
+  theme_light()
+```
+
+In the chart below the overall effect of pieces is clearer. Against higher rated players, having white is a bigger advantage. (blue line for white is above red). But as the opponents get weaker, this advantage is less important.
+Now even having black generally leads to a win.
+
+*In statistics this is called an interaction. The advantage of having white is different depending on the opponents rating.*
+
+```{r including pieces model 3, echo=FALSE, fig.height=4, fig.width=6, fig.align='center', fig.cap= "Fig.12 - Hikaru vs Magnus with pieces color"}
+
+TT_long %>% 
+  filter(hero_name %in% c("Hikaru Nakamura", "Magnus Carlsen")) %>% 
+  ggplot(aes(x = opponent_rating, y = score, color = color)) +
+  geom_point(alpha = 0.5) +
+  facet_wrap(~ hero_name) + 
+  geom_smooth(method = "lm", se = 0) + 
+  labs(y = "", x = "opponents rating difference", 
+       subtitle = "Predicting the score for Hikaru and Magnus based on starting color and rating of their opponents", 
+       color = "Pieces:")  +
+  theme_light()
+```
+
+```{r model, include=FALSE, echo=FALSE, message=FALSE}
+lm(score ~ color + rating_difference, data = TT_long %>% filter(hero_name == "Hikaru Nakamura")) %>% summary()
+lm(score ~ color + rating_difference, data = TT_long %>% filter(hero_name == "Magnus Carlsen")) %>% summary()
+```
+
+
+```{r model 2, include=FALSE, echo=FALSE, message=FALSE}
+score_df <- data.frame(result = c("win", "draw", "lose"),
+                       score = c(1, 0.5, 0))
+TT_long <- TT_long %>% left_join(score_df)
+
+#than including player name (exclude direct games against one another)
+TT_long_HN_MC <- bind_rows(TT_long %>% filter(hero_name == "Hikaru Nakamura",
+                                              opponent_name != "Magnus Carlsen"),
+                           TT_long %>% filter(hero_name == "Magnus Carlsen",
+                                              opponent_name != "Hikaru Nakamura"))
+
+
+lm(score ~ hero_name + color + rating_difference, data = TT_long_HN_MC) %>% summary()
+lm(score ~ hero_name + color * rating_difference, data = TT_long_HN_MC) %>% summary()
+lm(score ~ hero_name * color + rating_difference, data = TT_long_HN_MC) %>% summary()
+lm(score ~ hero_name * rating_difference + color, data = TT_long_HN_MC) %>% summary()
+lm(score ~ hero_name * color * rating_difference, data = TT_long_HN_MC) %>% summary()
+
+#significant difference (knowing that one is hikaru or magnus)?
+```
+
+# Lowest rated player to lose against
+```{r Hikaru resistance 2, eval=TRUE, echo=FALSE}
+#results = 'asis'
+options(knitr.kable.NA = '')
+
+h1 <- TT_long %>% 
+  filter(hero_name %in% c("Hikaru Nakamura"),
+         result == "lose") %>% 
+  select(date_time, opponent_username, opponent_name, opponent_rating, color, result) %>% 
+  arrange(opponent_rating) %>% 
+  slice_head(n=10)
+
+names(h1) <- c("Date/Time", "Opponent Username",  "Opponent Name",  "Opponent Rating", "Pieces", "Result")
+           
+h1 %>% 
+  knitr::kable(caption = "Table 9: Lowest rated players Hikaru lost against", digits = 0) %>%
+  kableExtra::kable_styling(bootstrap_options = "striped", full_width = TRUE)
+``` 
+
+
+```{r Magnus resistance 2, results = 'asis', eval=TRUE, echo=FALSE}
+options(knitr.kable.NA = '')
+
+TT_long$opponent_name[TT_long$opponent_username == "Liljon_chess"] <- "Ulugbek Tillyaev"
+
+h2 <- TT_long %>% 
+  filter(hero_name %in% c("Magnus Carlsen"),
+         result == "lose") %>% 
+  select(date_time, opponent_username, opponent_name, opponent_rating, color, result) %>% 
+  arrange(opponent_rating) %>% 
+  slice_head(n=10)
+
+names(h2) <- c("Date/Time", "Opponent Username",  "Opponent Name",  "Opponent Rating", "Pieces", "Result")
+           
+h2 %>% 
+  knitr::kable(caption = "Table 10: Lowest rated players Magnus lost against", digits = 0) %>%
+  kableExtra::kable_styling(bootstrap_options = "striped", full_width = TRUE)
+``` 
+
+
+# Summary table
+
+
+
+

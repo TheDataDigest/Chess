@@ -1,0 +1,5 @@
+"0","women_df <- player_df %>% filter(name %in% women) %>% "
+"0","  select(name, title, fed, best_Place, score, rating_best, N_participations) %>% "
+"0","  arrange(desc(rating_best))"
+"0",""
+"0","DT::datatable(women_df)"

@@ -1,0 +1,5 @@
+"0","draw2 <- TT %>% filter(date == ""2023-08-08"", time == ""early"","
+"0","              number %in% 1:14) %>% "
+"0","  select(date, time, name, title, fed, score, sonneborn_berger, rating, games_played)"
+"0",""
+"0","kable(draw2)"

@@ -41,7 +41,7 @@ You can visit the tournament [here](https://www.chess.com/tournament/live/titled
 
 ```{r, message=F, warning=F}
 # load helper functions
-source("2_helper_functions.R")
+source("../R/2_helper_functions.R")
 
 # load the tidyverse
 library(tidyverse)
@@ -97,7 +97,7 @@ Hikaru Nakamura wins the Award for most Tournament wins and the biggest prize mo
 
 And this is a summary image:
 
-![](../images/Folie1.png){fig-alt="An image showing Nakamura, Carlsen and Andreikin" fig-align="left" width=354 height=630 fig-caption="Hikaru Nakamura wins the Award for most Tournament wins and the biggest prize money earned in 2023"}
+![](images/Folie1.png){fig-alt="An image showing Nakamura, Carlsen and Andreikin" fig-align="left" width=354 height=630 fig-caption="Hikaru Nakamura wins the Award for most Tournament wins and the biggest prize money earned in 2023"}
 
 ## Most participations and longest participation streak
 Sergei Zhigalko participated in 100 out of 103 tournaments. 76 participations in a row, playing both the early and late tournament edition over several weeks.
@@ -116,7 +116,7 @@ longest_participation_streak <- tournament_streak %>%
 kable(longest_participation_streak)
 ```
 
-![](../images/Folie2.png){fig-alt="An image showing Zhigalko, Golubev and Vlassov" fig-align="left" width=354 height=630 fig-caption="Sergei Zhigalko wins the Award for most Tournament participaitions and longest participation streak"}
+![](images/Folie2.png){fig-alt="An image showing Zhigalko, Golubev and Vlassov" fig-align="left" width=354 height=630 fig-caption="Sergei Zhigalko wins the Award for most Tournament participaitions and longest participation streak"}
 
 
 
@@ -172,7 +172,7 @@ longest_wins <- winning_streak %>% select(name, title, fed, winning_streak) %>%
 kable(longest_wins)
 ```
 
-![](../images/Folie3.png){fig-align="center" width=354 height=630 fig-caption="test"}
+![](images/Folie3.png){fig-align="center" width=354 height=630 fig-caption="test"}
 
 ## Lowest rated player to win the tournament
 It is not easy to beat the competition of the highly rated super GMs that participate in this tournament.
@@ -207,7 +207,7 @@ lowest_rated_winner <- TT %>%
 kable(lowest_rated_winner, caption = 'Winning with a "relatively low" rating')
 ```
 
-![](../images/Folie4.png){fig-align="center" width=354 height=630}
+![](images/Folie4.png){fig-align="center" width=354 height=630}
 
 ## Award for the best positioned non-Grand master
 
@@ -222,7 +222,7 @@ non_GM_best_place <- TT %>%
 kable(non_GM_best_place, caption = 'Best placement of a non-GM')
 ```
 
-![](../images/Folie5.png){fig-align="center" width=354 height=630}
+![](images/Folie5.png){fig-align="center" width=354 height=630}
 
 ## Award to sweeping the day (winning early and late tournament)
 6 players accomplished this feat in 2023, winning both, the early and late event on the same day:
@@ -237,7 +237,7 @@ sweep <- TT %>% filter(number == 1) %>%
 kable(sweep)
 ```
 
-![](../images/Folie6.png){fig-align="center" width=354 height=630}
+![](images/Folie6.png){fig-align="center" width=354 height=630}
 
 Wesley So and Maxime Vachier-Lagrave accomplished this with only 22 and 25 participations respectively.
 
@@ -323,7 +323,7 @@ DT::datatable(women_df)
 ```
 
 
-![](../images/Folie7.png){fig-align="center" width=354 height=630}
+![](images/Folie7.png){fig-align="center" width=354 height=630}
 
 ## Biggest draw
 

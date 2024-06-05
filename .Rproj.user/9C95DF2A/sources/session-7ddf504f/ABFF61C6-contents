@@ -66,24 +66,47 @@ g1 <- player_df %>%
     filter(N_participations >= 10) %>% 
   # filter(N_participations >= 10,
   #        title_ordered %in% c("GM", "IM", "FM", "CM", "NM")) %>% 
-  ggplot(aes(x = rating_avg, y = avg_score)) +
-  geom_point(aes(x=3280, y=8.56), size=12, shape=21, color = "black") + 
+  ggplot(aes(x = rating_best, y = avg_score, label = name)) +
+  geom_point(aes(x=3295, y=8.574), size=12, shape=21, color = "black") + 
   geom_point(color = "grey", alpha = 0.5) +
   geom_point(data = player_df %>% filter(N_participations >= 10, title %in% c("IM")),
-             mapping = aes(x = rating_avg, y = avg_score), color = "#E69F00", alpha = 0.6) + 
+             mapping = aes(x = rating_best, y = avg_score), color = "#E69F00", alpha = 0.6) + 
   geom_point(data = player_df %>% filter(N_participations >= 10, title %in% c("GM")),
-             mapping = aes(x = rating_avg, y = avg_score), color = "#0072B2", alpha = 0.7) + 
+             mapping = aes(x = rating_best, y = avg_score), color = "#0072B2", alpha = 0.7) + 
 #  geom_point(data = player_df %>% filter(username %in% c("Hikaru", "MagnusCarlsen")),
 #             mapping = aes(x = rating_avg, y = avg_score), color = "darkblue", alpha = 1, size = 2) + 
   scale_y_continuous(breaks = c(0,2,4,6,8,10), limits = c(0, 9)) + 
-  labs(x="Average player rating", y="Average player score") +
+  labs(x="Best player rating in 2023", y="Average player score", title = "Player that participated at least 10 times in 2023 Titled Tuesday tournaments", caption = "test caption") +
   theme_light()
 
 ggplotly(g1)
 
 ```
 
-We can look at the total prize money earned throughout 2023 to find Hikaru (\$29,000) winning almost twice as much as Magnus (\$15,850). Nakamural also won the tournament twice as often as Carlsen (18 vs 9 wins), but this is mostly due to the fact that he participated almost twice as often (74 vs 39).
+::: {.callout-caution collapse="true"}
+## Temp
+For reference I included an interactive table with all players that participated in at least two tournaments in 2023. Sorted by decreasing average score.
+Filter for participations can be set in the table header via the slider function.
+Currently I include all columns but can easily remove some and rename them.
+Maybe it is best to have separated tables with only a few columns that are important for the relevant sections (like winning chances and prize money later)
+:::
+
+```{r player_df, cache=TRUE, echo=FALSE, message=FALSE}
+#player_df$title <- TT$title_ordered[match(player_df$username, TT$username)]
+
+dt1 <- player_df %>% 
+  filter(N_participations > 1) %>% 
+#  select(name, title, fed, N_participations, best_Place, avg_score, rating_best, winning_chance) %>% 
+  select(name, username, title, fed, everything(), -score, -title_ordered) %>% 
+  arrange(desc(avg_score))
+
+DT::datatable(dt1, filter = "top", selection = "multiple", caption = "All players that participated in at least two Titled Tuesday tournaments in 2023\nUse the filter slider in N_participations or any other column to sort and filter the date")
+#              colnames = c("Player", "Title", "Fed", "Participations", "Winning Chance", "Best"))
+
+```
+
+
+We can look at the total prize money earned throughout 2023 to find Hikaru (\$29,000) winning almost twice as much as Magnus (\$15,850). Hikaru also won the tournament twice as often as Magnus (18 vs 9 wins), but this is mostly due to the fact that he participated almost twice as often (74 vs 39).
 See chart below for the top 10 players from Titled Tuesday 2023 tournaments with regards to their prize money won based on the places 1-5.
 
 ```{r top10 with money, echo = FALSE, cache=TRUE, message=FALSE, fig.height=6, fig.width=8, fig.align='center', fig.cap= "Fig.2 - Winning the tournament, placing top 5, total prize money"}
@@ -128,31 +151,33 @@ Hikaru won 18 out of 74 tournaments (`r round(18/74*100, 1)`%) and is slightly a
 Honorable mention of Liem Le who one 3 out of 10 tournaments (30%) and the 4th place Maxime Vachier-Lagrave, who won 5 out of 25 tournaments (20%).
 
 ```{r winning chance, results = 'asis', eval=TRUE, echo=FALSE, cache = TRUE}
-table1 <- player_df %>% arrange(desc(winning_chance)) %>% 
-  slice_head(n=10) %>% 
+dt2 <- player_df %>% 
+  filter(N_participations >= 10,
+         N_1st > 0) %>% 
+  arrange(desc(winning_chance)) %>% 
+#  slice_head(n=10) %>% 
   mutate(winning_pct = paste0(round(winning_chance*100, 1), "%")) %>% 
-  select(name, N_participations, N_1st, winning_pct)
+  select(name, fed, N_participations, N_1st, winning_pct)
 
-table1 %>%
-  knitr::kable(caption = "Table 1: Winning chance (First places/Tournament participations)", digits = 0) %>%
-  kableExtra::kable_styling(bootstrap_options = "striped", full_width = FALSE)
+DT::datatable(dt2, caption = "Table 2: Winning chance (First places/Tournament participations)\nFor players that participated at least ten times")
 ``` 
-
-```{r winning chance 2, results = 'asis', eval=TRUE, echo=FALSE, cache = TRUE}
-DT::datatable(table1)
-``` 
-
 
 With regards to the average prize money per participation Magnus (\$406) holds a slight edge over Hikaru ($401).
 
 ```{r average prize, results = 'asis', eval=TRUE, echo=FALSE, cache = TRUE}
-player_df %>% arrange(desc(avg_prize)) %>% 
-  slice_head(n=10) %>% 
-  mutate(total_prize = dollar(total_prize),
-         avg_prize = dollar(avg_prize)) %>% 
-  select(name, avg_prize, N_participations, total_prize, rating_best) %>%
-  knitr::kable(caption = "Table 2: Average prize per tournament", digits = 0) %>%
-  kableExtra::kable_styling(bootstrap_options = "striped", full_width = FALSE)
+dt3 <- player_df %>% 
+  filter(N_participations >= 10,
+         total_prize > 0) %>% 
+  arrange(desc(avg_prize)) %>% 
+#  slice_head(n=10) %>% 
+  mutate(total_prize = scales::dollar(total_prize),
+         avg_prize = scales::dollar(avg_prize)) %>% 
+  select(name, fed, avg_prize, N_participations, total_prize, rating_best) 
+
+#knitr::kable(caption = "Table 2: Average prize per tournament", digits = 0) %>%
+#kableExtra::kable_styling(bootstrap_options = "striped", full_width = FALSE)
+
+DT::datatable(dt3, caption = "Table 3: Average and total prize money\nFor players that participated at least ten times")
 ``` 
 
 # Winning with white or black pieces
@@ -270,7 +295,7 @@ p_black_loss <- games_color_N20 %>% filter(color == "Black") %>%
 
 ```
 
-When we look at players that participated in 10 or more Titled Tuesday tournaments (to have a somewhat solid foundation for winning percentages). We see that Magnus Carlsen has the highest winning percentage of all players (80% with white pieces and 72.7% with black pieces).
+When we look at players that participated in ten or more Titled Tuesday tournaments (to have a somewhat solid foundation for winning percentages). We see that Magnus has the highest winning percentage of all players (80% with white pieces and 72.7% with black pieces).
 Hikaru is ranked 5th for winning with the white pieces (77.4% of the time) and ranked 3rd with the black pieces (70.1%).
 
 ```{r winning percent, echo=FALSE, cache=TRUE, fig.height=6, fig.width=10, fig.align='center', fig.cap= "Fig.3 - Winning with white and black pieces", message =FALSE}
@@ -281,7 +306,7 @@ grid.arrange(p_white_win + theme(legend.position = "none"),
 
 ```
 However Hikaru is really hard to beat. With the black pieces he is slightly ahead of Magnus (only losing 13.4% of the games with black, compared to Magnus 13.9%).
-Magnus only lost 6.3% of the games with white. A statistics that is far ahead of the competition.
+Magnus only lost 6.3% of the games with white. A statistic that is far ahead of the competition.
 
 ```{r losing percent, echo=FALSE, cache=TRUE, fig.height=6, fig.width=10, fig.align='center', fig.cap= "Fig.4 - Losing with white and black pieces", message=FALSE}
 
@@ -451,7 +476,7 @@ matches_df %>% filter(hero_name == "Hikaru Nakamura") %>%
   theme_light()
 ```
 
-We can make a similar chart for Magnus Carlsen who participated in 39 tournaments, played 399 games against 239 different opponents.
+We can make a similar chart for Magnus who participated in 39 tournaments, played 399 games against 239 different opponents.
 
 ```{r Magnus rating histogram, echo=FALSE, fig.height=4, fig.width=6, fig.align='center', fig.cap= "Fig.8 - Histogram of Magnus' opponents ratings", message = FALSE}
 

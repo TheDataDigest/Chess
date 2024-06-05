@@ -11,35 +11,37 @@ TT <- readRDS(file = "input/TitledTuesday_2023_df.RDS")
 player_df <- TT %>% group_by(username) %>% 
   summarize(N_participations = length(unique(file_name)),
             min_score = min(score), 
-            avg_score = mean(score),
+            avg_score = round(mean(score), 2),
             median_score = median(score), 
             max_score = max(score), 
             best_Place = min(number), 
-            avg_Place = mean(number),
+            avg_Place = round(mean(number), 1),
             median_Place = median(number), 
             lowest_Place = max(number),
-            winning_chance = mean(number == 1),
+            winning_chance = round(mean(number == 1), 4),
+            winning_pct = round(mean(number == 1)* 100, 1),
             N_1st = sum(number == 1),
             N_Top3 = sum(number %in% 1:3),
             N_Top5 = sum(number %in% 1:5),
             N_Top10 = sum(number %in% 1:10),
             N_Top25 = sum(number %in% 1:25), 
-            rating_avg = mean(rating),
+            rating_avg = round(mean(rating), 1),
             rating_best = max(rating),
             rating_lowest = min(rating),
-            avg_prize = mean(prize2),
+            avg_prize = round(mean(prize2), 2),
             total_prize = sum(prize2),
             N_all_games_played = sum(games_played == 11),
-            avg_games_played = mean(games_played), 
+            avg_games_played = round(mean(games_played), 2), 
             median_games_played = median(games_played), 
             N_majority_played = sum(games_played > 5),
-            avg_majority_played = mean(games_played > 5)) %>% ungroup()
+            avg_majority_played = round(mean(games_played > 5), 2)) %>% 
+              ungroup()
 
 player_df$fed <- TT$fed[match(player_df$username, TT$username)]
 player_df$name <- TT$name[match(player_df$username, TT$username)]
 player_df$title_ordered <- TT$title_ordered[match(player_df$username, TT$username)]
 player_df$title <- player_df$title_ordered
-player_df$score <- round(player_df$avg_score, 1)
+player_df$score <- round(player_df$avg_score, 2)
 
 time_df <- TT %>% group_by(username, time) %>% 
   summarize(N = length(unique(file_name))) %>% 

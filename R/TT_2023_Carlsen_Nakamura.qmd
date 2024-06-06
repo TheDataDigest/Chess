@@ -51,6 +51,7 @@ results_df <- readRDS(file = "../input/results_2023_df.RDS")
 tournament_streak <- readRDS(file = "../input/tournament_streak_2023_df.RDS")
 winning_streak <- readRDS(file = "../input/winning_streak_2023_df.RDS")
 week_streak <- readRDS(file = "../input/week_streak_2023_df.RDS")
+winning_streak_df <- readRDS(file = "../input/winning_streak_df_2023_df.RDS")
 ```
 
 
@@ -332,6 +333,131 @@ winning_streak %>% ungroup() %>%
 
 *Hikaru won round 11 in the early tournament on August 22. Then he won all games in the late TT the same day and the first 3 rounds in the early TT on September 5 (1+11+3=15)*
 
+## Winning streak distribution
+The table above shows the longest winning streaks that were achieved by different players in 2023.
+How different is this maximum away from the average winning streaks Magnus and Hikaru manage to accomplish during their participations.
+
+```{r}
+hikaru_wins <- matches_df %>% filter(username == "Hikaru") %>% pull(result) == "win"
+magnus_wins <- matches_df %>% filter(username == "MagnusCarlsen") %>% pull(result) == "win"
+
+hikaru_streak_results <- winning_streak_distribution(hikaru_wins)
+magnus_streak_results <- winning_streak_distribution(magnus_wins)
+
+streak_results_df <- data.frame(name = c(rep(x = "Hikaru Nakamura", times = length(hikaru_streak_results)),
+                                         rep(x = "Magnus Carlsen", times = length(magnus_streak_results))),
+                                streak = c(hikaru_streak_results, magnus_streak_results))
+
+streak_results_df %>% count(name, streak) %>% 
+  ggplot(aes(x = streak, y = n, fill = name)) +
+  geom_col(show.legend = FALSE) +
+  scale_x_continuous(breaks = 1:17, limits = c(0, 18)) +
+  facet_wrap(~name, ncol = 2) +
+  theme_light()
+```
+The histograms that show the distribution of winning streaks is a bit misleading because it shows the highest relative frequency for the 1 value. The 1 is not a winning streak but the result of winning a game and then not winning the next game. For Hikaru this "pseudo-streak" represents 25% (38/152) of his streak results. Which means that 75% of the time his wins led to an actual streak of 2-15 games.
+The "1-streak" result happened 18 times for Magnus which is 23.7% (18/76) of his results.
+Only the 15 games streak for Hikaru and the 17 streak for Magnus include their perfect days where they won 11 out of 11 games in a single tournament.
+
+```{r copy}
+hikaru_wins <- winning_streak_df %>% filter(username == "Hikaru") %>% pull(win) 
+magnus_wins <- winning_streak_df %>% filter(username == "MagnusCarlsen") %>% pull(win)
+
+hikaru_streak_results <- winning_streak_distribution(hikaru_wins)
+magnus_streak_results <- winning_streak_distribution(magnus_wins)
+
+streak_results_df <- data.frame(name = c(rep(x = "Hikaru Nakamura", times = length(hikaru_streak_results)),
+                                         rep(x = "Magnus Carlsen", times = length(magnus_streak_results))),
+                                streak = c(hikaru_streak_results, magnus_streak_results))
+
+streak_results_df %>% count(name, streak) %>% 
+  ggplot(aes(x = streak, y = n, fill = name)) +
+  geom_col(show.legend = FALSE) +
+  scale_x_continuous(breaks = 1:17, limits = c(0, 18)) +
+  facet_wrap(~name, ncol = 2) +
+  theme_light()
+```
+
+The charts above are based on all games (including skipped games). Skippin a game would break a winning streak.
+
+Below you see the streak distribution of all other GMs:
+*How are 18, 22 and 28 streaks possible? Who did it...*
+**It was based on the matches_df (not winning_streak_df), which excludes U-- "missing games", which meant that one player that often skipped the first rounds managed to achieve 86% win percentage including these long streaks because his opposition was on average 600 rating points lower**
+
+```{r}
+matches_df$res <- matches_df$result == "win"
+
+temp_df <- matches_df %>% filter(title == "GM",
+                                 username != "Hikaru",
+                                 username != "MagnusCarlsen") %>% 
+  select(username, hero_name, date_time, res) %>% 
+  arrange(username)
+
+usernames <- unique(temp_df$username)
+
+results <- list()
+#names(results) <- usernames
+for(i in 1:length(usernames)) {
+  results[[i]] <- temp_df %>% filter(username == usernames[i]) %>% pull(res) %>% 
+    winning_streak_distribution()
+}
+
+as.data.frame(table(unlist(results)))
+```
+When missed games don't break a winning streak then the average winning streak by GMs is: `r round(mean(unlist(results)), 2)`
+
+```{r}
+streak_results_df1 <- data.frame(name = "Other GMs", streak = unlist(results))
+xx <- bind_rows(streak_results_df, 
+                streak_results_df1[sample(x = 1:nrow(streak_results_df1), size = 250, replace = FALSE), ])
+
+xx %>% 
+  ggplot(aes(x = streak, color = name, fill = name)) +
+  geom_density(alpha = 0.05) +
+  theme_light()
+```
+
+
+**Repeat based on winning_streak_df that contains the skipped/missed matches, which would lead to a break of the winning streak.**
+
+```{r}
+temp_df2 <- winning_streak_df %>% filter(title == "GM",
+                                 username != "Hikaru",
+                                 username != "MagnusCarlsen") %>% 
+  select(username, name, result, win, file_name, round) %>% 
+  arrange(username)
+
+usernames <- unique(temp_df2$username)
+
+results2 <- list()
+#names(results) <- usernames
+for(i in 1:length(usernames)) {
+  results2[[i]] <- temp_df2 %>% filter(username == usernames[i]) %>% pull(win) %>% 
+    winning_streak_distribution()
+}
+
+GM_streaks_result2 <- as.data.frame(table(unlist(results2)))
+GM_streaks_result2
+
+```
+
+To compare the two distributions we can turn them into density plots where you can see that they are quite similar to one another. Hikaru has a mean streak of (`r round(mean(hikaru_streak_results),2)`) vs. Magnus having a mean streak of (`r round(mean(magnus_streak_results),2)`).
+The average mean streak of other GMs is: `r round(mean(unlist(results)), 2)`
+
+If I randomly sample 250 winning streaks from other GMs and add them to the chart with the streak distribution of Hikaru and Magnus we see how much better they are in this area.
+
+```{r}
+streak_results_df2 <- data.frame(name = "Other GMs", streak = unlist(results2))
+xx <- bind_rows(streak_results_df, 
+                streak_results_df2[sample(x = 1:nrow(streak_results_df2), size = 250, replace = FALSE), ])
+
+xx %>% 
+  ggplot(aes(x = streak, color = name, fill = name)) +
+  geom_density(alpha = 0.05) +
+  theme_light()
+```
+
+
 # Winning both tournaments ("Sweeping the day")
 In 2023 there were 6 players who accomplished to win both events on that day.
 Attempts refers to the times a player participated in the early and late tournament on the same day.
@@ -368,7 +494,7 @@ Therefore this point is a draw with a slight advantage for Magnus, because he pl
 
 In the 2nd segment of the chess speed championship, (3-minute games) Magnus won 5:4 games.
 
-Link to the chess-com video on youtube (https://www.youtube.com/live/CbJSYohWnoc?si=74LgbhWh0EpRpUCr&t=8598).
+You can see the tournament commentary by chess.com on their [YouTube channel](https://www.youtube.com/live/CbJSYohWnoc?si=74LgbhWh0EpRpUCr&t=8598).
 
 
 ## Top match-ups for Hikaru

@@ -1,0 +1,8 @@
+"0","streak_results_df2 <- data.frame(name = ""Other GMs"", streak = unlist(results2))"
+"0","xx <- bind_rows(streak_results_df, "
+"0","                streak_results_df2[sample(x = 1:nrow(streak_results_df2), size = 250, replace = FALSE), ])"
+"0",""
+"0","xx %>% "
+"0","  ggplot(aes(x = streak, color = name, fill = name)) +"
+"0","  geom_density(alpha = 0.05) +"
+"0","  theme_light()"

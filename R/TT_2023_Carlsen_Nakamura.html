@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Torsten Blass">
-<meta name="dcterms.date" content="2024-06-05">
+<meta name="dcterms.date" content="2024-06-06">
 <meta name="keywords" content="Quarto, Chess.com, Magnus Carlsen, Hikaru Nakamura, Titled Tuesday">
 
 <title>Magnus Carlsen vs Hikaru Nakamura</title>
@@ -159,7 +159,7 @@ background: #f0f3f5;
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">June 5, 2024</p>
+        <p class="date">June 6, 2024</p>
       </div>
     </div>
     
@@ -183,7 +183,10 @@ background: #f0f3f5;
   <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><span class="header-section-number">2</span> Introduction</a></li>
   <li><a href="#winning-chance-and-money-per-participation" id="toc-winning-chance-and-money-per-participation" class="nav-link" data-scroll-target="#winning-chance-and-money-per-participation"><span class="header-section-number">3</span> Winning Chance and money per participation</a></li>
   <li><a href="#winning-with-white-or-black-pieces" id="toc-winning-with-white-or-black-pieces" class="nav-link" data-scroll-target="#winning-with-white-or-black-pieces"><span class="header-section-number">4</span> Winning with white or black pieces</a></li>
-  <li><a href="#winning-streaks" id="toc-winning-streaks" class="nav-link" data-scroll-target="#winning-streaks"><span class="header-section-number">5</span> Winning streaks</a></li>
+  <li><a href="#winning-streaks" id="toc-winning-streaks" class="nav-link" data-scroll-target="#winning-streaks"><span class="header-section-number">5</span> Winning streaks</a>
+  <ul class="collapse">
+  <li><a href="#winning-streak-distribution" id="toc-winning-streak-distribution" class="nav-link" data-scroll-target="#winning-streak-distribution"><span class="header-section-number">5.1</span> Winning streak distribution</a></li>
+  </ul></li>
   <li><a href="#winning-both-tournaments-sweeping-the-day" id="toc-winning-both-tournaments-sweeping-the-day" class="nav-link" data-scroll-target="#winning-both-tournaments-sweeping-the-day"><span class="header-section-number">6</span> Winning both tournaments (“Sweeping the day”)</a></li>
   <li><a href="#direct-comparisons" id="toc-direct-comparisons" class="nav-link" data-scroll-target="#direct-comparisons"><span class="header-section-number">7</span> Direct comparisons</a>
   <ul class="collapse">
@@ -211,28 +214,34 @@ background: #f0f3f5;
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load helper functions</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../R/2_helper_functions.R"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># load the tidyverse</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)     <span class="co"># combine charts together</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DT)            <span class="co"># interactive tables</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)         <span class="co"># static table with the kable() function</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)        <span class="co"># interactive graphs</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glue)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../R/2_helper_functions.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 2 3</code></pre>
+</div>
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load the tidyverse</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)     <span class="co"># combine charts together</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DT)            <span class="co"># interactive tables</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)         <span class="co"># static table with the kable() function</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)        <span class="co"># interactive graphs</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glue)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the clean dataset</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>TT <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="st">"../input/TitledTuesday_2023_df.RDS"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>player_df <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="st">"../input/player_2023_df.RDS"</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>matches_df <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="st">"../input/matches_2023_df.RDS"</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>results_df <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="st">"../input/results_2023_df.RDS"</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>tournament_streak <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="st">"../input/tournament_streak_2023_df.RDS"</span>)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>winning_streak <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="st">"../input/winning_streak_2023_df.RDS"</span>)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>week_streak <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="st">"../input/week_streak_2023_df.RDS"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the clean dataset</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>TT <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="st">"../input/TitledTuesday_2023_df.RDS"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>player_df <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="st">"../input/player_2023_df.RDS"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>matches_df <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="st">"../input/matches_2023_df.RDS"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>results_df <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="st">"../input/results_2023_df.RDS"</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>tournament_streak <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="st">"../input/tournament_streak_2023_df.RDS"</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>winning_streak <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="st">"../input/winning_streak_2023_df.RDS"</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>week_streak <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="st">"../input/week_streak_2023_df.RDS"</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>winning_streak_df <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="st">"../input/winning_streak_df_2023_df.RDS"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -443,6 +452,193 @@ Temp
 </div>
 <p><em>Magnus won round 10 and 11 in the late tournament on June 27. Then he won all games in the late TT on July 4 and the first 4 games in the late TT on July 11 (2+11+4=17)</em></p>
 <p><em>Hikaru won round 11 in the early tournament on August 22. Then he won all games in the late TT the same day and the first 3 rounds in the early TT on September 5 (1+11+3=15)</em></p>
+<section id="winning-streak-distribution" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="winning-streak-distribution"><span class="header-section-number">5.1</span> Winning streak distribution</h2>
+<p>The table above shows the longest winning streaks that were achieved by different players in 2023. How different is this maximum away from the average winning streaks Magnus and Hikaru manage to accomplish during their participations.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>hikaru_wins <span class="ot">&lt;-</span> matches_df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(username <span class="sc">==</span> <span class="st">"Hikaru"</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(result) <span class="sc">==</span> <span class="st">"win"</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>magnus_wins <span class="ot">&lt;-</span> matches_df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(username <span class="sc">==</span> <span class="st">"MagnusCarlsen"</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(result) <span class="sc">==</span> <span class="st">"win"</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>hikaru_streak_results <span class="ot">&lt;-</span> <span class="fu">winning_streak_distribution</span>(hikaru_wins)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>magnus_streak_results <span class="ot">&lt;-</span> <span class="fu">winning_streak_distribution</span>(magnus_wins)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>streak_results_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">name =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="at">x =</span> <span class="st">"Hikaru Nakamura"</span>, <span class="at">times =</span> <span class="fu">length</span>(hikaru_streak_results)),</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>                                         <span class="fu">rep</span>(<span class="at">x =</span> <span class="st">"Magnus Carlsen"</span>, <span class="at">times =</span> <span class="fu">length</span>(magnus_streak_results))),</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>                                <span class="at">streak =</span> <span class="fu">c</span>(hikaru_streak_results, magnus_streak_results))</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>streak_results_df <span class="sc">%&gt;%</span> <span class="fu">count</span>(name, streak) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> streak, <span class="at">y =</span> n, <span class="at">fill =</span> name)) <span class="sc">+</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">17</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">18</span>)) <span class="sc">+</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>name, <span class="at">ncol =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="TT_2023_Carlsen_Nakamura_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The histograms that show the distribution of winning streaks is a bit misleading because it shows the highest relative frequency for the 1 value. The 1 is not a winning streak but the result of winning a game and then not winning the next game. For Hikaru this “pseudo-streak” represents 25% (38/152) of his streak results. Which means that 75% of the time his wins led to an actual streak of 2-15 games. The “1-streak” result happened 18 times for Magnus which is 23.7% (18/76) of his results. Only the 15 games streak for Hikaru and the 17 streak for Magnus include their perfect days where they won 11 out of 11 games in a single tournament.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>hikaru_wins <span class="ot">&lt;-</span> winning_streak_df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(username <span class="sc">==</span> <span class="st">"Hikaru"</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(win) </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>magnus_wins <span class="ot">&lt;-</span> winning_streak_df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(username <span class="sc">==</span> <span class="st">"MagnusCarlsen"</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(win)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>hikaru_streak_results <span class="ot">&lt;-</span> <span class="fu">winning_streak_distribution</span>(hikaru_wins)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>magnus_streak_results <span class="ot">&lt;-</span> <span class="fu">winning_streak_distribution</span>(magnus_wins)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>streak_results_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">name =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="at">x =</span> <span class="st">"Hikaru Nakamura"</span>, <span class="at">times =</span> <span class="fu">length</span>(hikaru_streak_results)),</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                                         <span class="fu">rep</span>(<span class="at">x =</span> <span class="st">"Magnus Carlsen"</span>, <span class="at">times =</span> <span class="fu">length</span>(magnus_streak_results))),</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>                                <span class="at">streak =</span> <span class="fu">c</span>(hikaru_streak_results, magnus_streak_results))</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>streak_results_df <span class="sc">%&gt;%</span> <span class="fu">count</span>(name, streak) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> streak, <span class="at">y =</span> n, <span class="at">fill =</span> name)) <span class="sc">+</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">17</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">18</span>)) <span class="sc">+</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>name, <span class="at">ncol =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="TT_2023_Carlsen_Nakamura_files/figure-html/copy-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The charts above are based on all games (including skipped games). Skippin a game would break a winning streak.</p>
+<p>Below you see the streak distribution of all other GMs: <em>How are 18, 22 and 28 streaks possible? Who did it…</em> <strong>It was based on the matches_df (not winning_streak_df), which excludes U– “missing games”, which meant that one player that often skipped the first rounds managed to achieve 86% win percentage including these long streaks because his opposition was on average 600 rating points lower</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>matches_df<span class="sc">$</span>res <span class="ot">&lt;-</span> matches_df<span class="sc">$</span>result <span class="sc">==</span> <span class="st">"win"</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>temp_df <span class="ot">&lt;-</span> matches_df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(title <span class="sc">==</span> <span class="st">"GM"</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                                 username <span class="sc">!=</span> <span class="st">"Hikaru"</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>                                 username <span class="sc">!=</span> <span class="st">"MagnusCarlsen"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(username, hero_name, date_time, res) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(username)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>usernames <span class="ot">&lt;-</span> <span class="fu">unique</span>(temp_df<span class="sc">$</span>username)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">#names(results) &lt;- usernames</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(usernames)) {</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  results[[i]] <span class="ot">&lt;-</span> temp_df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(username <span class="sc">==</span> usernames[i]) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(res) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">winning_streak_distribution</span>()</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="fu">as.data.frame</span>(<span class="fu">table</span>(<span class="fu">unlist</span>(results)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Var1 Freq
+1     1 7198
+2     2 4873
+3     3 3014
+4     4 1759
+5     5  883
+6     6  416
+7     7  210
+8     8   94
+9     9   42
+10   10   21
+11   11   12
+12   12    7
+13   13    2
+14   14    1
+15   18    1
+16   22    1
+17   28    1</code></pre>
+</div>
+</div>
+<p>When missed games don’t break a winning streak then the average winning streak by GMs is: 2.32</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>streak_results_df1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">name =</span> <span class="st">"Other GMs"</span>, <span class="at">streak =</span> <span class="fu">unlist</span>(results))</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>xx <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(streak_results_df, </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                streak_results_df1[<span class="fu">sample</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(streak_results_df1), <span class="at">size =</span> <span class="dv">250</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>), ])</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>xx <span class="sc">%&gt;%</span> </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> streak, <span class="at">color =</span> name, <span class="at">fill =</span> name)) <span class="sc">+</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.05</span>) <span class="sc">+</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="TT_2023_Carlsen_Nakamura_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Repeat based on winning_streak_df that contains the skipped/missed matches, which would lead to a break of the winning streak.</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>temp_df2 <span class="ot">&lt;-</span> winning_streak_df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(title <span class="sc">==</span> <span class="st">"GM"</span>,</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                                 username <span class="sc">!=</span> <span class="st">"Hikaru"</span>,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                                 username <span class="sc">!=</span> <span class="st">"MagnusCarlsen"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(username, name, result, win, file_name, round) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(username)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>usernames <span class="ot">&lt;-</span> <span class="fu">unique</span>(temp_df2<span class="sc">$</span>username)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>results2 <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">#names(results) &lt;- usernames</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(usernames)) {</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  results2[[i]] <span class="ot">&lt;-</span> temp_df2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(username <span class="sc">==</span> usernames[i]) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(win) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">winning_streak_distribution</span>()</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>GM_streaks_result2 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">table</span>(<span class="fu">unlist</span>(results2)))</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>GM_streaks_result2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Var1 Freq
+1     1 7432
+2     2 4972
+3     3 3041
+4     4 1753
+5     5  870
+6     6  409
+7     7  200
+8     8   88
+9     9   33
+10   10   18
+11   11    9
+12   12    6</code></pre>
+</div>
+</div>
+<p>To compare the two distributions we can turn them into density plots where you can see that they are quite similar to one another. Hikaru has a mean streak of (3.79) vs.&nbsp;Magnus having a mean streak of (3.77). The average mean streak of other GMs is: 2.32</p>
+<p>If I randomly sample 250 winning streaks from other GMs and add them to the chart with the streak distribution of Hikaru and Magnus we see how much better they are in this area.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>streak_results_df2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">name =</span> <span class="st">"Other GMs"</span>, <span class="at">streak =</span> <span class="fu">unlist</span>(results2))</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>xx <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(streak_results_df, </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                streak_results_df2[<span class="fu">sample</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(streak_results_df2), <span class="at">size =</span> <span class="dv">250</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>), ])</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>xx <span class="sc">%&gt;%</span> </span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> streak, <span class="at">color =</span> name, <span class="at">fill =</span> name)) <span class="sc">+</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.05</span>) <span class="sc">+</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="TT_2023_Carlsen_Nakamura_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="winning-both-tournaments-sweeping-the-day" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> Winning both tournaments (“Sweeping the day”)</h1>
@@ -517,7 +713,7 @@ Temp
 <p>In 2023 Hikaru Nakamura faced Magnus Carlsen 10 times: + twice with the black pieces (drawing both games) + and 8 times playing with white (2 draws, 3 wins, 3 losses)</p>
 <p>Therefore this point is a draw with a slight advantage for Magnus, because he played black 8 out of 10 times.</p>
 <p>In the 2nd segment of the chess speed championship, (3-minute games) Magnus won 5:4 games.</p>
-<p>Link to the chess-com video on youtube (https://www.youtube.com/live/CbJSYohWnoc?si=74LgbhWh0EpRpUCr&amp;t=8598).</p>
+<p>You can see the tournament commentary by chess.com on their <a href="https://www.youtube.com/live/CbJSYohWnoc?si=74LgbhWh0EpRpUCr&amp;t=8598">YouTube channel</a>.</p>
 <section id="top-match-ups-for-hikaru" class="level2 page-columns page-full" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="top-match-ups-for-hikaru"><span class="header-section-number">7.1</span> Top match-ups for Hikaru</h2>
 <div class="cell page-columns page-full" data-layout-align="center">

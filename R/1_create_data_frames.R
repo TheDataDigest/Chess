@@ -173,3 +173,4 @@ winning_streak <- winning_streak_df %>% group_by(username, title, name, fed) %>%
 saveRDS(object = week_streak, file = "input/week_streak_2023_df.RDS")
 saveRDS(object = tournament_streak, file = "input/tournament_streak_2023_df.RDS")
 saveRDS(object = winning_streak, file = "input/winning_streak_2023_df.RDS")
+saveRDS(object = winning_streak_df, file = "input/winning_streak_df_2023_df.RDS")

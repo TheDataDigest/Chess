@@ -1,0 +1,6 @@
+"0",""
+"0","matches_df %>% filter(hero_name == ""Magnus Carlsen"") %>% "
+"0","  ggplot(aes(x = opponent_rating)) +"
+"0","  geom_histogram(color = ""darkgrey"", fill = ""lightgrey"") +"
+"0","  labs(y = """", x = ""Rating of Magnus's opponenets"") +"
+"0","  theme_light()"

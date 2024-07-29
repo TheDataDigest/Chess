@@ -1,0 +1,16 @@
+"0","top10_money <- player_df %>% 
+  mutate(label_N_usd = paste0(dollar(total_prize), "",\n"", N_participations, "" participations""),
+         second_fifth = N_Top5 - N_1st) %>% 
+  select(name, N_participations, total_prize, N_1st, second_fifth, label_N_usd, N_Top5) %>% 
+  arrange(desc(total_prize)) %>% 
+  slice_head(n = 10) %>% 
+  pivot_longer(cols = -c(name, N_participations, total_prize, label_N_usd, N_Top5), names_to = ""places"", values_to = ""N"")  
+"
+"1","[1m[33mError[39m in `mutate()`:[22m
+[38;5;239m[36mℹ[38;5;239m In argument: `label_N_usd = paste0(dollar(total_prize), "",\n"", N_participations, "" participations"")`.[39m
+[1mCaused by error in `dollar()`:[22m
+[33m![39m could not find function ""dollar""
+Backtrace:
+[90m  1. [39m... %>% ...
+[90m 13. [39m[1mbase[22m::paste0(dollar(total_prize), "",\n"", N_participations, "" participations"")
+"

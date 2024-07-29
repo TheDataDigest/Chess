@@ -1,0 +1,10 @@
+"0",""
+"0","matches_df %>% "
+"0","  filter(hero_name %in% c(""Hikaru Nakamura"", ""Magnus Carlsen"")) %>% "
+"0","  ggplot(aes(x = opponent_rating, color = hero_name)) +"
+"0","  geom_density(size = 1) +"
+"0","  labs(y = """", x = ""Rating of Hikarus' and Magnus' opponents"", color = ""Player:"") +"
+"0","  theme(axis.ticks.y = element_blank(), axis.text.y = element_blank()) +"
+"0","  theme_light()"
+"2","Warnung: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+Please use `linewidth` instead."

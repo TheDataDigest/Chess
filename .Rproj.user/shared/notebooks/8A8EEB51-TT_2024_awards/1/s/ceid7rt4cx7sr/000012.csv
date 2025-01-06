@@ -1,0 +1,5 @@
+"0","longest_participation_streak <- tournament_streak  %>% "
+"0","  left_join(player_df %>% select(name, N_participations)) %>% "
+"0"," slice_head(n=10)"
+"2","Joining with `by = join_by(name)`"
+"0","kable(longest_participation_streak)"

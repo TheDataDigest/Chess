@@ -1,0 +1,27 @@
+{
+    "id": "3CF9F077",
+    "path": "E:/The Data Digest/GitHub/Chess/R/1_create_data_frames.R",
+    "project_path": "R/1_create_data_frames.R",
+    "type": "r_source",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1716458758781.0,
+    "source_on_save": false,
+    "relative_order": 2,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "58,0",
+        "scrollLine": "0",
+        "docOutlineVisible": "1"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1736180392,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1736180392358,
+    "read_only": false,
+    "read_only_alternatives": []
+}

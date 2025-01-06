@@ -1,0 +1,11 @@
+"0","losing_percentages %>% 
+  filter(username != ""howitzer14"") %>% 
+  filter(games_w_Black >= 50,
+         result_color == ""lose_Black"") %>% 
+  arrange(lose_black_pct) %>% 
+  left_join(player_df %>% select(username, name, title, fed)) %>% 
+  select(username, name, games_w_Black, lose_black_pct, title, fed) %>% 
+  mutate(lose_black_pct = percent(lose_black_pct, accuracy = 0.1)) %>% 
+  slice_head(n=10) 
+"
+"2","Joining with `by = join_by(username)`"

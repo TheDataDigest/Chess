@@ -1,0 +1,540 @@
+---
+title: "Titled Tuesday - 2024 Awards"
+title-block-banner: "#f0f3f5"
+title-block-banner-color: "black"
+description: "This document is a draft for the 2024 TT Awards for chess.com"
+
+author: 
+  name: "TheDataDigest"
+  affiliation: "https://www.youtube.com/c/TheDataDigest"
+  email: contact@thedatadigest.email
+
+keywords: "Quarto, Chess.com, Data Analysis, Titled Tuesday"
+date: today
+
+fig-cap-location: margin
+format:
+  docx:
+    toc: true
+    number-sections: true
+    highlight-style: github
+    code-fold: true
+    code-summary: "Show the code"
+    toc-title: " "
+    toc-location: left
+    toc-expand: true
+    toc-depth: 2
+editor: source
+---
+
+# Setup
+
+```{r, message=F, warning=F}
+# load helper functions
+source("../R/2_helper_functions.R")
+
+# load the tidyverse
+library(tidyverse)
+library(patchwork)     # combine charts together
+library(DT)            # interactive tables
+library(knitr)         # static table with the kable() function
+library(plotly)        # interactive graphs
+```
+
+
+```{r}
+# Read the clean dataset
+TT <- readRDS(file = "../input/2024_df_RDS/TitledTuesday_2024_df.RDS")
+player_df <- readRDS(file = "../input/2024_df_RDS/player_2024_df.RDS")
+matches_df <- readRDS(file = "../input/2024_df_RDS/matches_2024_df.RDS")
+results_df <- readRDS(file = "../input/2024_df_RDS/results_2024_df.RDS")
+tournament_streak <- readRDS(file = "../input/2024_df_RDS/tournament_streak_2024_df.RDS")
+winning_streak <- readRDS(file = "../input/2024_df_RDS/winning_streak_2024_df.RDS")
+week_streak <- readRDS(file = "../input/2024_df_RDS/week_streak_2024_df.RDS")
+```
+
+
+
+
+# 2024 AWARDS
+* Do we compare the 2024 winners to 2023 results? *
+Or do we just show a table at the end that shows the top 3 players in each category?
+
+*I created ~11 different award categories:*
+
+1. Most tournament participations
+1b. Most games played
+2. Longest participations streak
+3. Most games won (also show percentage)
+3b. Most games lost (with % played)
+3c. Most games draw
+4. Highest winning % with white and black
+4b. Lowest losing % with white and black
+5. Longest winning streak
+6. Perfect day? compare to attempts
+7. Sweeping the day with attempts
+8. Lowest rated player to win
+9. Biggest rating difference to win (for white and black)
+13. Biggest draw (not as extreme as 2023 (8 and 12 players drawing))
+10. Best position for a non-GM
+11. Best women player
+12. Most tournament wins (and biggest prize money)
+
+
+## 1) Most tournament participations
+In 2024 there were `r length(unique(TT$file_name))` Titled Tuesday tournaments with a total of `r nrow(player_df)` players participating.
+
+On average each play participated in `r round(mean(player_df$N_participations), 1)` with a median of `r median(player_df$N_participations)` participations.
+
+Sergei Zhigalko participated in 100 out of 103 tournaments. 76 participations in a row, playing both the early and late tournament edition over several weeks.
+
+***Confirm that a participation of a tournament is only granted if at least one game was played***
+
+```{r}
+most_participations <- player_df %>% select(name, title, fed, N_participations, total_games_played) %>% 
+ arrange(desc(N_participations)) %>% 
+ slice_head(n=20)
+  
+kable(most_participations)
+```
+
+### 1b) Most games played (only show if different from most tournament participations)
+```{r}
+
+most_games_played <- player_df %>% select(name, title, fed, total_games_played, N_participations) %>% 
+ arrange(desc(total_games_played)) %>% 
+ slice_head(n=20)
+  
+kable(most_games_played)
+```
+
+
+## 2) Longest participations streak
+```{r}
+longest_participation_streak <- tournament_streak %>% 
+ slice_head(n=20)
+kable(longest_participation_streak)
+```
+
+## 3) Most games won (also show percentage)
+```{r}
+most_wins <- matches_df %>% 
+  group_by(username, hero_name) %>% 
+  summarize(total_wins = sum(first_letter == "W", na.rm = T),
+            winning_pct = mean(first_letter == "W", na.rm = T)) %>% 
+  ungroup() %>% 
+  left_join(player_df %>% select(username, N_participations, fed, title)) %>% 
+  arrange(desc(total_wins)) %>% 
+  slice_head(n=20) %>% 
+  select(hero_name, fed, title, total_wins, N_participations, winning_pct)
+
+kable(most_wins)
+```
+
+### 3b) Most games lost (with % played)
+```{r}
+most_losses <- matches_df %>% 
+  group_by(username, hero_name) %>% 
+  summarize(total_losses = sum(first_letter == "L", na.rm = T),
+            losing_pct = mean(first_letter == "L", na.rm = T)) %>% 
+  ungroup() %>% 
+  left_join(player_df %>% select(username, N_participations, fed, title, rating_best,best_Place, median_score, max_score)) %>% 
+  arrange(desc(total_losses)) %>% 
+  slice_head(n=20) %>% 
+  select(hero_name, fed, title, total_losses, N_participations, losing_pct, rating_best,best_Place, median_score, max_score)
+
+kable(most_losses)
+```
+
+
+### 3c) Most games drawn
+```{r}
+most_draws <- matches_df %>% 
+  group_by(username, hero_name) %>% 
+  summarize(total_draws = sum(first_letter == "D", na.rm = T),
+            drawing_pct = mean(first_letter == "D", na.rm = T)) %>% 
+  ungroup() %>% 
+  left_join(player_df %>% select(username, N_participations, fed, title)) %>% 
+  arrange(desc(total_draws)) %>% 
+  slice_head(n=20) %>% 
+  select(hero_name, fed, title, total_draws, N_participations, drawing_pct)
+
+kable(most_draws)
+```
+
+## 4) Highest winning % with white and black
+** I filtered for players that played at least 30 games with the specific color **
+* Maybe do a test for signficiance if the ranking is not clear *
+Low sample size will favor more extreme results (like high win rates)
+
+```{r}
+# player_df_50_games <- player_df %>% filter(N_participations > 25) %>% arrange(desc(avg_score)) %>% head(20) %>% pull(username)
+
+games_color <- results_df %>% 
+#  filter(username %in% player_df_50_games) %>% 
+  pivot_longer(cols = -c(username, games_w_White, games_w_Black)) %>% 
+  mutate(win_white_pct = round(value / games_w_White, 4),
+         win_black_pct = round(value / games_w_Black, 4),
+         lose_white_pct = round(value / games_w_White, 4),
+         lose_black_pct = round(value / games_w_Black, 4))
+         
+names(games_color)[4] <- "result_color"
+
+winning_percentages <- games_color %>% filter(result_color %in% c("win_White", "win_Black"))
+
+top_30_win_white <- winning_percentages %>% 
+  filter(games_w_White >= 30,
+         result_color == "win_White") %>% 
+  arrange(desc(win_white_pct)) %>% 
+  left_join(player_df %>% select(username, name, title, fed)) %>% 
+  select(username, name, games_w_White, win_white_pct, title, fed) %>% 
+  slice_head(n=30) 
+
+kable(top_30_win_white)
+```
+
+Howitzer being best is not surprising as he often misses the first games and the only playes against lower rated players. He achvieved several really long winning streaks with that strategy in 2023.
+Konavets could be excluded with currently "only" 46 games with White. Might change towards the end of the year, and then Magnus would be number one.
+
+```{r}
+top_30_win_black <- winning_percentages %>% 
+  filter(games_w_Black >= 30,
+         result_color == "win_Black") %>% 
+  arrange(desc(win_black_pct)) %>% 
+  left_join(player_df %>% select(username, name, title, fed)) %>% 
+  select(username, name, games_w_Black, win_black_pct, title, fed) %>% 
+  slice_head(n=30) 
+
+kable(top_30_win_black)
+```
+Again David Howell is number one.
+
+
+### 4b. Lowest losing % with white and black
+```{r}
+losing_percentages <- games_color %>% filter(result_color %in% c("lose_White", "lose_Black"))
+
+top_30_lose_white <- losing_percentages %>% 
+  filter(games_w_White >= 30,
+         result_color == "lose_White") %>% 
+  arrange(lose_white_pct) %>% 
+  left_join(player_df %>% select(username, name, title, fed)) %>% 
+  select(username, name, games_w_White, lose_white_pct, title, fed) %>% 
+  slice_head(n=30)
+
+kable(top_30_lose_white)
+```
+David Howell making an appearance again, but I love to see that Hikaru and Sam Sevian show a distinctly low losing percentage with white.
+
+
+```{r}
+top_30_lose_black <- losing_percentages %>% 
+  filter(games_w_Black >= 30,
+         result_color == "lose_Black") %>% 
+  arrange(lose_black_pct) %>% 
+  left_join(player_df %>% select(username, name, title, fed)) %>% 
+  select(username, name, games_w_Black, lose_black_pct, title, fed) %>% 
+  slice_head(n=30) 
+
+kable(top_30_lose_black)
+```
+A bit ridiculous, David Howell only losing 3.3 % with Black compared to 11 % MVL and 12 % Paravyan and 13 % Nakamura. I think that points in the direction of not giving him the Award in these categories.
+On a personal note I highly appreaciate him and his tournament commentary. 
+It is just strange that he follows this strategy on Titled Tuesday. I once reached out to him on Twitter/X but he never replied.
+Very cool that Daniel Naroditsky is also ahead of Magnus Carlsen in that category.
+
+
+## 5) Longest winning streak
+It is not easy to establish a winning streak in the titled tournament.
+The average maximum winning streak of Grand Masters is `r winning_streak %>% filter(title == "GM") %>% pull(winning_streak) %>% mean() %>% round(2)` games.
+International Masters get to `r winning_streak %>% filter(title == "IM") %>% pull(winning_streak) %>% mean() %>% round(2)` on average and the longest winning streak of Fide Masters is only `r winning_streak %>% filter(title == "FM") %>% pull(winning_streak) %>% mean() %>% round(2)` in Titled Tuesday tournaments 2024.
+Candidate Masters (`r winning_streak %>% filter(title == "CM") %>% pull(winning_streak) %>% mean() %>% round(2)`), National Masters (`r winning_streak %>% filter(title == "NM") %>% pull(winning_streak) %>% mean() %>% round(2)`).
+
+The table below shows the median, mean and max winning streaks summarized by titles.
+```{r}
+streak_results <- winning_streak %>%
+  filter(title %in% c("GM", "IM", "FM", "CM", "NM")) %>% 
+  group_by(title) %>% 
+  summarize(median = median(winning_streak),
+            mean = round(mean(winning_streak), 2),
+            max = max(winning_streak),
+            `No. of players` = n())
+
+streak_results$title <- factor(streak_results$title, levels = c("GM", "IM", "FM", "CM", "NM"), ordered = TRUE)
+
+kable(streak_results[order(streak_results$title), ], caption = "Winning streaks for different titles")
+```
+
+```{r}
+longest_wins <- winning_streak %>% select(name, title, fed, winning_streak) %>% 
+ slice_head(n=20)
+  
+kable(longest_wins)
+```
+
+
+## 6) Perfect day? compare to attempts
+The only players that accomplished a perfect game in 2024 were Magnus Carlsen and Jose Martinez.
+```{r}
+perfect_day <- TT %>% filter(score == 11) %>% 
+  select(date_time, name, title, fed, score)
+  
+kable(perfect_day)
+```
+
+This allowed them to get to 18 and 12 wins respectively.
+
+## 7) Sweeping the day with attempts (winning early and late tournament)
+
+In 2023 six players accomplished the feat of winning both the early and late event on the same day.
+*Wesley So, Hikaru Nakamura, MVL, Alireza Firouzja, Jose Martinez, and Magnus Carlsen.
+
+But so far in 2024 only Hikaru Nakamura won both the early and late TT tournament.
+
+```{r}
+sweep <- TT %>% filter(number == 1) %>% 
+  count(date, username, name, title, fed, rating) %>% 
+  filter(n == 2) %>% 
+  select(date, username, name, title, fed, rating) %>% 
+  left_join(player_df %>% select(name, N_participations))
+
+kable(sweep)
+```
+
+When we look even deeper into it and check how often a player participated in both the early and late tournament we get the following result:
+
+```{r}
+temp_dates <- TT %>% filter(number == 1) %>% 
+  count(name, date) %>% 
+  filter(n == 2) %>% 
+  arrange(date) %>% pull(date)
+
+temp_names <- TT %>% filter(date %in% temp_dates,
+              number %in% 1) %>% # show second place? 
+  arrange(date, time) %>% 
+  select(date, time, number, fed, title, name, username, score) %>% 
+  pull(name) %>% unique()
+
+same_day_part <- TT %>% filter(name %in% temp_names) %>% 
+  count(name, date) %>% # show line by line
+  filter(n == 2) %>% count(name, sort = TRUE) %>% 
+  arrange(n)
+
+kable(same_day_part)
+```
+
+Hikaru played both tournaments 33 times.
+
+This year 3 other players and Hikaru came close to sweeping the day.
+
+* 11 June: Hikaru Nakamura placed 2nd (same points as Aleksei Sarana) in the early tournament but won the late event
+* 2 July: Arjun Erigaisi placed 2nd both in the early and late tournament both times with the same points (9.5) as the winners (Dmitry Andreikin and Hikaru Nakamura
+* 13 August: Magnus Carlsen placed 2nd in the early and late event that day
+* 20 August: Jeffery Xiong placed 2nd in the early and late event that day
+
+
+```{r}
+win_both <- TT %>% filter(number == 1) %>% 
+  count(date, username, name) %>% 
+  filter(n == 2) %>% pull(date)
+
+win_both2 <- TT %>% filter(number %in% 1:2) %>% 
+  count(date, username, name) %>% 
+  filter(n == 2) %>% arrange(date) %>% pull(date)
+
+came_close <- win_both2[!win_both2 %in% win_both]
+
+coming_close <- TT %>% filter(date %in% came_close, number %in% 1:2) %>% 
+  select(date, time, number, name, score, buchholz_cut_1)
+
+kable(coming_close)
+```
+
+## 8) Lowest rated player to win the tournament
+
+The table below shows the median, mean and max winning streaks summarized by titles.
+```{r}
+lowest_rated_winner <- TT %>%
+  filter(number == 1,
+         rating < 3000) %>% 
+  arrange(rating) %>% 
+  select(number, name, title, fed, rating, score, date_time) %>% 
+  #left_join(player_df %>% select(name, rating_avg, rating_best, N_participations))
+  left_join(player_df %>% select(name, N_participations))
+
+kable(lowest_rated_winner, caption = 'Winning with a "relatively low" rating')
+```
+
+## 9) Biggest rating difference to win (for white and black)
+
+I think this is an interesting categories, but one would have to check the individual games to see whether the win happened due to a disconnect or other errors.
+Also, as the reward relies on rating differences one would have to look into why some titled players have really low rating.
+
+
+```{r}
+# Lower rated player winning with White
+matches_df %>% mutate(rating_difference = hero_rating - opponent_rating) %>% 
+  filter(color == "white") %>% 
+  filter(result == "win" & hero_rating < opponent_rating) %>% 
+  arrange(rating_difference) %>% 
+  select(date_time, title, fed, hero_name, hero_rating, round, color, result, opponent_name, opponent_rating, rating_difference) %>% 
+  slice_head(n=10)
+
+# Lower rated player winning with Black
+matches_df %>% mutate(rating_difference = hero_rating - opponent_rating) %>% 
+  filter(color == "black") %>% 
+  filter(result == "win" & hero_rating < opponent_rating) %>% 
+  arrange(rating_difference) %>% 
+  select(date_time, title, fed, hero_name, hero_rating, round, color, result, opponent_name, opponent_rating, rating_difference) %>% 
+  slice_head(n=10)
+```
+
+## 9b) Biggest rating difference to draw (for white and black)
+The draw results look much more reasonable, but one would still have to check the games to rule out that two players agreed on a draw within the first moves etc.
+
+```{r}
+# Lower rated player winning with White
+matches_df %>% mutate(rating_difference = hero_rating - opponent_rating) %>% 
+  filter(color == "white") %>% 
+  filter(result == "draw" & hero_rating < opponent_rating) %>% 
+  arrange(rating_difference) %>% 
+  select(date_time, title, fed, hero_name, hero_rating, round, color, result, opponent_name, opponent_rating, rating_difference) %>% 
+  slice_head(n=10)
+
+# Lower rated player winning with Black
+matches_df %>% mutate(rating_difference = hero_rating - opponent_rating) %>% 
+  filter(color == "black") %>% 
+  filter(result == "draw" & hero_rating < opponent_rating) %>% 
+  arrange(rating_difference) %>% 
+  select(date_time, title, fed, hero_name, hero_rating, round, color, result, opponent_name, opponent_rating, rating_difference) %>% 
+  slice_head(n=10)
+```
+
+
+## 13) Biggest draw
+
+In 2023 there was a draw with 8 players scoring 9 points (18 April) and a draw with 12 players scoring 9 points (8 August).
+In 2024 the biggest draw happend with 5 players scoring 9.5 points three times.
+All three of these draws happend in the first quarter of 2024 and in early tournaments with 9.5 points
+
+Not as exciting to have "only" 5 players drawing and in the end it is pure luck on how the opponents you beat in your 11 games performed against their other opponents.
+But one could mention that MVL (79 buchholz cut 1), Jan-Krzysztof Duda (77 points) and Alireza Firouzja (77.5 points) were on top of these draws.
+
+```{r}
+TT %>% group_by(date_time) %>% 
+  filter(score == max(score)) %>% 
+  count(date_time) %>% 
+  filter(n == 5)
+
+draw1 <- TT %>% filter(date_time == "2024-01-16_early", number %in% 1:5) %>% 
+#  select(date, time, name, title, fed, score, buchholz_cut_1, rating, games_played)
+  select(number, name, title, fed, score, buchholz_cut_1, rating, games_played)
+
+print("2024-01-16_early")
+kable(draw1)
+```
+
+
+```{r}
+draw2 <- TT %>% filter(date_time == "2024-02-13_early", number %in% 1:5) %>% 
+  select(date, time, name, title, fed, score, buchholz_cut_1, rating, games_played)
+
+kable(draw2)
+```
+
+```{r}
+draw2 <- TT %>% filter(date_time == "2024-03-05_early", number %in% 1:5) %>% 
+  select(date, time, name, title, fed, score, buchholz_cut_1, rating, games_played)
+
+kable(draw2)
+```
+
+
+
+Here is the distribution of shared top scores.
+
+```{r, warning=FALSE, message=FALSE}
+# How often is the first place tied, and what was the most common tie?
+draw_distribution <- TT %>% group_by(file_name) %>% 
+  filter(score == max(score)) %>% 
+  count(file_name) %>% ungroup() %>% 
+  count(n) %>% 
+  mutate(percent = round((nn / sum(nn) * 100),1))
+
+names(draw_distribution) <- c("Player with same score", "N", "%")
+
+kable(draw_distribution)
+```
+
+50% of the time a single player has the highest score and no tie-break (Buchholz System Cut 1) is necessary.
+26% of the time 2 players have the same highest score and ~14% of the time it is shared by 3 players. 
+Ties with 4 or 5 happend 6.2% and 3.8% respectively.
+
+
+
+## 10) Award for the best positioned non-Grand master
+
+The table below shows the players that are not Grand Masters but managed to place second or third in a tournament. Similar to 2023 only GMs were able to win the tournament.
+On 2024-03-26_late Ivan Yeletsky got 10 points but lost to Alireza Firouzja (10.5 points).
+
+```{r}
+non_GM_best_place <- TT %>%
+  filter(title != "GM") %>% 
+  arrange(number) %>% 
+  select(number, name, title, fed, rating, score, date_time) %>% 
+  filter(number <= 3) %>% 
+  left_join(player_df %>% select(name, N_participations))
+
+kable(non_GM_best_place, caption = 'Best placement of a non-GM')
+```
+
+
+
+## 11) Best woman
+It is not easy to rate which women performed the best in 2023. We can sort them by different criteria and then judge how often one ranked higher than the others.
+
+First we can look at the price money they earned. The highest placed women earns $100 in each tournament
+```{r}
+#| layout-ncol: 1
+women <- TT %>% filter(gender == "Women") %>% pull(name) %>% unique()
+
+women_prize_df <- TT %>% filter(name %in% women) %>% 
+  arrange(file_name, number) %>% 
+  group_by(file_name) %>% slice_head(n = 1) %>% ungroup() %>% 
+  count(name, sort = TRUE) %>% 
+  mutate(women_prize_money = n * 100) %>% 
+  select(-n)
+
+player_df <- player_df %>% left_join(women_prize_df, by = "name")
+player_df$women_prize_money[is.na(player_df$women_prize_money)] <- 0
+
+kable(x = player_df %>% filter(name %in% women, women_prize_money > 0) %>% arrange(desc(women_prize_money)) %>% select(name, title, fed, women_prize_money, N_participations) %>% slice_head(n=10))
+```
+
+We can also sort by other metrics like, highest rating, average score, best place and number of tournaments:
+
+
+
+## 12 Most tournament wins and prize money
+This is the code to sort the players by the number of first places and total tournament prize money earned in 2024:
+Currently the top 3 players with the most wins, also represent the order of the biggest total prize money won. Therefore one award that combines both results should be enough for the final category.
+
+```{r}
+#| layout-ncol: 2
+
+most_TT_wins <- player_df %>% select(name, title, fed, N_1st, N_participations) %>% 
+ mutate(winning_pct = round(N_1st / N_participations, 3)) %>% 
+ arrange(desc(N_1st)) %>% 
+ filter(N_1st > 3)
+           
+kable(most_TT_wins)
+
+highest_TT_prize <- player_df %>% select(name, title, fed, total_prize, N_participations) %>% 
+ arrange(desc(total_prize)) %>% 
+ slice_head(n=5)
+kable(highest_TT_prize)
+```
+
+Hikaru Nakamura wins the Award for most Tournament wins and the biggest prize money earned in 2024.
+
+

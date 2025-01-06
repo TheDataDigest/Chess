@@ -52,6 +52,6 @@ winning_streak_distribution <- function(logical_vector) {
 }
 
 # Example usage
-a <- c(TRUE, FALSE, TRUE, TRUE, FALSE, TRUE, TRUE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE)
-result <- winning_streak_distribution(a)
-print(result)
+# a <- c(TRUE, FALSE, TRUE, TRUE, FALSE, TRUE, TRUE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE)
+# result <- winning_streak_distribution(a)
+# print(result)

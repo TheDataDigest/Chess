@@ -1,0 +1,10 @@
+"0","top_30_women_black <- winning_percentages %>% 
+  filter(username %in% women_users) %>% 
+  filter(games_w_Black >= 30,
+         result_color == ""win_Black"") %>% 
+  arrange(desc(win_black_pct)) %>% 
+  left_join(player_df %>% select(username, name, title, fed)) %>% 
+  select(username, name, games_w_Black, win_black_pct, title, fed) %>% 
+  slice_head(n=30) 
+"
+"2","Joining with `by = join_by(username)`"

@@ -1,0 +1,4 @@
+"0","longest_wins <- winning_streak %>% select(name, title, fed, winning_streak) %>% "
+"0"," slice_head(n=10)"
+"0","  "
+"0","kable(longest_wins)"

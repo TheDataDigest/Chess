@@ -1,0 +1,81 @@
+https://www.chess.com/member/aleksandar-topalov
+https://www.chess.com/member/bobbyfischer1508
+
+SRB vs ECU
+same player, different accounts
+
+Aleksandar-Topalov
+Aleksandar Topalov
+CM
+SRB
+18
+2
+10
+input/TitledTuesday_2024_csv_files/early-titled-tuesday-blitz-may-14-2024-4758145.csv
+
+BobbyFischer1508
+Aleksandar Topalov
+CM
+ECU
+20
+2
+	
+input/TitledTuesday_2024_csv_files/early-titled-tuesday-blitz-may-21-2024-4772078.csv
+
+
+#! same name participating with two usernames
+# Account swith during tournament, first played with chesskalmar, lost then switch to chessbaerchen
+
+input/TitledTuesday_2024_csv_files/early-titled-tuesday-blitz-july-16-2024-4900933.csv
+132
+3
+KGZ
+FM
+chessbaerchen
+Bayastan Sydykov
+2626
+U--
+D227W
+D300B
+W304W
+L491B
+W270B
+D183W
+L264B
+W285W
+W273B
+W207W
+6.5
+42.5
+45.5
+30.50
+0
+5
+2
+2459
+early
+july-16-2024
+2024-07-16
+10
+2024-07-16_early
+FM
+Men
+7
+input/TitledTuesday_2024_csv_files/early-titled-tuesday-blitz-july-16-2024-4900933.csv
+616
+373
+INT
+FM
+chesskalmar
+Bayastan Sydykov
+
+input/TitledTuesday_2024_csv_files/early-titled-tuesday-blitz-august-20-2024-4996245.csv
+leavethecannoli
+Christopher Chabris
+norwaytoadog
+Christopher Chabris
+both participated but no games played on the same day
+
+input/TitledTuesday_2024_csv_files/late-titled-tuesday-blitz-july-16-2024-4900935.csv
+solofon, Joachim100x participated with 2 accounts
+Joachim Solberg

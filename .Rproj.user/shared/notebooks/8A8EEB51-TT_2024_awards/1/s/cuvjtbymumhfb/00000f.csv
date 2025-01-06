@@ -1,0 +1,11 @@
+"0","top_10_win_white2 <- winning_percentages %>% 
+  filter(username != ""howitzer14"") %>% 
+  filter(games_w_White >= 50,
+         result_color == ""win_White"") %>% 
+  arrange(desc(win_white_pct)) %>% 
+  left_join(player_df %>% select(username, name, title, fed)) %>% 
+  select(name, games_w_White, win_white_pct, title, fed) %>% 
+#  mutate(win_white_pct = percent(win_white_pct, accuracy = 0.1)) %>% 
+  head(n=10) 
+"
+"2","Joining with `by = join_by(username)`"

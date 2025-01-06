@@ -1,0 +1,8 @@
+"0",""
+"0","# Lower rated player winning with Black"
+"0","matches_df %>% mutate(rating_difference = hero_rating - opponent_rating) %>% "
+"0","  filter(color == ""black"") %>% "
+"0","  filter(result == ""draw"" & hero_rating < opponent_rating) %>% "
+"0","  arrange(rating_difference) %>% "
+"0","  select(date_time, title, fed, hero_name, hero_rating, round, color, result, opponent_name, opponent_rating, rating_difference) %>% "
+"0","  slice_head(n=10)"

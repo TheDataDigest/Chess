@@ -1,0 +1,4 @@
+"0","perfect_day <- TT %>% filter(score == 11) %>% "
+"0","  select(date_time, name, title, fed, score)"
+"0","  "
+"0","kable(perfect_day)"

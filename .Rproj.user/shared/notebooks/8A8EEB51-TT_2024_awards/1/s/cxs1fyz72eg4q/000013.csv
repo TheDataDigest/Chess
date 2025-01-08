@@ -1,9 +1,0 @@
-"0","#average competition defeated, based on at least 10 games
-average_defeated_rating <- matches_df %>% filter(hero_name %in% women) %>% 
-  filter(result == ""win"") %>% 
-  group_by(username, hero_name) %>% 
-  summarize(average_opponent_defeated = mean(opponent_rating, na.rm = T),
-            median_opponent_defeated = median(opponent_rating, na.rm = T),
-            N_games = n()) %>% filter(N_games >= 10) %>% ungroup()
-"
-"2","`summarise()` has grouped output by 'username'. You can override using the `.groups` argument."

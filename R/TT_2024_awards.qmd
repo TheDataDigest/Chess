@@ -166,7 +166,7 @@ kable(most_draws)
 # Performance
 ## Highest winning % with white and black
 
-```{r, include=T}
+```{r}
 games_color <- results_df %>% 
 #  filter(username %in% player_df_50_games) %>% 
   pivot_longer(cols = -c(username, games_w_White, games_w_Black)) %>% 
@@ -180,46 +180,8 @@ names(games_color)[4] <- "result_color"
 winning_percentages <- games_color %>% filter(result_color %in% c("win_White", "win_Black"))
 ```
 
-```{r,include=F}
-games_color <- results_df %>% 
-#  filter(username %in% player_df_50_games) %>% 
-  pivot_longer(cols = -c(username, games_w_White, games_w_Black)) %>% 
-  mutate(win_white_pct = percent(value / games_w_White, accuracy = 0.1),
-         win_black_pct = percent(value / games_w_Black, accuracy = 0.1),
-         lose_white_pct = percent(value / games_w_White, accuracy = 0.1),
-         lose_black_pct = percent(value / games_w_Black, accuracy = 0.1))
-         
-names(games_color)[4] <- "result_color"
-
-winning_percentages <- games_color %>% filter(result_color %in% c("win_White", "win_Black"))
-```
-
-```{r, include = FALSE}
-# player_df_50_games <- player_df %>% filter(N_participations > 25) %>% arrange(desc(avg_score)) %>% head(20) %>% pull(username)
-top_20_win_white <- winning_percentages %>% 
-  filter(games_w_White >= 30,
-         result_color == "win_White") %>% 
-  arrange(desc(win_white_pct)) %>% 
-  left_join(player_df %>% select(username, name, title, fed)) %>% 
-  select(name, games_w_White, win_white_pct, title, fed) %>% 
-  slice_head(n=20) 
-
-kable(top_20_win_white)
-```
 
 
-```{r, include = FALSE}
-#And with the black pieces we see that a cut-off of 30 games might be too low. 
-top_20_win_black <- winning_percentages %>% 
-  filter(games_w_Black >= 30,
-         result_color == "win_Black") %>% 
-  arrange(desc(win_black_pct)) %>% 
-  left_join(player_df %>% select(username, name, title, fed)) %>% 
-  select(username, name, games_w_Black, win_black_pct, title, fed) %>% 
-  slice_head(n=20) 
-
-kable(top_20_win_black)
-```
 ** I filtered for players that played at least 50 games with the specific color **
 
 Magnus Carlsen should get this award with 82.5% beating Sam Sevian with 82.5%.
@@ -228,7 +190,7 @@ For the last award I will show the players that faced the strongest and weakest 
 
 Magnus Carlsen would win this award with white and black.
 ```{r}
-top_10_win_white2 <- winning_percentages %>% 
+top_10_win_white <- winning_percentages %>% 
   filter(username != "howitzer14") %>% 
   filter(games_w_White >= 50,
          result_color == "win_White") %>% 
@@ -239,12 +201,12 @@ top_10_win_white2 <- winning_percentages %>%
   head(n=10) 
 
 #top_10_win_white2$win_white_pct <- percent(as.numeric(top_10_win_white2$win_white_pct), accuracy = 0.1)
-kable(top_10_win_white2)
+kable(top_10_win_white)
 ```
 
 And this result for black:
 ```{r}
-top_10_win_black2 <- winning_percentages %>% 
+top_10_win_black <- winning_percentages %>% 
   filter(username != "howitzer14") %>% 
   filter(games_w_Black >= 50,
          result_color == "win_Black") %>% 
@@ -255,32 +217,18 @@ top_10_win_black2 <- winning_percentages %>%
   head(n=10) 
 
 #top_10_win_black2$win_black_pct <- percent(as.numeric(top_10_win_black2$win_black_pct), accuracy = 0.1)
-kable(top_10_win_black2)
+kable(top_10_win_black)
 ```
 
 ## Lowest losing % with white and black
 
-```{r, include = FALSE}
-losing_percentages <- games_color %>% filter(result_color %in% c("lose_White", "lose_Black"))
 
-top_20_lose_white <- losing_percentages %>% 
-  filter(games_w_White >= 30,
-         result_color == "lose_White") %>% 
-  arrange(lose_white_pct) %>% 
-  left_join(player_df %>% select(username, name, title, fed)) %>% 
-  select(username, name, games_w_White, lose_white_pct, title, fed) %>% 
-  slice_head(n=20)
-
-kable(top_20_lose_white)
-```
 I filter for at least 50 games and the award goes to Nakamura ahead of Carlsen
 
 ```{r}
 losing_percentages <- games_color %>% filter(result_color %in% c("lose_White", "lose_Black"))
-```
 
-```{r, include=TRUE}
-top_10_lose_white2 <- losing_percentages %>% 
+top_10_lose_white <- losing_percentages %>% 
   filter(username != "howitzer14") %>% 
   filter(games_w_White >= 50,
          result_color == "lose_White") %>% 
@@ -288,10 +236,10 @@ top_10_lose_white2 <- losing_percentages %>%
   left_join(player_df %>% select(username, name, title, fed)) %>% 
   select(name, games_w_White, lose_white_pct, title, fed) %>% 
 #  mutate(lose_white_pct = percent(lose_white_pct, accuracy = 0.1)) %>% 
-  slice_head(n=10)
+  head(n=10)
 
 #top_10_lose_white2$lose_white_pct <- percent(as.numeric(top_10_lose_white2$lose_white_pct), accuracy = 0.1)
-kable(top_10_lose_white2)
+kable(top_10_lose_white)
 ```
 
 
@@ -318,7 +266,7 @@ top_10_lose_black <- losing_percentages %>%
   left_join(player_df %>% select(username, name, title, fed)) %>% 
   select(name, games_w_Black, lose_black_pct, title, fed) %>% 
 #  mutate(lose_black_pct = percent(lose_black_pct, accuracy = 0.1)) %>% 
-  slice_head(n=10) 
+  head(n=10) 
 
 #top_10_lose_black$lose_black_pct <- percent(as.numeric(top_10_lose_black$lose_black_pct), accuracy = 0.1)
 kable(top_10_lose_black)

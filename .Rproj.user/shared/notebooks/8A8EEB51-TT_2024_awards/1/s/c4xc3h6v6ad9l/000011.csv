@@ -1,6 +1,0 @@
-"0","kable(x = player_df %>% filter(name %in% women, women_prize_money > 0) %>% arrange(desc(women_prize_money)) %>% select(name, title, fed, women_prize_money, N_participations) %>% slice_head(n=10))
-"
-"2","Registered S3 method overwritten by 'rmarkdown':
-  method         from
-  print.paged_df     
-"

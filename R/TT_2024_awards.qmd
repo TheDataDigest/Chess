@@ -563,7 +563,7 @@ We can sort them by any metric you like, e.g. highest rating, average score, bes
 
 The top 2 are Aleksandra Goryachkina, Alexandra Kosteniuk. My arguments to give this award to Kosteniuk instead of Goryachkina would be:
 Even though the Goryachkina made \$1600, she participated 66 times (\$24/tournament) vs. Kosteniuk who got her \$1400 prize money with 37 participations (\$38/tournament).
-Goryachkina had a better "best place" 27 vs 37 but Kosteniuk wins at higher average score (6.82 vs 6.52), higher Buchholtz_Cut (59.35 vs 57.20), she had a slightly better rating (2792 vs 2770), and a better winning percentage with white (59.8% vs 54.6%) and with the black pieces (50.5% vs 46.3%). She also defeated a better competition on average (2540 vs 2505 for median defeated opponents rating) and (2579 vs 2529 for average defeated opponents rating).
+Goryachkina had a better "best place" 27 vs 37 but Kosteniuk wins at higher average score (6.82 vs 6.52), higher Buchholtz_Cut (59.35 vs 57.20), she had a slightly better rating (2792 vs 2770), and a better winning percentage with white (59.8% vs 54.6%) and with the black pieces (50.5% vs 46.3%). She also defeated a better competition on average (2540 vs 2505 for median defeated opponents rating) and (2579 vs 2529 for average defeated opponents rating). She also had the highest winning streak overall with 9 games, together with Gulrukhbegim Tokhirjonova. Aleksandra Goryachkina "only" got a maxium winning streak of 6 games.
 
 The next four contestants (Meri Arabidze, Karina Ambartsumova, Aleksandra Maltsevskaya, Polina Shuvalova) are also very strong and close to one another at different criteria and could share a 3rd place. 
 
@@ -573,10 +573,13 @@ women_df <- player_df %>% filter(name %in% women) %>%
   left_join(average_faced_rating) %>% 
   left_join(women_white) %>% 
   left_join(women_black) %>% 
-  select(name, title, fed, women_prize_money, best_Place, score, avg_BhC1, rating_best, N_participations,avg_games_played, win_white_pct ,games_w_White,win_black_pct ,games_w_Black, median_opponent_defeated, average_opponent_defeated) %>% 
+  left_join(winning_streak) %>% 
+  select(name, title, fed, women_prize_money, best_Place, score, avg_BhC1, rating_best, N_participations,avg_games_played, winning_streak, win_white_pct ,games_w_White,win_black_pct ,games_w_Black, median_opponent_defeated, average_opponent_defeated) %>% 
   arrange(desc(women_prize_money)) %>% 
   filter(N_participations >= 10) %>% ungroup()
 #  slice_head(n=100) %>% ungroup()
+
+names(women_df)[4] <- "prize_money"
 
 DT::datatable(women_df)
 ```

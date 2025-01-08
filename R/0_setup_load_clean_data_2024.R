@@ -8,6 +8,7 @@ library(tidyverse)
 library(readr)
 library(readxl)
 library(stringr)
+library(stringi)
 library(lubridate)
 library(forcats)
 library(janitor)
@@ -64,6 +65,7 @@ TT$number[TT$date_time == "2024-12-24_early"] <- 1:length(
 # Ordering the titles of the players and extracting gender information
 TT$title_ordered <- factor(TT$title, levels = c("GM", "IM", "FM", "CM", "NM", "WGM", "WIM", "WFM", "WCM", "WNM"))
 TT <- TT %>% mutate(gender = ifelse(str_detect(string = TT$title, pattern = "W"), "Women", "Men"))
+
 
 # Fixing non standard english alphabet names
 TT$name[TT$name == "Davíð Kjartansson" & !is.na(TT$name)] <- "David Kjartansson"
@@ -232,4 +234,20 @@ TT <- TT %>% left_join(prize_money, by = "number")
 TT$prize2 <- TT$prize
 TT$prize2[is.na(TT$prize2)] <- 0
 
-saveRDS(object = TT, file = "input/TitledTuesday_2024_df.RDS")
+TT$name <- gsub(pattern = "malakismayil", replacement = "Malak Ismayil", x = TT$name)
+TT$name <- gsub(pattern = "Padmini Rout", replacement = "Rout Padmini", x = TT$name)
+TT$name <- gsub(pattern = "BOZNENA PIDDUBNA", replacement = "Bozhena Piddubna", x = TT$name)
+TT$name <- gsub(pattern = "Nhung Hong Nguyen", replacement = "Nguyen Hong Nhung", x = TT$name)
+TT$name <- gsub(pattern = "Guldona Karimov", replacement = "Guldona Karimova", x = TT$name)
+TT$name <- gsub(pattern = "Phuong Hanh Luong", replacement = "Luong Phuong Hanh", x = TT$name)
+TT$name <- gsub(pattern = "AFRUZA Khamdamova", replacement = "Afruza Khamdamova", x = TT$name, ignore.case = FALSE)
+TT$name <- gsub(pattern = "Kler Çaku", replacement = "Kler Caku", x = TT$name)
+TT$name <- gsub(pattern = "Wiktoria Śmietańska", replacement = "Wiktoria Smietanska", x = TT$name)
+TT$name <- gsub(pattern = "Irene Sukandar", replacement = "Irine Kharisma Sukandar", x = TT$name)
+
+top_100_women <- c("Alexandra Kosteniuk","Aleksandra Goryachkina","Polina Shuvalova","Meri Arabidze","Aleksandra Maltsevskaya","Karina Ambartsumova","Anna M. Sargsyan","Gulrukhbegim Tokhirjonova","Le Thao Nguyen Pham","Jiner Zhu","Anastasia Avramidou","Veronika Shubenkova","Afruza Khamdamova","Ekaterina Goltseva","Malak Ismayil","Atousa Pourkashiyan","Kalyani Sirin","Yuliia Osmak","Megan Althea Paragua","Rout Padmini","Anna Shukhman","Bozhena Piddubna","Galina Novikova","Liwia Jarocka","Nguyen Hong Nhung","Ekaterini Pavlidou","Diana Preobrazhenskaya","Anna Kubicka","Guldona Karimova","Katarzyna Dwilewicz","Maria Teresa Jimenez Salas","Zeinep Sultanbek","Lile Koridze","Trisha Kanyamarala","Liya Kurmangaliyeva","Olga Matveeva","Lala Huseynova","Veronika Minina","Luong Phuong Hanh","Swara Lakshmi Nair",
+                   "Anastasia Bodnaruk", "Kler Caku", "Saadat Bashirli", "Teodora Injac", "Keti Tsatsalashvili", "Anastasiia Hnatyshyn", "Wiktoria Smietanska", "Jemal Ovezdurdyyeva", "Olga Badelka", "Alisa Genrietta Yunker", "Guadalupe Montano Vicente","Shubhi Gupta", "Elnaz Kaliakhmet", "Daria Zaichenko", "Zoey Tang", "Thalia Cervantes Landeiro","Margarita Novikova", "Maya Porozhnyak", "Elis Denele Dicen", "Sivanesan Nithyalakshmi", "T H D Niklesha Tharushi", "Svetlana Vifleemskaia", "Sofia Blokhin", "Aleksandra Tarnowska", "Mrudul Dehankar", "Nurai Sovetbekova", "Margarita Filippova", "Ana Kuchava", "Arina Kiseleva", "Rebeca Jimenez Fernandez", "Sujana Lohani", "Alena Nikulina", "Valentina Golubenko", "Mai Narva", "Olga Yushko", "Maftuna Bobomurodova", "Anusha Subramanian", "Anastasia Travkina", "Viktoriya Tarasova", "Enkhrii Enkh-Amgalan", "Tatjana Vasilevich", "Cyrielle Monpeurt", "Savitha Shri B", "Gergana Peycheva", "Turkan Mamedjarova", "Salomeja Zaksaite", "Nadya Toncheva", "Diana Mirza", "Dila Baloglu", "Kelsey Liu", "Polina A Smirnova", "Katharina Reinecke", "Irine Kharisma Sukandar", "Bibisara Assaubayeva", "Ishvi Aggarwal", "Ewa Barwinska", "Maria Larina", "Alexandra Afanasieva", "Daria Yurasova", "Marya Demina")
+
+TT$gender[TT$name %in% top_100_women] <- "Women"
+
+saveRDS(object = TT, file = "input/2024_df_RDS/TitledTuesday_2024_df.RDS")

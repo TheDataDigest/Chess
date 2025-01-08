@@ -238,7 +238,7 @@ top_10_win_white2 <- winning_percentages %>%
 #  mutate(win_white_pct = percent(win_white_pct, accuracy = 0.1)) %>% 
   head(n=10) 
 
-top_10_win_white2$win_white_pct <- percent(as.numeric(top_10_win_white2$win_white_pct), accuracy = 0.1)
+#top_10_win_white2$win_white_pct <- percent(as.numeric(top_10_win_white2$win_white_pct), accuracy = 0.1)
 kable(top_10_win_white2)
 ```
 
@@ -254,7 +254,7 @@ top_10_win_black2 <- winning_percentages %>%
 #  mutate(win_black_pct = percent(win_black_pct, accuracy = 0.1)) %>% 
   head(n=10) 
 
-top_10_win_black2$win_black_pct <- percent(as.numeric(top_10_win_black2$win_black_pct), accuracy = 0.1)
+#top_10_win_black2$win_black_pct <- percent(as.numeric(top_10_win_black2$win_black_pct), accuracy = 0.1)
 kable(top_10_win_black2)
 ```
 
@@ -286,11 +286,11 @@ top_10_lose_white2 <- losing_percentages %>%
          result_color == "lose_White") %>% 
   arrange(lose_white_pct) %>% 
   left_join(player_df %>% select(username, name, title, fed)) %>% 
-  select(username, name, games_w_White, lose_white_pct, title, fed) %>% 
+  select(name, games_w_White, lose_white_pct, title, fed) %>% 
 #  mutate(lose_white_pct = percent(lose_white_pct, accuracy = 0.1)) %>% 
   slice_head(n=10)
 
-top_10_lose_white2$lose_white_pct <- percent(as.numeric(top_10_lose_white2$lose_white_pct), accuracy = 0.1)
+#top_10_lose_white2$lose_white_pct <- percent(as.numeric(top_10_lose_white2$lose_white_pct), accuracy = 0.1)
 kable(top_10_lose_white2)
 ```
 
@@ -316,11 +316,11 @@ top_10_lose_black <- losing_percentages %>%
          result_color == "lose_Black") %>% 
   arrange(lose_black_pct) %>% 
   left_join(player_df %>% select(username, name, title, fed)) %>% 
-  select(username, name, games_w_Black, lose_black_pct, title, fed) %>% 
+  select(name, games_w_Black, lose_black_pct, title, fed) %>% 
 #  mutate(lose_black_pct = percent(lose_black_pct, accuracy = 0.1)) %>% 
   slice_head(n=10) 
 
-top_10_lose_black$lose_black_pct <- percent(as.numeric(top_10_lose_black$lose_black_pct), accuracy = 0.1)
+#top_10_lose_black$lose_black_pct <- percent(as.numeric(top_10_lose_black$lose_black_pct), accuracy = 0.1)
 kable(top_10_lose_black)
 ```
 
@@ -537,26 +537,16 @@ kable(non_GM_best_place, caption = 'Best placement of a non-GM')
 
 
 # Best woman
-It is not easy to rate which women performed the best in 2024. We can sort them by different criteria and then judge how often one ranked higher than the others.
-
-### Summary table
-I looked into 10 different criteria and reported the rank of these top 3 players.
-I think it is a tie between Gulrukhbegim Tokhirjonova (24yo) and Aleksandra Maltsevskaya (22yo). Anna Shukham (16yo) is the clear third place.
-Tokhirjonova has a better median and average ranking compared to Maltsevskaya. However Maltsevskaya is ahead in 6 out of 10 criteria. One could argue to combine the average opponents ratings faced and defeated into one category. Same could be said about winning percentages with white and black. However Tokhirjonova is clearly ahead of Maltsevskaya when it comes to winning percentages.
-
-The table below shows their individual values and the rank compared to all women players.
-The average tournament score is filtered for at least 5 participations. The winning percentages are ranked for women that played at least 30 games. The opponent rating ranks are filtered for at least 100 matches and the opponent rating defeated ranks are filter for at least 50 wins.
-The absolute ranking is not as important as the relative ranking and there it is really close between the top two.
+Thank you Nathaniel for this link "https://www.chess.com/events/2024-titled-tuesday-blitz-november-12-late#leaderboard"
+The mistake I made was that I only included women that had a W-title, like WGM, WIM, etc.
+But from your list the top 5 use GM or IM.
+I used the information from that list to not miss any of the top 100.
 
 ```{r}
-summary_women <- read.xlsx(file = "../input/women_2024.xlsx", sheetIndex = 1)
-kable(summary_women[1:12, 1:7])
+#summary_women <- read.xlsx(file = "../input/women_2024.xlsx", sheetIndex = 1)
+#kable(summary_women[1:12, 1:7])
 ```
 
-
-
-The table below shows the price money they earned. The highest placed women earns \$100 in each tournament.
-Aleksandra Maltsevskaya (\$1400), Gulrukhbegim Tokhirjonova (\$1100), Anna Shukhman (\$700), would be the top 3.
 
 ```{r}
 #| layout-ncol: 1
@@ -572,76 +562,75 @@ women_prize_df <- TT %>% filter(name %in% women) %>%
 player_df <- player_df %>% left_join(women_prize_df, by = "name")
 player_df$women_prize_money[is.na(player_df$women_prize_money)] <- 0
 
-kable(x = player_df %>% filter(name %in% women, women_prize_money > 0) %>% arrange(desc(women_prize_money)) %>% select(name, title, fed, women_prize_money, N_participations) %>% slice_head(n=10))
-```
-The interactive table below shows all 532 women that participated in the Title tuesday tournaments.
-We can sort them by any metric you like, e.g. highest rating, average score, best place and number of tournaments:
-
-```{r}
-women_df <- player_df %>% filter(name %in% women) %>% 
-  select(name, title, fed, best_Place, score, rating_best, N_participations) %>% 
-  arrange(best_Place)
-
-DT::datatable(women_df)
+#kable(x = player_df %>% filter(name %in% women, women_prize_money > 0) %>% arrange(desc(women_prize_money)) %>% select(name, title, fed, women_prize_money, N_participations) %>% slice_head(n=10))
 ```
 
 
 
-```{r, include = FALSE}
+```{r, include = T}
 women_users <- TT %>% filter(gender == "Women") %>% pull(username) %>% unique()
 
-top_30_women_white <- winning_percentages %>% 
+women_white <- winning_percentages %>% 
   filter(username %in% women_users) %>% 
-  filter(games_w_White >= 30,
+  filter(games_w_White >= 10,
          result_color == "win_White") %>% 
   arrange(desc(win_white_pct)) %>% 
   left_join(player_df %>% select(username, name, title, fed)) %>% 
-  select(username, name, games_w_White, win_white_pct, title, fed) %>% 
-  slice_head(n=30) 
+  select(username, name, games_w_White, win_white_pct, title, fed) 
 
-kable(top_30_women_white)
-```
 
-```{r, include = FALSE}
-top_30_women_black <- winning_percentages %>% 
+women_black <- winning_percentages %>% 
   filter(username %in% women_users) %>% 
-  filter(games_w_Black >= 30,
+  filter(games_w_Black >= 10,
          result_color == "win_Black") %>% 
   arrange(desc(win_black_pct)) %>% 
   left_join(player_df %>% select(username, name, title, fed)) %>% 
-  select(username, name, games_w_Black, win_black_pct, title, fed) %>% 
-  slice_head(n=30) 
+  select(username, name, games_w_Black, win_black_pct, title, fed) 
 
-kable(top_30_women_black)
+
 ```
-
-```{r , include = FALSE}
-women_df <- player_df %>% filter(name %in% women) %>% 
-  select(name, title, fed, best_Place, score, rating_best, N_participations) %>% 
-  arrange(best_Place) %>% slice_head(n=20)
-
-kable(women_df)
-```
-
-```{r, include = FALSE}
-#average competition faced, based on at least 100 games
-
-matches_df %>% filter(hero_name %in% women) %>% 
-  group_by(username, hero_name) %>% 
-  summarize(average_opponent_rating = mean(opponent_rating),
-            median_opponent_rating = median(opponent_rating),
-            N_games = n()) %>% filter(N_games >= 100) %>% arrange(desc(median_opponent_rating)) %>% View()
-```
-
-```{r, include=FALSE}
-#average competition defeated
-
-matches_df %>% filter(hero_name %in% women) %>% 
+```{r, include=TRUE}
+#average competition defeated, based on at least 10 games
+average_defeated_rating <- matches_df %>% filter(hero_name %in% women) %>% 
   filter(result == "win") %>% 
   group_by(username, hero_name) %>% 
-  summarize(average_opponent_rating = mean(opponent_rating),
-            median_opponent_rating = median(opponent_rating),
-            N_games = n()) %>% filter(N_games >= 50) %>% arrange(desc(average_opponent_rating)) %>% View()
+  summarize(average_opponent_defeated = mean(opponent_rating, na.rm = T),
+            median_opponent_defeated = median(opponent_rating, na.rm = T),
+            N_games = n()) %>% filter(N_games >= 10) %>% ungroup()
+```
+
+
+```{r, include = T}
+#average competition faced, based on at least 10 games
+
+average_faced_rating <- matches_df %>% filter(hero_name %in% women) %>% 
+  group_by(username, hero_name) %>% 
+  summarize(average_opponent_faced = mean(opponent_rating, na.rm =T),
+            median_opponent_faced = median(opponent_rating, na.rm =T),
+            N_games = n()) %>% filter(N_games >= 10) %>% ungroup()
+```
+
+The interactive table below shows every women (182) that competed in at least 10 tournaments.
+We can sort them by any metric you like, e.g. highest rating, average score, best place and number of tournaments:
+
+The top 2 are Aleksandra Goryachkina, Alexandra Kosteniuk. My arguments to give this award to Kosteniuk instead of Goryachkina would be:
+Even though the Goryachkina made \$1600, she participated 66 times (\$24/tournament) vs. Kosteniuk who got her \$1400 prize money with 37 participations (\$38/tournament).
+Goryachkina had a better "best place" 27 vs 37 but Kosteniuk wins at higher average score (6.82 vs 6.52), higher Buchholtz_Cut (59.35 vs 57.20), she had a slightly better rating (2792 vs 2770), and a better winning percentage with white (59.8% vs 54.6%) and with the black pieces (50.5% vs 46.3%). She also defeated a better competition on average (2540 vs 2505 for median defeated opponents rating) and (2579 vs 2529 for average defeated opponents rating).
+
+The next four contestants (Meri Arabidze, Karina Ambartsumova, Aleksandra Maltsevskaya, Polina Shuvalova) are also very strong and close to one another at different criteria and could share a 3rd place. 
+
+```{r}
+women_df <- player_df %>% filter(name %in% women) %>% 
+  left_join(average_defeated_rating) %>% 
+  left_join(average_faced_rating) %>% 
+  left_join(women_white) %>% 
+  left_join(women_black) %>% 
+  select(name, title, fed, women_prize_money, best_Place, score, avg_BhC1, rating_best, N_participations,avg_games_played, win_white_pct ,games_w_White,win_black_pct ,games_w_Black, median_opponent_defeated, average_opponent_defeated) %>% 
+  arrange(desc(women_prize_money)) %>% 
+  filter(N_participations >= 10) %>% ungroup()
+#  slice_head(n=100) %>% ungroup()
+
+DT::datatable(women_df)
 ```
 
 

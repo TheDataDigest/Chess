@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="TheDataDigest">
-<meta name="dcterms.date" content="2025-01-06">
+<meta name="dcterms.date" content="2025-01-08">
 <meta name="keywords" content="Quarto, Chess.com, Data Analysis, Titled Tuesday Tournaments">
 <meta name="description" content="This document is a draft for the 2024 TT Awards for chess.com">
 
@@ -146,7 +146,7 @@ background: #f0f3f5;
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">January 6, 2025</p>
+        <p class="date">January 8, 2025</p>
       </div>
     </div>
     
@@ -962,7 +962,7 @@ background: #f0f3f5;
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">#  mutate(win_white_pct = percent(win_white_pct, accuracy = 0.1)) %&gt;% </span></span>
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n=</span><span class="dv">10</span>) </span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>top_10_win_white2<span class="sc">$</span>win_white_pct <span class="ot">&lt;-</span> <span class="fu">percent</span>(<span class="fu">as.numeric</span>(top_10_win_white2<span class="sc">$</span>win_white_pct), <span class="at">accuracy =</span> <span class="fl">0.1</span>)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co">#top_10_win_white2$win_white_pct &lt;- percent(as.numeric(top_10_win_white2$win_white_pct), accuracy = 0.1)</span></span>
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(top_10_win_white2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
@@ -980,70 +980,70 @@ background: #f0f3f5;
 <tr class="odd">
 <td style="text-align: left;">Magnus Carlsen</td>
 <td style="text-align: right;">291</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">82.5%</td>
 <td style="text-align: left;">GM</td>
 <td style="text-align: left;">NOR</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Sam Sevian</td>
 <td style="text-align: right;">73</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">82.2%</td>
 <td style="text-align: left;">GM</td>
 <td style="text-align: left;">USA</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Hikaru Nakamura</td>
 <td style="text-align: right;">502</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">80.5%</td>
 <td style="text-align: left;">GM</td>
 <td style="text-align: left;">USA</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Aleksei Sarana</td>
 <td style="text-align: right;">495</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">79.4%</td>
 <td style="text-align: left;">GM</td>
 <td style="text-align: left;">SRB</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Levon Aronian</td>
 <td style="text-align: right;">88</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">78.4%</td>
 <td style="text-align: left;">GM</td>
 <td style="text-align: left;">USA</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Nikolas Theodorou</td>
 <td style="text-align: right;">60</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">78.3%</td>
 <td style="text-align: left;">GM</td>
 <td style="text-align: left;">GRC</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Daniil Dubov</td>
 <td style="text-align: right;">112</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">76.8%</td>
 <td style="text-align: left;">GM</td>
 <td style="text-align: left;">RUS</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Hans Niemann</td>
 <td style="text-align: right;">189</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">75.7%</td>
 <td style="text-align: left;">GM</td>
 <td style="text-align: left;">USA</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Amin Tabatabaei</td>
 <td style="text-align: right;">74</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">75.7%</td>
 <td style="text-align: left;">GM</td>
 <td style="text-align: left;">IRN</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Fabiano Caruana</td>
 <td style="text-align: right;">193</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">75.6%</td>
 <td style="text-align: left;">GM</td>
 <td style="text-align: left;">USA</td>
 </tr>
@@ -1065,7 +1065,7 @@ background: #f0f3f5;
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#  mutate(win_black_pct = percent(win_black_pct, accuracy = 0.1)) %&gt;% </span></span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n=</span><span class="dv">10</span>) </span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>top_10_win_black2<span class="sc">$</span>win_black_pct <span class="ot">&lt;-</span> <span class="fu">percent</span>(<span class="fu">as.numeric</span>(top_10_win_black2<span class="sc">$</span>win_black_pct), <span class="at">accuracy =</span> <span class="fl">0.1</span>)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">#top_10_win_black2$win_black_pct &lt;- percent(as.numeric(top_10_win_black2$win_black_pct), accuracy = 0.1)</span></span>
 <span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(top_10_win_black2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
@@ -1083,70 +1083,70 @@ background: #f0f3f5;
 <tr class="odd">
 <td style="text-align: left;">Gizem Olcayoz</td>
 <td style="text-align: right;">82</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">9.8%</td>
 <td style="text-align: left;">WCM</td>
 <td style="text-align: left;">TUR</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Magnus Carlsen</td>
 <td style="text-align: right;">299</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">73.2%</td>
 <td style="text-align: left;">GM</td>
 <td style="text-align: left;">NOR</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Jan-Krzysztof Duda</td>
 <td style="text-align: right;">312</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">72.4%</td>
 <td style="text-align: left;">GM</td>
 <td style="text-align: left;">POL</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Alireza Firouzja</td>
 <td style="text-align: right;">260</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">72.3%</td>
 <td style="text-align: left;">GM</td>
 <td style="text-align: left;">FRA</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Sina Movahed</td>
 <td style="text-align: right;">79</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">72.2%</td>
 <td style="text-align: left;">IM</td>
 <td style="text-align: left;">IRN</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Azer Mirzoev</td>
 <td style="text-align: right;">176</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">71.6%</td>
 <td style="text-align: left;">GM</td>
 <td style="text-align: left;">AZE</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Javokhir Sindarov</td>
 <td style="text-align: right;">158</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">71.5%</td>
 <td style="text-align: left;">GM</td>
 <td style="text-align: left;">UZB</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Maxime Vachier-Lagrave</td>
 <td style="text-align: right;">90</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">71.1%</td>
 <td style="text-align: left;">GM</td>
 <td style="text-align: left;">FRA</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Nihal Sarin</td>
 <td style="text-align: right;">175</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">70.9%</td>
 <td style="text-align: left;">GM</td>
 <td style="text-align: left;">IND</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Anton Korobov</td>
 <td style="text-align: right;">82</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">70.7%</td>
 <td style="text-align: left;">GM</td>
 <td style="text-align: left;">UKR</td>
 </tr>
@@ -1173,26 +1173,17 @@ background: #f0f3f5;
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>         result_color <span class="sc">==</span> <span class="st">"lose_White"</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(lose_white_pct) <span class="sc">%&gt;%</span> </span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(player_df <span class="sc">%&gt;%</span> <span class="fu">select</span>(username, name, title, fed)) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(username, name, games_w_White, lose_white_pct, title, fed) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, games_w_White, lose_white_pct, title, fed) <span class="sc">%&gt;%</span> </span>
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#  mutate(lose_white_pct = percent(lose_white_pct, accuracy = 0.1)) %&gt;% </span></span>
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">10</span>)</span>
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>top_10_lose_white2<span class="sc">$</span>lose_white_pct <span class="ot">&lt;-</span> <span class="fu">percent</span>(<span class="fu">as.numeric</span>(top_10_lose_white2<span class="sc">$</span>lose_white_pct), <span class="at">accuracy =</span> <span class="fl">0.1</span>)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co">#top_10_lose_white2$lose_white_pct &lt;- percent(as.numeric(top_10_lose_white2$lose_white_pct), accuracy = 0.1)</span></span>
 <span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(top_10_lose_white2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
-<colgroup>
-<col style="width: 26%">
-<col style="width: 24%">
-<col style="width: 17%">
-<col style="width: 18%">
-<col style="width: 7%">
-<col style="width: 5%">
-</colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: left;">username</th>
 <th style="text-align: left;">name</th>
 <th style="text-align: right;">games_w_White</th>
 <th style="text-align: left;">lose_white_pct</th>
@@ -1202,82 +1193,72 @@ background: #f0f3f5;
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Konavets</td>
 <td style="text-align: left;">Sam Sevian</td>
 <td style="text-align: right;">73</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">11.0%</td>
 <td style="text-align: left;">GM</td>
 <td style="text-align: left;">USA</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">HansOnTwitch</td>
 <td style="text-align: left;">Hans Niemann</td>
 <td style="text-align: right;">189</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">12.2%</td>
 <td style="text-align: left;">GM</td>
 <td style="text-align: left;">USA</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">DenLaz</td>
 <td style="text-align: left;">Denis Lazavik</td>
 <td style="text-align: right;">309</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">12.3%</td>
 <td style="text-align: left;">GM</td>
 <td style="text-align: left;">BLR</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">FabianoCaruana</td>
 <td style="text-align: left;">Fabiano Caruana</td>
 <td style="text-align: right;">193</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">12.4%</td>
 <td style="text-align: left;">GM</td>
 <td style="text-align: left;">USA</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Grischuk</td>
 <td style="text-align: left;">Alexander Grischuk</td>
 <td style="text-align: right;">218</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">12.4%</td>
 <td style="text-align: left;">GM</td>
 <td style="text-align: left;">RUS</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">dropstoneDP</td>
 <td style="text-align: left;">David Paravyan</td>
 <td style="text-align: right;">460</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">12.4%</td>
 <td style="text-align: left;">GM</td>
 <td style="text-align: left;">RUS</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">lachesisQ</td>
 <td style="text-align: left;">Ian Nepomniachtchi</td>
 <td style="text-align: right;">177</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">12.4%</td>
 <td style="text-align: left;">GM</td>
 <td style="text-align: left;">RUS</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">LevonAronian</td>
 <td style="text-align: left;">Levon Aronian</td>
 <td style="text-align: right;">88</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">12.5%</td>
 <td style="text-align: left;">GM</td>
 <td style="text-align: left;">USA</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">FairChess_on_YouTube</td>
 <td style="text-align: left;">Dmitry Andreikin</td>
 <td style="text-align: right;">508</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">12.8%</td>
 <td style="text-align: left;">GM</td>
 <td style="text-align: left;">MDV</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">TigrVShlyape</td>
 <td style="text-align: left;">Gata Kamsky</td>
 <td style="text-align: right;">551</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">13.2%</td>
 <td style="text-align: left;">GM</td>
 <td style="text-align: left;">USA</td>
 </tr>
@@ -1295,26 +1276,17 @@ background: #f0f3f5;
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>         result_color <span class="sc">==</span> <span class="st">"lose_Black"</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(lose_black_pct) <span class="sc">%&gt;%</span> </span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(player_df <span class="sc">%&gt;%</span> <span class="fu">select</span>(username, name, title, fed)) <span class="sc">%&gt;%</span> </span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(username, name, games_w_Black, lose_black_pct, title, fed) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, games_w_Black, lose_black_pct, title, fed) <span class="sc">%&gt;%</span> </span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">#  mutate(lose_black_pct = percent(lose_black_pct, accuracy = 0.1)) %&gt;% </span></span>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">10</span>) </span>
 <span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>top_10_lose_black<span class="sc">$</span>lose_black_pct <span class="ot">&lt;-</span> <span class="fu">percent</span>(<span class="fu">as.numeric</span>(top_10_lose_black<span class="sc">$</span>lose_black_pct), <span class="at">accuracy =</span> <span class="fl">0.1</span>)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co">#top_10_lose_black$lose_black_pct &lt;- percent(as.numeric(top_10_lose_black$lose_black_pct), accuracy = 0.1)</span></span>
 <span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(top_10_lose_black)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
-<colgroup>
-<col style="width: 25%">
-<col style="width: 27%">
-<col style="width: 16%">
-<col style="width: 18%">
-<col style="width: 7%">
-<col style="width: 4%">
-</colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: left;">username</th>
 <th style="text-align: left;">name</th>
 <th style="text-align: right;">games_w_Black</th>
 <th style="text-align: left;">lose_black_pct</th>
@@ -1324,82 +1296,72 @@ background: #f0f3f5;
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">LyonBeast</td>
 <td style="text-align: left;">Maxime Vachier-Lagrave</td>
 <td style="text-align: right;">90</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">11.1%</td>
 <td style="text-align: left;">GM</td>
 <td style="text-align: left;">FRA</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">MagnusCarlsen</td>
 <td style="text-align: left;">Magnus Carlsen</td>
 <td style="text-align: right;">299</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">13.4%</td>
 <td style="text-align: left;">GM</td>
 <td style="text-align: left;">NOR</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Hikaru</td>
 <td style="text-align: left;">Hikaru Nakamura</td>
 <td style="text-align: right;">498</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">13.7%</td>
 <td style="text-align: left;">GM</td>
 <td style="text-align: left;">USA</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">dropstoneDP</td>
 <td style="text-align: left;">David Paravyan</td>
 <td style="text-align: right;">455</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">14.1%</td>
 <td style="text-align: left;">GM</td>
 <td style="text-align: left;">RUS</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">jefferyx</td>
 <td style="text-align: left;">Jeffery Xiong</td>
 <td style="text-align: right;">384</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">15.6%</td>
 <td style="text-align: left;">GM</td>
 <td style="text-align: left;">USA</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">DenLaz</td>
 <td style="text-align: left;">Denis Lazavik</td>
 <td style="text-align: right;">296</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">15.9%</td>
 <td style="text-align: left;">GM</td>
 <td style="text-align: left;">BLR</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Polish_fighter3000</td>
 <td style="text-align: left;">Jan-Krzysztof Duda</td>
 <td style="text-align: right;">312</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">16.0%</td>
 <td style="text-align: left;">GM</td>
 <td style="text-align: left;">POL</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">FairChess_on_YouTube</td>
 <td style="text-align: left;">Dmitry Andreikin</td>
 <td style="text-align: right;">480</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">16.5%</td>
 <td style="text-align: left;">GM</td>
 <td style="text-align: left;">MDV</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">DanielNaroditsky</td>
 <td style="text-align: left;">Daniel Naroditsky</td>
 <td style="text-align: right;">344</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">16.6%</td>
 <td style="text-align: left;">GM</td>
 <td style="text-align: left;">USA</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Prizant_academy</td>
 <td style="text-align: left;">Ivan Zemlyanskii</td>
 <td style="text-align: right;">84</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: left;">16.7%</td>
 <td style="text-align: left;">GM</td>
 <td style="text-align: left;">RUS</td>
 </tr>
@@ -2337,153 +2299,14 @@ background: #f0f3f5;
 </section>
 <section id="best-woman" class="level1" data-number="11">
 <h1 data-number="11"><span class="header-section-number">11</span> Best woman</h1>
-<p>It is not easy to rate which women performed the best in 2024. We can sort them by different criteria and then judge how often one ranked higher than the others.</p>
-<section id="summary-table" class="level3" data-number="11.0.1">
-<h3 data-number="11.0.1" class="anchored" data-anchor-id="summary-table"><span class="header-section-number">11.0.1</span> Summary table</h3>
-<p>I looked into 10 different criteria and reported the rank of these top 3 players. I think it is a tie between Gulrukhbegim Tokhirjonova (24yo) and Aleksandra Maltsevskaya (22yo). Anna Shukham (16yo) is the clear third place. Tokhirjonova has a better median and average ranking compared to Maltsevskaya. However Maltsevskaya is ahead in 6 out of 10 criteria. One could argue to combine the average opponents ratings faced and defeated into one category. Same could be said about winning percentages with white and black. However Tokhirjonova is clearly ahead of Maltsevskaya when it comes to winning percentages.</p>
-<p>The table below shows their individual values and the rank compared to all women players. The average tournament score is filtered for at least 5 participations. The winning percentages are ranked for women that played at least 30 games. The opponent rating ranks are filtered for at least 100 matches and the opponent rating defeated ranks are filter for at least 50 wins. The absolute ranking is not as important as the relative ranking and there it is really close between the top two.</p>
+<p>Thank you Nathaniel for this link “https://www.chess.com/events/2024-titled-tuesday-blitz-november-12-late#leaderboard” The mistake I made was that I only included women that had a W-title, like WGM, WIM, etc. But from your list the top 5 use GM or IM. I used the information from that list to not miss any of the top 100.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>summary_women <span class="ot">&lt;-</span> <span class="fu">read.xlsx</span>(<span class="at">file =</span> <span class="st">"../input/women_2024.xlsx"</span>, <span class="at">sheetIndex =</span> <span class="dv">1</span>)</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(summary_women[<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#summary_women &lt;- read.xlsx(file = "../input/women_2024.xlsx", sheetIndex = 1)</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co">#kable(summary_women[1:12, 1:7])</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output-display">
-<table class="table table-sm table-striped small">
-<colgroup>
-<col style="width: 22%">
-<col style="width: 22%">
-<col style="width: 7%">
-<col style="width: 21%">
-<col style="width: 7%">
-<col style="width: 12%">
-<col style="width: 7%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Category</th>
-<th style="text-align: right;">Gulrukhbegim.Tokhirjonova</th>
-<th style="text-align: right;">GT.rank</th>
-<th style="text-align: right;">Aleksandra.Maltsevskaya</th>
-<th style="text-align: right;">AM.rank</th>
-<th style="text-align: right;">Anna.Shukhman</th>
-<th style="text-align: right;">AS.rank</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">prize money</td>
-<td style="text-align: right;">1100.00</td>
-<td style="text-align: right;">2.0</td>
-<td style="text-align: right;">1400.00</td>
-<td style="text-align: right;">1.0</td>
-<td style="text-align: right;">700.00</td>
-<td style="text-align: right;">3.0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">best place</td>
-<td style="text-align: right;">24.00</td>
-<td style="text-align: right;">2.0</td>
-<td style="text-align: right;">29.00</td>
-<td style="text-align: right;">3.0</td>
-<td style="text-align: right;">41.00</td>
-<td style="text-align: right;">5.0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">best rating</td>
-<td style="text-align: right;">2729.00</td>
-<td style="text-align: right;">3.0</td>
-<td style="text-align: right;">2769.00</td>
-<td style="text-align: right;">2.0</td>
-<td style="text-align: right;">2662.00</td>
-<td style="text-align: right;">6.0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">participations</td>
-<td style="text-align: right;">37.00</td>
-<td style="text-align: right;">15.0</td>
-<td style="text-align: right;">69.00</td>
-<td style="text-align: right;">2.0</td>
-<td style="text-align: right;">19.00</td>
-<td style="text-align: right;">77.0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">avgerage score</td>
-<td style="text-align: right;">5.97</td>
-<td style="text-align: right;">1.0</td>
-<td style="text-align: right;">4.71</td>
-<td style="text-align: right;">23.0</td>
-<td style="text-align: right;">5.95</td>
-<td style="text-align: right;">2.0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">winning pct. white</td>
-<td style="text-align: right;">57.80</td>
-<td style="text-align: right;">1.0</td>
-<td style="text-align: right;">51.70</td>
-<td style="text-align: right;">11.0</td>
-<td style="text-align: right;">46.50</td>
-<td style="text-align: right;">25.0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">winning pct. black</td>
-<td style="text-align: right;">50.80</td>
-<td style="text-align: right;">4.0</td>
-<td style="text-align: right;">52.60</td>
-<td style="text-align: right;">3.0</td>
-<td style="text-align: right;">54.10</td>
-<td style="text-align: right;">2.0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">winning streak</td>
-<td style="text-align: right;">9.00</td>
-<td style="text-align: right;">1.0</td>
-<td style="text-align: right;">5.00</td>
-<td style="text-align: right;">10.0</td>
-<td style="text-align: right;">5.00</td>
-<td style="text-align: right;">10.0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">average competition faced</td>
-<td style="text-align: right;">2590.00</td>
-<td style="text-align: right;">9.0</td>
-<td style="text-align: right;">2604.00</td>
-<td style="text-align: right;">5.0</td>
-<td style="text-align: right;">2592.00</td>
-<td style="text-align: right;">8.0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">average competition won</td>
-<td style="text-align: right;">2493.00</td>
-<td style="text-align: right;">5.0</td>
-<td style="text-align: right;">2510.00</td>
-<td style="text-align: right;">2.0</td>
-<td style="text-align: right;">2507.00</td>
-<td style="text-align: right;">3.0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">avgerage rank</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">4.3</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">6.2</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">14.1</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">median rank</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">2.5</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">3.0</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">5.5</td>
-</tr>
-</tbody>
-</table>
 </div>
-</div>
-<p>The table below shows the price money they earned. The highest placed women earns $100 in each tournament. Aleksandra Maltsevskaya ($1400), Gulrukhbegim Tokhirjonova ($1100), Anna Shukhman ($700), would be the top 3.</p>
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>women <span class="ot">&lt;-</span> TT <span class="sc">%&gt;%</span> <span class="fu">filter</span>(gender <span class="sc">==</span> <span class="st">"Women"</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(name) <span class="sc">%&gt;%</span> <span class="fu">unique</span>()</span>
@@ -2498,136 +2321,97 @@ background: #f0f3f5;
 <span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>player_df <span class="ot">&lt;-</span> player_df <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(women_prize_df, <span class="at">by =</span> <span class="st">"name"</span>)</span>
 <span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>player_df<span class="sc">$</span>women_prize_money[<span class="fu">is.na</span>(player_df<span class="sc">$</span>women_prize_money)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
 <span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="at">x =</span> player_df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(name <span class="sc">%in%</span> women, women_prize_money <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(women_prize_money)) <span class="sc">%&gt;%</span> <span class="fu">select</span>(name, title, fed, women_prize_money, N_participations) <span class="sc">%&gt;%</span> <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="co">#kable(x = player_df %&gt;% filter(name %in% women, women_prize_money &gt; 0) %&gt;% arrange(desc(women_prize_money)) %&gt;% select(name, title, fed, women_prize_money, N_participations) %&gt;% slice_head(n=10))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell quarto-layout-panel" data-layout-ncol="1">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
-<table class="table table-sm table-striped small">
-<colgroup>
-<col style="width: 36%">
-<col style="width: 8%">
-<col style="width: 5%">
-<col style="width: 25%">
-<col style="width: 23%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">name</th>
-<th style="text-align: left;">title</th>
-<th style="text-align: left;">fed</th>
-<th style="text-align: right;">women_prize_money</th>
-<th style="text-align: right;">N_participations</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Aleksandra Maltsevskaya</td>
-<td style="text-align: left;">WGM</td>
-<td style="text-align: left;">POL</td>
-<td style="text-align: right;">1400</td>
-<td style="text-align: right;">69</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Gulrukhbegim Tokhirjonova</td>
-<td style="text-align: left;">WGM</td>
-<td style="text-align: left;">USA</td>
-<td style="text-align: right;">1100</td>
-<td style="text-align: right;">37</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Anna Shukhman</td>
-<td style="text-align: left;">WIM</td>
-<td style="text-align: left;">RUS</td>
-<td style="text-align: right;">700</td>
-<td style="text-align: right;">19</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">AFRUZA Khamdamova</td>
-<td style="text-align: left;">WFM</td>
-<td style="text-align: left;">UZB</td>
-<td style="text-align: right;">400</td>
-<td style="text-align: right;">25</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Veronika Shubenkova</td>
-<td style="text-align: left;">WFM</td>
-<td style="text-align: left;">RUS</td>
-<td style="text-align: right;">400</td>
-<td style="text-align: right;">81</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">malakismayil</td>
-<td style="text-align: left;">WFM</td>
-<td style="text-align: left;">AZE</td>
-<td style="text-align: right;">400</td>
-<td style="text-align: right;">29</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Atousa Pourkashiyan</td>
-<td style="text-align: left;">WGM</td>
-<td style="text-align: left;">USA</td>
-<td style="text-align: right;">300</td>
-<td style="text-align: right;">29</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Alexandra Afanasieva</td>
-<td style="text-align: left;">WFM</td>
-<td style="text-align: left;">ESP</td>
-<td style="text-align: right;">300</td>
-<td style="text-align: right;">12</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Megan Althea Paragua</td>
-<td style="text-align: left;">WFM</td>
-<td style="text-align: left;">USA</td>
-<td style="text-align: right;">300</td>
-<td style="text-align: right;">38</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Cervantes Landeiro Thalia</td>
-<td style="text-align: left;">WGM</td>
-<td style="text-align: left;">MCO</td>
-<td style="text-align: right;">200</td>
-<td style="text-align: right;">35</td>
-</tr>
-</tbody>
-</table>
+
 </div>
-</div>
-</div>
-<p>The interactive table below shows all 532 women that participated in the Title tuesday tournaments. We can sort them by any metric you like, e.g.&nbsp;highest rating, average score, best place and number of tournaments:</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>women_df <span class="ot">&lt;-</span> player_df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(name <span class="sc">%in%</span> women) <span class="sc">%&gt;%</span> </span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, title, fed, best_Place, score, rating_best, N_participations) <span class="sc">%&gt;%</span> </span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(best_Place)</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>DT<span class="sc">::</span><span class="fu">datatable</span>(women_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>women_users <span class="ot">&lt;-</span> TT <span class="sc">%&gt;%</span> <span class="fu">filter</span>(gender <span class="sc">==</span> <span class="st">"Women"</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(username) <span class="sc">%&gt;%</span> <span class="fu">unique</span>()</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>women_white <span class="ot">&lt;-</span> winning_percentages <span class="sc">%&gt;%</span> </span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(username <span class="sc">%in%</span> women_users) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(games_w_White <span class="sc">&gt;=</span> <span class="dv">10</span>,</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>         result_color <span class="sc">==</span> <span class="st">"win_White"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(win_white_pct)) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(player_df <span class="sc">%&gt;%</span> <span class="fu">select</span>(username, name, title, fed)) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(username, name, games_w_White, win_white_pct, title, fed) </span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>women_black <span class="ot">&lt;-</span> winning_percentages <span class="sc">%&gt;%</span> </span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(username <span class="sc">%in%</span> women_users) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(games_w_Black <span class="sc">&gt;=</span> <span class="dv">10</span>,</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>         result_color <span class="sc">==</span> <span class="st">"win_Black"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(win_black_pct)) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(player_df <span class="sc">%&gt;%</span> <span class="fu">select</span>(username, name, title, fed)) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(username, name, games_w_Black, win_black_pct, title, fed) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#average competition defeated, based on at least 10 games</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>average_defeated_rating <span class="ot">&lt;-</span> matches_df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(hero_name <span class="sc">%in%</span> women) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(result <span class="sc">==</span> <span class="st">"win"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(username, hero_name) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">average_opponent_defeated =</span> <span class="fu">mean</span>(opponent_rating, <span class="at">na.rm =</span> T),</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">median_opponent_defeated =</span> <span class="fu">median</span>(opponent_rating, <span class="at">na.rm =</span> T),</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">N_games =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(N_games <span class="sc">&gt;=</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span> <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#average competition faced, based on at least 10 games</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>average_faced_rating <span class="ot">&lt;-</span> matches_df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(hero_name <span class="sc">%in%</span> women) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(username, hero_name) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">average_opponent_faced =</span> <span class="fu">mean</span>(opponent_rating, <span class="at">na.rm =</span>T),</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">median_opponent_faced =</span> <span class="fu">median</span>(opponent_rating, <span class="at">na.rm =</span>T),</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">N_games =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(N_games <span class="sc">&gt;=</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span> <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>The interactive table below shows every women (182) that competed in at least 10 tournaments. We can sort them by any metric you like, e.g.&nbsp;highest rating, average score, best place and number of tournaments:</p>
+<p>The top 2 are Aleksandra Goryachkina, Alexandra Kosteniuk. My arguments to give this award to Kosteniuk instead of Goryachkina would be: Even though the Goryachkina made $1600, she participated 66 times ($24/tournament) vs.&nbsp;Kosteniuk who got her $1400 prize money with 37 participations ($38/tournament). Goryachkina had a better “best place” 27 vs 37 but Kosteniuk wins at higher average score (6.82 vs 6.52), higher Buchholtz_Cut (59.35 vs 57.20), she had a slightly better rating (2792 vs 2770), and a better winning percentage with white (59.8% vs 54.6%) and with the black pieces (50.5% vs 46.3%). She also defeated a better competition on average (2540 vs 2505 for median defeated opponents rating) and (2579 vs 2529 for average defeated opponents rating).</p>
+<p>The next four contestants (Meri Arabidze, Karina Ambartsumova, Aleksandra Maltsevskaya, Polina Shuvalova) are also very strong and close to one another at different criteria and could share a 3rd place.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>women_df <span class="ot">&lt;-</span> player_df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(name <span class="sc">%in%</span> women) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(average_defeated_rating) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(average_faced_rating) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(women_white) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(women_black) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, title, fed, women_prize_money, best_Place, score, avg_BhC1, rating_best, N_participations,avg_games_played, win_white_pct ,games_w_White,win_black_pct ,games_w_Black, median_opponent_defeated, average_opponent_defeated) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(women_prize_money)) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(N_participations <span class="sc">&gt;=</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span> <span class="fu">ungroup</span>()</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="co">#  slice_head(n=100) %&gt;% ungroup()</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>DT<span class="sc">::</span><span class="fu">datatable</span>(women_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-cf331d96a9bc049980c9" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-cf331d96a9bc049980c9">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150","151","152","153","154","155","156","157","158","159","160","161","162","163","164","165","166","167","168","169","170","171","172","173","174","175","176","177","178","179","180","181","182","183","184","185","186","187","188","189","190","191","192","193","194","195","196","197","198","199","200","201","202","203","204","205","206","207","208","209","210","211","212","213","214","215","216","217","218","219","220","221","222","223","224","225","226","227","228","229","230","231","232","233","234","235","236","237","238","239","240","241","242","243","244","245","246","247","248","249","250","251","252","253","254","255","256","257","258","259","260","261","262","263","264","265","266","267","268","269","270","271","272","273","274","275","276","277","278","279","280","281","282","283","284","285","286","287","288","289","290","291","292","293","294","295","296","297","298","299","300","301","302","303","304","305","306","307","308","309","310","311","312","313","314","315","316","317","318","319","320","321","322","323","324","325","326","327","328","329","330","331","332","333","334","335","336","337","338","339","340","341","342","343","344","345","346","347","348","349","350","351","352","353","354","355","356","357","358","359","360","361","362","363","364","365","366","367","368","369","370","371","372","373","374","375","376","377","378","379","380","381","382","383","384","385","386","387","388","389","390","391","392","393","394","395","396","397","398","399","400","401","402","403","404","405","406","407","408","409","410","411","412","413","414","415","416","417","418","419","420","421","422","423","424","425","426","427","428","429","430","431","432","433","434","435","436","437","438","439","440","441","442","443","444","445","446","447","448","449","450","451","452","453","454","455","456","457","458","459","460","461","462","463","464","465","466","467","468","469","470","471","472","473","474","475","476","477","478","479","480","481","482","483","484","485","486","487","488","489","490","491","492","493","494","495","496","497","498","499","500","501","502","503","504","505","506","507","508","509","510","511","512","513","514","515","516","517","518","519","520","521","522","523","524","525","526","527","528","529","530","531","532"],["Patricie Naymanova","Gulrukhbegim Tokhirjonova","Aleksandra Maltsevskaya","Sachi Jain","Anna Shukhman","BOZNENA PIDDUBNA","Zarina Nurgaliyeva","Meruert Kamalidenova","Zeinep Sultanbek","Cécile Haussernot","Olesia Vlasova","Mobina Alinasab","Maria Teresa Jimenez Salas","Savitha Shri B","Atousa Pourkashiyan","Maria Malicka","Cervantes Landeiro Thalia","Veronika Shubenkova","Kalyani Sirin","Laurie Qiu","Vantika Agrawal","Margarita Potapova","Kheerthi Ganta","Megan Althea Paragua","Olga Kuznetsova","Omya Vidyarthi","malakismayil","Irina Bulmaga","Emilia Sprzęczka","Dila Baloglu","Leyla Budaqova","Daria Yurasova","Maria Florencia Fernandez","Swara Lakshmi Nair","Keti Tsatsalashvili","Olga Yushko","Hoang Thi Bao Tram","Alexandra Afanasieva","Nhung Hong Nguyen","Anastasia Travkina","Mariya Nosacheva","Nemo Zhou","Sofiia Hryzlova","Alua Nurman","Mammadova Narmin","Lile Koridze","Galina Novikova","Veronika Minina","Alfia Nasybullina","Candela Belén Francisco Guecamburu","Melika Mohammadi","Ekaterini Pavlidou","Sabreen Oraby","Annamaria Marjanovic","Anastasiia Hnatyshyn","Lala Huseynova","Dana Kochavi","Nehir Tokat","Qianyun Gong","Alisa Genrietta Yunker","Jemal Ovezdurdyeva","Anni Guo","Michalina Rudzińska","Mitra Hejazipour","Mariya Bruyatskaya","Anahi Ortiz Verdezoto","Phuong Hanh Luong","Elnaz Kaliakhmet","AFRUZA Khamdamova","Tannaz Azali","Jovana Srdanovic","Anna-Maja Kazarian","Maria Siekanska","Guldona Karimov","Taqwa Hamouri","Alexandra Shvedova","Byambaa Uyanga","Galina Mikheeva","Josefine Heinemann","Anna Kubicka","Valerie Ruchinskaya","Kler Çaku","Katarzyna Dwilewicz","Chelsie Monica Ignesias Sihite","Dina Belenkaya","Fruzsina Szente-Varga","Enkhrii Enkh-Amgalan","Radmila Kovacevic","Javiera Barrera","Aleksandra Lach","Rainbow2014","Devina Devagharan","Fiorella Contreras Huaman","Kelsey Liu","Trisha Kanyamarala","Maftuna Bobomurodova","Aleksandra Lukina","Aadya Gupta","Rebeca Jiménez Fernández","Uliana Dudkina","Yelyzaveta Hrebenshchykova","Jinela de la Caridad Rodríguez Rivero","Sujana Lohani","Papp Petra","vesal hamedi nia","winniethepooh04","Maya Porozhnyak","Rochelle Wu","Shubhi Gupta","Marija Kuznecova","Giulia Sala","Mounika Akshaya Bommini","Anastasia Grozdanovic","Theodora Koutsogiannopoulou","Eugenia Karas","Becca Lampman","Mahalakshmi M","Charvi A","Margarita Novikova","Elena Orshonova","Alena Nikulina","Anna Jakubowska","Valentina Golubenko","Sara Moncada Correa","Tarasova Viktoriya","Amelia Hernandez","Claudia Amura","Diana Preobrazhenskaya","Bich Ngoc (Penny) Pham","Mariia Dolinskaya","Elis Denele Dicen","Lisa Schut","Anna Kantane","Sıla Çağlar","Assel Lesbekova","Anna Cramling","Isha Sharma","Skye Attieh","Aiaru Altynbek","Alana Chibnall","Zsoka Gaal","Mrudul Dehankar","Oda Kofoed Skramstad","Tatev Abrahamyan","Svetlana Vifleemskaia","Olga Matveeva","Alma Jaqueline Mora Velasco","Marya","Marina Kuznetsova","Anishka Vikram","Polina A Smirnova","Irena Hertlein","April Zhong","Wiktoria Cieślak","Margarita Fakhretdinova","Dinushki Premanath","Lilia Fuentes","Aleksandra Tarnowska","Aleksandra Milovic","Bristy Mukherjee","Mariya Yakimova","Naruna Chan","Alba De Lomas Busquets","Sharvaanica A S","Ernestina Adam","Nurai Sovetbekova","Anna Slusarczyk","Yuliya Khegay","Laysa Latifah","Priyanka Nutakki","Yulia Efremova","Anna Laura Scarsi","Tori Porat","Alexandra Samaganova","Ronit Levitan","Ashley Qian","Kesaria Mgeladze","Europe03","Ayan Allahverdiyeva","Sivanesan Nithyalakshmi","Amani Alazmi","S Dharia Parnali","Lisa Sickmann","Saadat Bashirli","Niklesha Tharushi","Ema Hajdinic","Khanim Ismayilova","Ashley Alexandra Castillo Beitia","Grapsa Grapsa","Maria Fominykh","Laura Viñolas","Ewa Barwinska","Elene Tsotsonava","Alessia Santeramo","Ayelen Martinez","Irina Mikhaylova","Tarsier2007","Triin Narva","Jenny Astrid Chirivi Castiblanco","Maria Larina","Sofia Blokhin","Nancy Flores Mirabal","Jwalanthi Ram","Luisa Bashylina","Roxangel Obregón","Emujin Enkh-Amgalan","Elena Verbova","Masa Maksimovic","Turkan Mamedjarova","Sara Francine Olendo","Patty Castillo","Leancy Beatriz Fernandez Bustamante","Lhia Castellanos Hernandez","Avery Yu","Ameyalli Avila Fraire","Natalie Wisniowski","Arina Kiseleva","Kanishka Bhatia","Milena Vujcic","Ana Kuchava","Marisa Zuriel","Ellen Nilssen","Diana Mirza","Dorsa Sadat Khalafvand","Maria Jose Campos","Sarocha Chuemsakul","Sahana Aravindakshan","Sofia Valente","Buyankhishig Batpelden","Raehanna Brown","Karen Gutierrez","Evgeniya Doluhanova","Margarita Filippova","Zuzanna Siekańska","Angie Garcia","Daria Zaichenko","Marina Kaydanovich","Cyrielle Monpeurt","Katharina Reinecke","Alina Semenova","Ruqayyah Rida","Nasrin Babayeva","Alexandra Prado","Adani Clarke","Juliana Figueira Theophilo Silva","Andrea Ju Parkhurst Casas","Annmarie Muetsch","Maria Belen Sarquis","Abigail Zhou","Irene Xie","Anahi Meza","Andjela Dimitrijevic","melissa_guez","Kriti Patel","Vera Juergens","Ummi Fisabilillah","Jessica Trindade Hubner","Joy Romany","Mumtozbegim Mansurova","Geo Castellanos Hernandez","Reka Kovacs","Vicmary Perez Hernandez","Ishvi Aggarwal","Nerina Gaite","Salomeja Zaksaite","Oriana Isabel Aponte","Dantelle Joubert","Ivana Hrescak","Ayaulym Kaldarova","Angelic Danish","Rutuja Bakshi","Rowelyn-Joy Acedo","V Toshali","Alexandra Muratet Carmona","Vesna Mihelic","Yessica Mendez Tovar","Dana Tuleyeva-Aketayeva","Arnash Bauyrzhan","Ramyres Santana Coelho","Ebru Kaplan","Olga Babiy","Alexandra Alieva","Giovanna Arbunic Castro","Tea Gueci","Marta Bartel","Ivashentseva Dominika","Maria Gevorgyan","Enrica Zito","Emilia Dyalog","Jenny Qi","Josselyne Penafiel Mendoza","Valeria Viana","Anupam M Sreekumar","Anousha Mahdian","Nadezhda Antonova","Uliana Kusakina","Cherry Ann Mejia","Maria Angelica Carrillo Marval","Lorena Beatriz Montejo Bello","Myroslava Hrabinska","Yilin Li","Diana Omurbekova","Sherali Pattnaik","Cecilia Guillo","Carina D'Souza","Gisela Roque Sola","Monalisha khamboo","Meilin Hoshino","Simona Limontaite","Warsia Khusbu","Antonia Christodoulaki","x-7171385435","Inna Agrest","Hong Ngoc Nguyen","Agatha Nunes","Jessica Molina Chambilla","Remy Al asmar","Jennifer Acevedo","Anapaola S. Borda Rodas","Nino Maisuradze","Thien Ngan Nguyen","Mary Kiseljova","Blanka Ejsymont","Roxanny Matute","Boshra Alshaeby","In Vau","Lianet Diaz Garcia","Diajeng Theresa Singgih","Lucia Malan Ramos","Vera Vujović","Kamaliya Bulatova","Bach Ngoc Thuy Duong","Xiahan (Luna) Lu","Sofia Pogorelskikh","Kate Nikanova","Rucha Pujari","Natacha Benmesbah","Regita Desyari Putri","Sasvatha A","Tatiana Malgina","Bakhora Egamberdieva","Viktoriia Kirchei","Tatiana Bogumil","murugapotri","Olga Belka","Ma. Elayza Villa","Gizem Olcayoz","Iris Nicole Mollo Figueroa","Sara Adel","Stephanie Velea","Lili Toth","Marjona Malikova","Leslie Carolin Torres Hernandez","Gal.la Garcia-Castany Musellas","Safiye Oyku Ince","Regina Rodrigues Bonfim","Julia Tsukerman","Sai Nirupama Kotepalli","Tania Miranda Rodriguez","Laura Sofia Huayhuas Robles","Claudia Sofronie","Jana Mukhina","Martyna Starosta","Julia Elizabeth Sloan","Jazmin Donda","An Nguyen Thi Thanh","Olga Prudnykova","Saparya Ghosh","Anusha Subramanian","Paula Sofia Hernandez Diaz","Aimee Yang","Stela Farhat Willemstein","Maryana Huda","Helen Montiel Caceres","Mitzi Vedan de Ramos","Cholleti Sahajasri","Lakshmi C","Anysia Thomas","Arshiya Das","Bhagyashree Patil","Narmin Khalafova","kaponerde","Alina Mihailova","Rinoa Mariel Sadey","Adriana Palao","Aksithi Eswaran","Susanna Gaboyan","dark_horse05","Evangelia Siskou","Pragnya H G","Nimmy A. George","Uliana Yeshchenko","Sabina Foisor","Lera Reger","Vania Vindy Chandra","Nadezhda Kostina","Algi Acarbay","Cindy Qiao","Zuzanna Kaminska","Aaradhya Das","Mariam Mkrtchyan","Badamkhand Norovsambuu","Alessia-Mihaela Ciolacu","Luyse Victoria Gomes Acioli","Liliam Barbara Blanco Garcia","Jennifer Perez Rodriguez","Nusrat Jahan Alo","Kavitha J E","Irina Petrova","Sarah Sima Derlich","Nandinjiguur Chinzorig","Dahamdi Sanudula","Hanna Wesołowska","Prachiti Chandratreya","Andrea Ortez","Zenia Corrales Jiménez","Olga Petrukhina","Lila Rzadkowska","Mariana Silva","Sipos Stefania","Ana Srebrnic","Lilian Schirmbeck","Marharyta Khrapko","Nanditha V","Rajanya Datta","Yanira Vigoa Apecheche","Julia Antolak","Marianta Lampou","Emilia Zavivaeva","Linda Krumina","Sarai Sanchez","x-7747083681","Arya Aydogan","Michelle Catherine, P","Polina Kobak","Alexandra Botez","Lula Roberts","Aashna Makhija","Carolina Mazariegos","Monserrat Morales F.","S D Ranasinghe","Juliette Cornileau","Nadia Fawaz","Oksana Vozovic","Ekaterina Kornilova","Izabela Tokarz","Adianet Perez Cruz","Xiaobing Gu","Ana-Maria Sava","Nelli Aleksanyan Cadir","Barbara Skuhala","Vu Bui Thi Thanh Van","Andrea Nicole Garcia","Nan Hlyan","Bala Kannamma P","Erin Bian","Andreea Navrotescu","Sarah de Lisle","Paula Oviedo","Ivana Maria Furtado","Xueyi Li","Marya Kiseljova","Laura  Unuk","Katarzyna Murawko","Nina Pert","Machteld Van Foreest","Alejandra Guerrero","Miruna-Daria Lehaci","Janelle Mae Frayna","Bhillva Nilaya Kondari Eswara Krishna","Gabriela Antova","Riddhi Patel","Kai Ni Agnes Chong","Andrea Henderson de la Fuente","Vishwa Shah","Nastassia Krauchenia","Valentina Jorquera Cabello","Kristina Zavivaeva","Laksshana Deepak","Karina Ivanova","Karen Zapata","Anna Rudolph","Lucy Wanjiru","Yerisbel Miranda Llanes","Adina-Maria Hamdouchi","Eva Lourenco","Sylvia Johnsen","Irina Baraeva","Klára Kovács","Anna Khachatryan","Gabriela Vargas","Mariam Janiashvili","Evita Cherepanova","Patricia Vujnović","Morgen Mills","Ingrid Yadyra Aliaga Fernandez","cardiganbyts","Ema Walter","Khadidja Latreche","Melissa Castrillon Gomez","Maria Emelianova","helene Mira","Srishti Pandey","Besa Masaiti","Tilsia Varela","Arpita Mukherjee","Natalya Zainullina","Anna Afonasieva","Geydis Mantilla Gras","Elisa Cassi","Gulenay Aydin","Eman Sawan","Enkhtuul Altan-Ulzii","Anna Zhurova","Jan Jodilyn Fronda","Lubov Markelova","Kylen Joy Mordido","Bhillva Nilaya Kondari Eshwara Krishna","Jesse February","Aishath Iva Hassan","Marta Elena Jimenez Carrazoni","Narmin Soyunlu","Linh Dong","Lara Hernandez","Parahitha Legowo","Maria Severina","Xeniya Balabayeva","Valentina Verbin","Shrook Wafa","Anna Novikova","Viktoria Ni","Shreya Mangalam"],["WFM","WGM","WGM","WFM","WIM","WFM","WFM","WGM","WIM","WIM","WCM","WGM","WFM","WGM","WGM","WGM","WGM","WFM","WFM","WFM","WGM","WIM","WFM","WFM","WFM","WIM","WFM","WGM","WFM","WCM","WCM","WFM","WIM","WCM","WGM","WFM","WGM","WFM","WFM","WIM","WFM","WGM","WIM","WIM","WIM","WFM","WFM","WFM","WIM","WGM","WFM","WIM","WCM","WGM","WFM","WCM","WFM","WFM","WGM","WCM","WFM","WFM","WGM","WGM","WFM","WIM","WIM","WFM","WFM","WFM","WIM","WIM","WFM","WFM","WCM","WFM","WFM","WFM","WGM","WIM","WCM","WCM","WFM","WIM","WGM","WFM","WCM","WFM","WIM","WIM","WGM","WFM","WIM","WIM","WIM","WIM","WFM","WFM","WFM","WCM","WIM","WFM","WFM","WGM","WIM","WCM","WCM","WGM","WFM","WFM","WFM","WIM","WFM","WCM","WFM","WCM","WIM","WCM","WCM","WFM","WFM","WIM","WGM","WIM","WIM","WFM","WGM","WFM","WIM","WCM","WCM","WIM","WIM","WIM","WCM","WFM","WIM","WCM","WCM","WFM","WIM","WIM","WCM","WGM","WFM","WIM","WCM","WFM","WFM","WCM","WFM","WFM","WCM","WCM","WFM","WFM","WIM","WCM","WIM","WFM","WFM","WCM","WCM","WCM","WFM","WFM","WCM","WFM","WIM","WGM","WIM","WFM","WCM","WFM","WCM","WCM","WFM","WGM","WIM","WCM","WCM","WIM","WFM","WCM","WCM","WCM","WCM","WFM","WFM","WGM","WCM","WFM","WFM","WFM","WIM","WGM","WFM","WFM","WIM","WFM","WCM","WCM","WCM","WFM","WIM","WCM","WFM","WFM","WGM","WNM","WFM","WFM","WCM","WCM","WCM","WCM","WCM","WCM","WFM","WFM","WIM","WIM","WFM","WCM","WFM","WFM","WFM","WCM","WCM","WCM","WFM","WGM","WFM","WCM","WIM","WFM","WIM","WFM","WCM","WFM","WCM","WFM","WCM","WCM","WFM","WCM","WIM","WIM","WCM","WCM","WFM","WCM","WIM","WCM","WGM","WIM","WNM","WIM","WCM","WCM","WCM","WFM","WCM","WFM","WGM","WIM","WFM","WIM","WFM","WFM","WFM","WNM","WFM","WCM","WFM","WIM","WIM","WFM","WFM","WNM","WGM","WFM","WIM","WIM","WGM","WCM","WGM","WFM","WFM","WFM","WCM","WCM","WCM","WIM","WFM","WCM","WFM","WCM","WFM","WGM","WFM","WCM","WCM","WFM","WNM","WFM","WCM","WCM","WIM","WCM","WFM","WCM","WIM","WCM","WFM","WFM","WCM","WFM","WFM","WGM","WIM","WFM","WCM","WFM","WIM","WFM","WFM","WIM","WCM","WFM","WFM","WIM","WCM","WIM","WFM","WIM","WGM","WFM","WCM","WIM","WIM","WFM","WGM","WCM","WFM","WNM","WCM","WFM","WFM","WCM","WFM","WIM","WFM","WFM","WCM","WFM","WCM","WFM","WIM","WCM","WFM","WFM","WCM","WFM","WCM","WGM","WIM","WFM","WCM","WFM","WCM","WFM","WGM","WCM","WCM","WIM","WFM","WFM","WCM","WFM","WGM","WCM","WFM","WNM","WCM","WCM","WIM","WFM","WFM","WFM","WIM","WFM","WGM","WFM","WNM","WIM","WCM","WFM","WCM","WCM","WIM","WFM","WFM","WNM","WFM","WGM","WCM","WFM","WIM","WCM","WCM","WCM","WFM","WFM","WIM","WIM","WFM","WCM","WCM","WCM","WGM","WCM","WFM","WCM","WCM","WGM","WGM","WCM","WCM","WFM","WGM","WCM","WCM","WIM","WFM","WFM","WCM","WIM","WIM","WCM","WIM","WFM","WCM","WGM","WFM","WFM","WFM","WGM","WCM","WIM","WFM","WFM","WCM","WFM","WFM","WFM","WGM","WFM","WCM","WIM","WGM","WFM","WGM","WCM","WCM","WIM","WIM","WIM","WGM","WCM","WGM","WCM","WFM","WFM","WFM","WFM","WIM","WCM","WCM","WFM","WIM","WIM","WCM","WGM","WGM","WCM","WFM","WIM","WIM","WFM","WIM","WFM","WCM","WFM","WFM","WIM","WCM","WFM","WIM","WIM","WFM","WIM","WIM","WFM","WIM","WIM","WFM","WIM","WFM","WFM","WFM","WFM","WGM","WFM","WIM","WFM","WIM","WCM","WIM","WCM","WCM","WFM","WCM","WCM","WFM","WIM","WIM","WFM","WGM","WIM","WIM","WCM"],["BGR","USA","POL","IND","RUS","UKR","KAZ","KAZ","KAZ","FRA","RUS","IRN","PER","IND","USA","POL","MCO","RUS","IND","USA","IND","RUS","IND","USA","RUS","USA","AZE","ROU","POL","TUR","AZE","RUS","ARG","IND","GEO","UKR","VNM","ESP","VNM","INT","RUS","FIN","CHE","KAZ","AND","GEO","BLR","RUS","KAZ","ARG","IRN","GRC","SDN","USA","UKR","EST","ISR","GBR","SGP","INT","TKM","CAN","POL","FRA","RUS","ECU","MDV","KAZ","UZB","IRN","SRB","NLD","POL","UZB","PSE","ITA","USA","RUS","DEU","POL","CAN","ALB","POL","IDN","FRA","HUN","MNG","SRB","CHL","POL","DEU","USA","PER","USA","IRL","UZB","MNE","IND","ESP","INT","UKR","CUB","NPL","HUN","IRN","TUR","JAM","USA","IND","LVA","ITA","USA","SRB","GRC","INT","USA","IND","IND","UKR","KOR","LUX","POL","HRV","COL","RUS","VEN","ARG","RUS","CAN","RUS","GBR","NLD","POL","USA","KGZ","SWE","INT","LBN","KAZ","AUS","HUN","IND","NOR","USA","RUS","RUS","MEX","RUS","RUS","IND","RUS","POL","CAN","POL","RUS","LKA","MEX","POL","MNE","IND","RUS","KHM","ESP","IND","ARG","KGZ","POL","UZB","IDN","IND","INT","ARG","USA","KGZ","ISR","CAN","GEO","AZE","AZE","MYS","KWT","IND","DEU","AZE","LKA","HRV","AZE","PAN","GBR","RUS","ESP","POL","JPN","ITA","ARG","RUS","PSE","EST","COL","CYP","EST","ARG","USA","DEU","CUB","MNG","UZB","BIH","AZE","PHL","DOM","CUB","MEX","USA","MEX","USA","RUS","GBR","SRB","GEO","ARG","DNK","IRL","IRN","ARG","THA","USA","PRT","MNG","LUX","CUB","UKR","RUS","POL","SLV","RUS","RUS","FRA","DEU","RUS","GBR","AZE","BOL","JAM","BRA","MEX","BEL","ARG","USA","CAN","ARG","SRB","CUB","IND","DEU","IDN","BRA","EGY","UZB","MEX","HUN","VEN","IND","ARG","LTU","VEN","ZAF","SVN","KAZ","USA","IND","PHL","USA","AND","SVN","MEX","KAZ","KAZ","BRA","CHE","UKR","RUS","CHL","ITA","POL","DMA","ARM","ITA","INT","USA","ECU","MTQ","IND","INT","ZWE","RUS","PHL","PAN","CUB","UKR","CAN","KGZ","IND","ESP","CAN","ESP","NPL","JPN","LTU","BGD","GRC","INT","SWE","VNM","BRA","BOL","LBN","CRI","ARG","FRA","VNM","RUS","POL","VEN","JOR","LVA","CUB","IDN","URY","SRB","INT","VNM","NZL","SRB","SVK","IND","FRA","IDN","IND","RUS","UZB","RUS","RUS","IND","RUS","PHL","TUR","BOL","EGY","USA","HUN","UZB","ARG","ESP","TUR","BRA","CAN","IND","CUB","PER","ROU","RUS","POL","USA","ARG","VNM","UKR","IND","GBR","MEX","USA","CHE","UKR","PRY","BRA","IND","IND","FRA","IND","IND","AZE","TUR","MDA","PHL","ESP","USA","ARM","USA","GRC","IND","IND","UKR","USA","DEU","IDN","RUS","TUR","CAN","ALB","IND","ARM","USA","ROU","TON","CUB","PRY","BGD","IND","GLP","DNK","MNG","LKA","POL","IND","SLV","MEX","KAZ","POL","PRT","HUN","SVN","DEU","DEU","IND","IND","USA","POL","GRC","RUS","LVA","VEN","INT","TUR","IND","ARM","USA","JEY","IND","GTM","CHL","LKA","FRA","LBN","UKR","MNE","POL","CUB","CHN","ROU","TUR","SVN","VNM","HND","MMR","IND","USA","FRA","GBR","PRY","IND","CHN","RUS","SVN","POL","GBR","NLD","MEX","ROU","PHL","IND","BGR","IND","CAN","AND","IND","BLR","CHL","RUS","CAN","INT","ESP","NLD","KEN","CUB","FRA","NZL","NOR","RUS","HUN","ARM","PRY","GEO","NOR","HRV","CAN","PER","TKM","BEL","ZAF","COL","NLD","AUT","IND","BWA","ESP","INT","RUS","RUS","CUB","ITA","TUR","PSE","MNG","SRB","PHL","RUS","PHL","IND","ZAF","MDV","ESP","AZE","INT","FRA","IDN","SRB","KAZ","INT","EGY","RUS","USA","USA"],[21,24,29,37,41,43,54,58,64,67,67,68,68,69,70,71,73,76,77,81,83,84,85,85,86,88,88,90,90,91,92,92,93,94,95,95,96,97,98,99,99,100,100,100,100,101,101,102,102,102,102,102,102,105,105,107,108,110,111,111,114,115,115,117,117,118,119,120,120,121,122,123,123,124,124,125,125,127,128,128,129,131,132,133,133,133,135,140,141,141,141,141,141,143,143,144,144,144,145,146,147,148,148,152,152,152,153,153,154,155,155,156,156,158,158,159,159,160,161,162,163,164,165,165,166,166,167,167,167,167,167,168,168,168,169,170,172,172,173,173,174,174,174,177,177,178,180,180,181,181,182,182,183,183,184,184,184,184,185,185,185,185,185,186,186,186,188,190,190,192,192,192,192,193,193,193,193,195,195,196,197,197,197,198,198,198,198,199,199,201,202,202,202,203,203,204,204,204,205,205,207,208,208,208,209,209,210,210,211,212,213,213,213,214,215,215,216,216,216,217,218,218,219,219,220,220,220,221,221,221,222,223,223,223,225,226,226,226,227,228,228,228,228,229,229,229,229,230,230,230,232,232,233,234,235,237,238,239,239,240,241,242,242,242,242,243,244,245,246,247,248,248,248,249,249,250,251,251,252,252,255,257,257,257,257,257,258,258,258,259,259,259,262,262,263,263,263,263,264,264,264,266,266,266,266,267,267,268,268,269,269,269,270,270,272,272,274,275,275,276,276,276,277,277,279,280,281,281,282,282,282,283,283,283,285,285,285,285,285,285,286,286,287,287,287,287,288,288,288,288,290,290,290,290,290,292,293,294,294,296,296,296,298,298,299,299,300,300,301,302,302,303,303,305,306,306,308,309,309,310,310,310,313,313,315,316,318,320,320,322,323,329,330,330,330,331,331,333,335,336,336,339,343,345,346,350,351,351,353,354,357,358,358,358,359,359,365,365,365,365,369,369,372,372,373,374,375,375,375,376,376,376,378,379,379,380,381,382,382,383,389,390,390,391,394,395,396,396,397,398,401,402,406,407,408,408,411,414,416,416,416,417,420,421,423,425,428,428,429,430,430,438,439,439,441,444,444,446,448,449,450,459,460,461,461,474,476,477,482,489,490,492,493,495,498,501,502,506,506,509,524,527,530,541,549,551,560,564,576,578,583,584,588,590,592,597,599,605,606,608,619,626,628,645,660,661,667,675,687,749,765,826],[4.38,5.97,4.71,3.89,5.95,4.49,3.29,6.12,4.34,2.32,7,4.93,4.05,3.23,4.81,3.17,2.6,4.16,5.17,5.5,6.17,4.64,2.67,4.91,4.6,4.25,5.03,5.58,3.93,3.2,4.25,4.79,4.21,4.43,4.89,3.29,3.43,4.79,4.77,3.41,6,4.5,3.5,4.42,6.5,4.61,4.27,3.31,3.25,5.33,4.32,4.24,4.9,5,4.62,4.31,2.67,2.33,3.67,4.47,4.2,2.47,6,2.93,3.88,3,2.67,5.77,5.76,5.2,1.46,5.12,4.33,4.7,1.67,5.71,3,5.5,4.94,3.97,3.38,3.99,4.63,3.43,4.62,2.86,3.87,2.42,3,3.93,4.17,2.25,3.9,2.6,5.02,3.55,6,4.38,3.11,4.91,4.54,3.38,3.15,2.11,2.57,3.65,4.29,3,3.16,2.73,1.52,2.2,2.06,3.31,2.35,4.83,3.79,4.75,2.54,2.06,2.99,3.15,3.78,4.67,2.74,1.75,3.14,4.84,4,2.7,4.05,2.5,5,1.25,1.94,3.71,4.38,2.43,3.33,3.5,5.25,3.76,3.79,5.12,4,4.33,2.85,3.19,5.5,3,3.53,1.78,2.83,3.25,3.05,4.4,3.1,3.05,2.29,2.33,2,2.67,3,4.42,4.39,3.95,2.5,1.89,4.25,6,3.12,3.23,3.8,3.12,1.5,2.75,3.75,3.5,4.5,3.73,2.94,4.5,3.39,3.82,3.39,2.33,2.33,6,4.17,4,2.7,2.1,3.08,4.2,2.38,3.37,4.5,1.41,3.5,2.62,3.73,3,3.06,2.03,3.5,4.15,4.25,3.25,2.91,3.67,0.95,3.5,2.07,2.21,3,2.5,3.67,3.3,2.17,3.65,1.35,2.25,2.19,4,3,5,2.59,1.92,3.17,1.67,2.8,1.04,2.86,2.17,2.33,3.35,3.67,2.83,2.37,1.33,5,2.04,2.12,2.32,1.53,0,3.07,1.68,2.13,2.29,3.25,1.7,3.75,3.54,3,2.9,2.15,2.71,2.81,2.5,2.5,3,3.47,1.3,2.37,1.44,1.53,2.61,3,1.83,5.5,5,2.6,1,3.12,1.67,4,2.97,1.26,1.17,2,2.75,1.8,4.5,1.75,3.33,2.5,1.83,1.71,1.44,1.67,2.26,3.78,3.33,2.62,2.36,2.18,2.38,2.08,2.67,1.29,2.6,2.57,3,1,2.5,5,3,3.55,1.79,3.5,2.08,4,3.67,1.5,0.67,2.67,1,1.75,2.5,3,2.71,3.61,0.5,5,2.33,0.77,1.12,2,1.12,2.29,3.88,1.42,3.69,2.83,1.64,1.33,2.27,1.39,3.4,1.67,0.5,2.19,0,1,2.38,1.64,3.5,1.67,1.12,1.88,2.38,1.3,2,5,2,0.5,4.5,2.75,1.07,4.3,2.79,3.62,1.17,1.38,0.5,4.5,4.33,3.29,4,1,1.21,1,2.75,2,4,0.92,2.89,2.44,2.25,0.75,0.67,4,1.73,0.33,0,2.5,4.5,3.17,1.44,3,4,4.17,3.17,0.5,2.17,4,2.12,2,2.62,4.5,2.5,1.5,1.17,1.2,0.92,2.62,3,1.17,1.88,2.5,3,2.4,3.5,2.67,3,2,1.33,2.2,2,2.5,2.06,1.5,1.5,1.83,1.1,2.25,2.5,1.33,4,1,3,1.75,2.5,1.75,2,1.3,2,2,0,2.25,1.31,3,3.5,2.5,1.5,0.6899999999999999,0.67,1.75,1.15,0.5600000000000001,3,1,0.9,2,0,1.5,1.75,2,0.89,1.14,2,2,2,0.5,1.17,1,1,2.75,2,1,0,0.86,0,1,0,1,1,0.25,0.57,2,2,1,2,1.5,0,0,2.5,1.17,2.5,0.5,0.5,5.5,0,0,0,0.5,4,2,3,0,0,3.25,0,1.5,1.2,0.67,2.5,0,3,1.17,1,2,1.5,1,1,2,1,1.5,1,0.88,1,0.5,2,1,1.5,1,0.5,1,0,0,0],[2295,2729,2769,2604,2662,2539,2577,2634,2525,2687,2390,2607,2409,2601,2509,2167,2505,2642,2630,2605,2608,2622,2361,2593,2587,2532,2592,2610,2382,2522,2329,2431,2455,2431,2409,2230,2589,2611,2601,2372,2568,2275,2532,2706,2869,2473,2491,2457,2355,2559,2641,2439,2553,2599,2490,2381,2249,2506,2595,2410,2462,2221,2452,2527,2351,2534,2507,2537,2620,2498,2535,2436,2331,2518,2221,2547,2249,2391,2500,2552,2347,2328,2469,2506,2421,2405,2471,2287,2475,2467,2491,2289,2243,2300,2528,2466,2406,2371,2405,2544,2451,2372,2445,2500,2490,2487,2411,2552,2515,2438,2347,2250,2320,2269,2329,2511,2538,2440,2211,2247,2254,2377,2239,2428,2353,2188,2450,2536,2536,2295,2421,2478,2298,2424,2404,2312,2371,1958,2453,2195,2500,2467,2243,2546,2399,2444,2300,2224,2446,2351,2377,2192,2170,2244,2359,2295,2285,2232,2148,2523,2479,2220,2264,2400,2282,2398,2368,2217,2516,2662,2273,2425,2211,2276,2290,2053,2425,2426,2442,2415,2154,2272,2179,2472,2296,2157,2128,2405,2326,2372,2104,2349,2341,2323,2104,2436,2321,2258,2290,2308,2260,2235,2102,2328,2501,2433,2327,2258,2183,2481,1904,2351,2358,2268,2170,2211,2298,2224,2235,2338,2318,2328,1954,2249,2456,2443,2180,2251,2312,2219,2308,2378,2284,1899,2122,2385,2326,2293,2083,2217,2275,2222,1957,2322,2143,1755,2562,2332,2137,2208,2046,2050,2219,2132,2181,2543,2103,2154,2186,1412,2006,2221,2287,2017,2291,1981,2102,2374,2356,2340,2547,2260,2290,1576,2225,2069,2221,2315,2214,2175,2455,2225,1921,2580,2321,2304,2320,2320,2312,2144,2039,2119,2303,2522,2114,2056,2369,2170,2319,2280,2146,2216,2340,2153,2087,2132,852,1984,2324,1999,2302,2163,2305,2341,1981,2215,2120,2076,2271,2385,2482,2250,2303,2260,2303,2317,1967,2341,2107,2338,2314,2465,1985,2314,2186,2449,2300,2403,2315,2320,2262,2508,1957,2187,2355,2311,2031,2127,2145,1736,2155,2419,2266,2248,2141,1526,1897,2452,2259,1880,2266,2303,2439,1991,1917,2267,2380,2370,2310,2309,1724,1631,2307,2101,1932,2344,2183,2283,2295,2323,2559,2217,2288,2316,1998,2121,2286,2235,2060,2329,2271,2585,2335,2531,2122,2155,2183,2352,1952,2025,2395,2224,2381,1872,2246,2456,1901,1851,2305,2008,1880,2133,2351,2433,2007,2261,2258,1767,2154,1977,2148,1966,2532,2202,2071,2292,2606,1943,2034,2226,2216,2219,1941,2351,2268,2210,1462,2055,1667,2255,2001,2116,2086,2326,2206,2531,1985,2301,1797,2044,2257,2497,1766,1690,2478,2344,2369,1591,1923,2171,2307,2237,2369,2085,2102,2428,2128,2548,2508,2044,2378,2033,2219,1883,2160,2216,2038,1924,1962,2258,2169,2153,1427,2403,2275,1329,1739,2304,2347,2330,2368,2238,2300,2374,2181,2278,2108,2415,2138,2294,1732,1765,2331,1818,2504,2648,2204,2515,1994,2247,2545,2232,2507,2443,2381,2173,2229,2020,2002,1595,2055,2154,2523,2000,2213,2456,2495,2196,2444,2122,2218,2001],[4,37,69,9,19,43,17,4,29,11,1,7,51,22,29,3,35,81,30,4,3,7,3,38,10,6,29,6,14,20,2,12,7,34,19,24,15,12,28,23,2,11,2,6,1,32,35,35,2,3,11,34,10,3,20,31,3,6,6,20,23,18,1,7,4,3,41,15,25,5,48,4,3,27,6,7,9,1,8,34,13,43,34,7,12,14,19,18,15,7,3,4,5,25,21,21,1,4,27,11,12,16,24,9,7,10,19,8,34,13,23,5,9,8,10,3,7,6,66,8,39,17,20,12,27,16,21,25,2,15,20,2,2,12,16,14,4,7,12,1,2,21,7,4,20,44,17,18,3,5,18,9,3,8,10,5,15,40,7,3,7,6,17,6,9,20,2,14,2,1,4,11,5,17,4,8,6,2,11,22,9,1,9,36,27,3,6,1,3,3,15,31,6,5,4,15,1,22,15,24,26,16,9,16,3,13,4,4,27,6,32,6,7,14,5,3,23,5,6,24,10,2,44,3,8,2,11,6,15,6,5,14,33,3,15,31,3,30,42,23,3,25,12,19,16,2,7,11,15,12,2,5,2,12,1,10,17,7,8,3,2,2,17,5,30,9,16,9,8,3,1,1,10,2,4,3,3,16,31,9,6,6,10,1,2,15,5,3,7,8,3,23,9,3,4,7,28,4,6,3,7,5,7,1,5,1,1,1,10,12,6,6,2,3,5,3,3,1,2,3,2,17,9,6,1,6,13,13,2,13,7,4,6,8,3,7,3,13,27,5,3,3,8,1,3,4,18,2,3,4,8,8,10,1,1,1,2,2,2,7,5,7,4,6,4,1,1,3,29,1,4,7,1,2,4,1,13,19,16,4,4,3,1,11,6,1,1,1,3,16,6,1,3,3,4,15,1,4,5,4,1,2,6,3,5,6,4,1,3,8,4,1,5,1,3,2,3,3,5,3,2,8,3,3,6,10,2,1,3,1,5,1,2,6,4,1,5,1,2,1,2,8,1,1,1,2,18,3,4,10,9,1,1,5,1,1,1,2,1,9,7,1,2,1,2,6,2,1,2,1,3,4,7,2,2,1,1,2,4,29,1,3,1,1,2,2,1,1,3,4,2,1,1,1,1,1,2,1,4,1,1,1,2,1,1,5,3,2,1,1,3,2,2,1,2,1,1,2,1,1,4,1,2,1,1,1,1,2,1,2,1,1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>name<\/th>\n      <th>title<\/th>\n      <th>fed<\/th>\n      <th>best_Place<\/th>\n      <th>score<\/th>\n      <th>rating_best<\/th>\n      <th>N_participations<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[4,5,6,7]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"name","targets":1},{"name":"title","targets":2},{"name":"fed","targets":3},{"name":"best_Place","targets":4},{"name":"score","targets":5},{"name":"rating_best","targets":6},{"name":"N_participations","targets":7}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-5050e1f151f242367145" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-5050e1f151f242367145">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150","151","152","153","154","155","156","157","158","159","160","161","162","163","164","165","166","167","168","169","170","171","172","173","174","175","176","177","178","179","180","181","182"],["Aleksandra Goryachkina","Alexandra Kosteniuk","Meri Arabidze","Karina Ambartsumova","Aleksandra Maltsevskaya","Polina Shuvalova","Le Thao Nguyen Pham","Gulrukhbegim Tokhirjonova","Tatjana Vasilevich","Anna M. Sargsyan","Bibisara Assaubayeva","Anna Shukhman","Anastasia Bodnaruk","Jiner Zhu","Ekaterina Goltseva","Atousa Pourkashiyan","Keti Tsatsalashvili","Veronika Shubenkova","Liya Kurmangaliyeva","Zeinep Sultanbek","Anastasia Avramidou","Dila Baloglu","Mai Narva","Yuliia Osmak","Radmila Kovacevic","Aiaru Altynbek","Alena Nikulina","Alexandra Samaganova","Alina Semenova","Alma Jaqueline Mora Velasco","Ana Kuchava","Anna Jakubowska","Arina Kiseleva","Assel Lesbekova","Turkan Mamedjarova","Jenny Astrid Chirivi Castiblanco","Olga Badelka","Saadat Bashirli","Lianet Diaz Garcia","Giovanna Arbunic Castro","Cécile Haussernot","Veronika Minina","Adianet Perez Cruz","Anusha Subramanian","Warsia Khusbu","Claudia Amura","Javiera Barrera","Daria Zaichenko","Diana Mirza","Dina Belenkaya","Cervantes Landeiro Thalia","Uliana Dudkina","Elnaz Kaliakhmet","Zoey Tang","Polina A Smirnova","Gizem Olcayoz","Valentina Golubenko","Angie Garcia","Adani Clarke","Irina Mikhaylova","Kelsey Liu","Jessica Trindade Hubner","Evgeniya Doluhanova","Jinela de la Caridad Rodríguez Rivero","Jemal Ovezdurdyeva","Juliana Figueira Theophilo Silva","Yuliya Khegay","Karina Ivanova","Nadezhda Kostina","Anysia Thomas","Maria Larina","Laura Viñolas","Lile Koridze","Emilia Sprzęczka","Maya Porozhnyak","Maftuna Bobomurodova","Marisa Zuriel","Marya","Marija Kuznecova","Olga Matveeva","Mrudul Dehankar","Cherry Ann Mejia","Swara Lakshmi Nair","Anni Guo","Nancy Flores Mirabal","Nasrin Babayeva","Anastasiia Hnatyshyn","Guadalupe Montano Vicente","Nelli Aleksanyan Cadir","Nemo Zhou","Anastasia Travkina","Patty Castillo","Diana Preobrazhenskaya","Katarzyna Dwilewicz","Ramyres Santana Coelho","Rebeca Jiménez Fernández","Yanira Vigoa Apecheche","Anna Kubicka","Sofia Blokhin","Niklesha Tharushi","Sujana Lohani","Lakshmi C","Giulia Sala","Leslie Carolin Torres Hernandez","Ummi Fisabilillah","Valeria Viana","Valerie Ruchinskaya","Vera Vujović","Tarasova Viktoriya","Sivanesan Nithyalakshmi","Alexandra Afanasieva","Lala Huseynova","Alisa Genrietta Yunker","Daria Yurasova","Olga Yushko","Zarina Nurgaliyeva","Alba De Lomas Busquets","Amelia Hernandez","Anna Cramling","Teodora Injac","Arnash Bauyrzhan","Sahana Aravindakshan","Maria Belen Sarquis","Margarita Fakhretdinova","Galina Novikova","Ayan Allahverdiyeva","Anna Laura Scarsi","Diajeng Theresa Singgih","Melika Mohammadi","Cyrielle Monpeurt","Alexandra Prado","Ekaterini Pavlidou","Mariia Dolinskaya","Elis Denele Dicen","Gergana Peycheva","Ishvi Aggarwal","Shubhi Gupta","Abigail Zhou","Ewa Barwinska","Regita Desyari Putri","Jovana Srdanovic","Katharina Reinecke","Sasvatha A","Kriti Patel","Olga Kuznetsova","Enkhrii Enkh-Amgalan","Lilia Fuentes","Sara Moncada Correa","Pragnya H G","Nurai Sovetbekova","Margarita Filippova","Mary Kiseljova","Hoang Thi Bao Tram","Arshiya Das","Eugenia Karas","Emujin Enkh-Amgalan","Liwia Jarocka","Buyankhishig Batpelden","Dantelle Joubert","Rinoa Mariel Sadey","Margarita Novikova","Kalyani Sirin","Salomeja Zaksaite","Megan Althea Paragua","Savitha Shri B","Luisa Bashylina","Irene Xie","Trisha Kanyamarala","Simona Limontaite","Ivashentseva Dominika","Fruzsina Szente-Varga","Aleksandra Tarnowska","Maria Teresa Jimenez Salas","Sabreen Oraby","V Toshali","Triin Narva","Nadya Toncheva","Svetlana Vifleemskaia","Sıla Çağlar","Yelyzaveta Hrebenshchykova","winniethepooh04","Avery Yu"],["GM","GM","IM","IM","WGM","IM","IM","WGM","IM","IM","IM","WIM","IM","GM","FM","WGM","WGM","WFM","FM","WIM","FM","WCM","IM","IM","WFM","WCM","WFM","WFM","WFM","WCM","WFM","WIM","WCM","WCM","WGM","WIM","IM","WCM","WFM","WIM","WIM","WFM","WFM","WCM","WCM","WGM","WIM","WFM","WFM","WGM","WGM","WCM","WFM","NM","WFM","WCM","WGM","WIM","WCM","WGM","WIM","WNM","WGM","WFM","WFM","WFM","WFM","WFM","WIM","WFM","WFM","WCM","WFM","WFM","WCM","WIM","WIM","WFM","WFM","WIM","WIM","WFM","WCM","WFM","WCM","WFM","WFM","NM","WIM","WGM","WIM","WFM","WFM","WFM","WFM","WFM","WGM","WIM","WCM","WCM","WFM","WFM","WFM","WFM","WIM","WCM","WCM","WFM","WIM","WCM","WFM","WCM","WCM","WFM","WFM","WFM","WCM","WFM","WFM","IM","WFM","WFM","WIM","WFM","WFM","WIM","WFM","WIM","WFM","WFM","WCM","WIM","WCM","WCM","FM","WCM","WFM","WCM","WFM","WFM","WIM","WCM","WCM","WCM","WFM","WCM","WIM","WIM","WFM","WFM","WFM","WFM","WGM","WCM","WFM","WCM","FM","WCM","WFM","WNM","WCM","WFM","WGM","WFM","WGM","WFM","WCM","WIM","WIM","WCM","WFM","WCM","WFM","WCM","WFM","WFM","FM","WFM","WIM","WIM","WCM","WCM"],["RUS","INT","GEO","RUS","POL","RUS","VNM","USA","RUS","USA","KAZ","RUS","RUS","CHN","GTM","USA","GEO","RUS","KAZ","KAZ","GRC","TUR","EST","UKR","SRB","KAZ","LUX","KGZ","RUS","MEX","GEO","POL","RUS","KGZ","AZE","COL","SYC","AZE","CUB","CHL","FRA","RUS","CUB","GBR","BGD","ARG","CHL","RUS","IRL","FRA","MCO","INT","KAZ","USA","RUS","TUR","HRV","SLV","JAM","RUS","USA","BRA","UKR","CUB","TKM","BRA","UZB","INT","RUS","FRA","CYP","ESP","GEO","POL","JAM","UZB","ARG","RUS","LVA","RUS","IND","PHL","IND","CAN","ARG","AZE","UKR","MEX","TUR","FIN","INT","DOM","RUS","POL","BRA","ESP","USA","POL","EST","LKA","NPL","IND","ITA","ARG","IDN","MTQ","CAN","SRB","RUS","MYS","ESP","EST","INT","RUS","UKR","KAZ","ESP","VEN","SWE","SRB","KAZ","USA","ARG","RUS","BLR","AZE","ARG","IDN","IRN","FRA","BOL","GRC","RUS","GBR","BGR","IND","IND","USA","POL","IDN","SRB","DEU","IND","IND","RUS","MNG","MEX","COL","IND","KGZ","RUS","RUS","VNM","IND","INT","MNG","POL","MNG","ZAF","PHL","UKR","IND","LTU","USA","IND","DEU","CAN","IRL","LTU","DMA","HUN","POL","PER","SDN","USA","EST","BGR","RUS","USA","UKR","TUR","USA"],[1600,1400,1000,900,800,700,500,400,400,400,200,200,200,200,200,100,100,100,100,100,100,100,100,100,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[27,37,37,41,29,29,54,24,40,37,21,41,44,19,51,70,95,76,69,64,49,91,45,44,140,173,163,193,228,180,217,164,216,169,211,205,71,198,281,257,67,102,396,301,269,167,141,226,219,133,73,146,120,154,182,288,165,225,229,204,143,238,223,148,114,229,190,449,331,309,205,202,101,90,153,144,218,180,155,178,174,263,94,115,208,228,105,175,398,100,99,213,167,132,252,145,374,128,207,198,148,308,155,290,237,259,129,282,166,196,97,107,111,92,95,54,185,166,170,85,251,220,230,184,101,195,192,281,102,226,228,102,167,167,95,242,154,230,202,285,122,227,285,234,86,135,184,165,322,186,223,276,96,309,158,209,92,221,244,313,161,77,242,85,69,208,230,143,268,257,133,184,68,102,248,204,79,177,168,147,152,214],[6.52,6.82,6.11,6.11,4.71,5.75,5.98,5.97,3.17,5.33,5.04,5.95,5.71,5.95,4.92,4.81,4.89,4.16,5.32,4.34,4.94,3.2,5.32,3.81,2.42,3.33,2.99,3.12,1.33,2.85,3.65,3.15,3.67,1.94,2.91,3.5,3.81,3.82,0.77,1.8,2.32,3.31,0.6899999999999999,3.29,1.79,3.14,3,3.35,2.19,4.62,2.6,4.91,5.77,3.86,3.53,1.64,3.78,2.33,2.32,3.37,2.6,2.15,1.04,3.38,4.2,1.53,1.89,0.57,2.17,2.89,2.62,2.7,4.61,3.93,4.29,3.55,1.35,3.19,2.73,4.33,3.76,2.18,4.43,2.47,3,2.04,4.62,3.4,1.15,4.5,3.41,0.95,4.84,4.63,1.26,3.11,1.1,3.97,3.73,3.39,3.15,0.92,1.52,1.3,2.9,2.26,3.38,1.12,2.74,3.73,4.79,4.31,4.47,4.79,3.29,3.29,3,1.75,3.71,4.08,2.97,2.59,1.68,3.05,4.27,4.5,3.23,1.12,4.32,2.83,2.12,4.24,2.7,4.05,5.04,3.47,3.16,2.13,2.1,2.27,1.46,2.37,1.39,3.54,4.6,3.87,3.1,4.67,1.44,3.95,2.86,2.71,3.43,2.44,2.35,4.15,3.59,3.17,1.53,1.73,2.54,5.17,2.37,4.91,3.23,2.03,2.29,5.02,3.55,3.33,2.86,3.05,4.05,4.9,2.6,1.41,5.5,4,1.25,4.54,3.65,2.21],[57.2,59.35,56.17,54.38,41.49,50.65,53.53,52.82,20.8,46.95,44.67,52.16,53.59,54,44.58,43.1,46.55,37.3,49.87,42.41,48.05,27.15,46.43,34.54,27.5,38.33,32.01,33.44,21.2,35.71,36.83,31.24,41.72,20.66,32.43,38,37.38,36.62,13.96,27.35,18.45,33.73,8.44,23.47,15.88,32.81,30.27,36.39,29.4,48.42,24.76,44.86,53,38.18,45.64,29.14,40.65,29.87,29.95,37.07,28.62,31.65,14.61,34.81,47.65,25.56,19.71,9.029999999999999,31.03,30.11,31.77,33.73,48.58,41.5,44.63,33.14,11.75,37.67,32.08,43.61,37.12,26.2,43.32,31.94,35.66,19.46,47.88,40.05,15.25,48.14,36.67,11.56,47.84,49.1,15.32,34.44,18.05,40.62,40.44,36.83,34.23,13.96,20.28,11.6,28.85,37.15,36.85,11.27,33.2,40.75,47.17,43.16,45.2,43.42,37.96,31.5,35.26,13.72,44.21,36.48,33.16,36.45,12.68,27.8,39.63,42.5,32.09,15.35,42.23,36.45,35.12,42.35,32.47,42.67,46.96,42.21,33.37,27.3,25.73,24.88,15.49,33.07,12.48,39.54,41.35,38.53,31.3,44.33,20.56,39.27,32.65,38,32.23,15.31,24.95,44.19,37.03,36.77,22.62,18.36,32.21,50.85,31.35,44.42,32.5,26.16,13.42,51.33,34.15,42.37,34.14,38.42,39.7,47,31.75,19,48.04,37.9,12.08,46.54,37,26.36],[2770,2792,2686,2717,2769,2771,2632,2729,2719,2653,2797,2662,2752,2703,2689,2509,2409,2642,2661,2525,2638,2522,2688,2608,2287,2453,2254,2276,2217,2300,2338,2377,2298,2404,2183,2290,2532,2472,1967,1921,2687,2457,1985,2310,1999,2450,2475,2385,1954,2421,2505,2544,2537,2460,2377,2031,2239,2122,2322,2436,2300,2103,2378,2372,2462,2143,2217,2258,2155,2283,2308,2104,2473,2382,2411,2466,2318,2224,2438,2444,2467,2369,2431,2221,2235,2222,2490,2281,2044,2275,2372,1904,2536,2469,2214,2405,2292,2552,2260,2296,2445,2183,2347,2266,2543,2119,2347,2338,2353,2415,2611,2381,2410,2431,2230,2577,2264,2188,2312,2688,2315,2180,2332,2359,2491,2442,2425,2341,2641,2293,1957,2439,2295,2421,2489,2287,2515,2137,2349,2403,2535,2083,2315,2132,2587,2471,2285,2428,2329,2398,2284,2250,2589,2295,2329,2433,2476,2312,2102,2316,2211,2630,2291,2593,2601,2328,2208,2528,2324,2304,2405,2232,2409,2553,2290,2258,2594,2399,2424,2451,2487,2268],[66,37,72,85,69,55,51,37,23,47,12,19,17,30,26,29,19,81,19,29,48,20,14,35,18,12,39,17,23,17,24,17,23,16,27,15,24,36,13,10,11,35,18,29,12,21,15,31,44,12,35,11,15,22,18,18,20,15,19,15,25,17,14,16,23,16,14,29,15,19,24,15,32,14,19,21,10,18,13,44,21,28,34,18,16,25,20,77,10,11,23,32,25,34,31,27,10,34,26,27,24,13,23,10,10,23,13,13,27,22,12,31,20,12,24,17,17,16,14,26,16,11,11,10,35,11,11,13,11,30,12,34,15,20,14,17,34,15,31,13,48,42,27,12,10,19,15,12,16,20,33,17,15,16,10,13,50,15,16,11,66,30,30,38,22,16,12,21,10,15,14,40,51,10,10,22,12,20,12,12,10,14],[10.77,10.86,10.57,10.78,8.539999999999999,9.75,10.71,10.38,4.78,9.550000000000001,8.17,10.47,10.12,10.33,9.08,9.619999999999999,10.63,8.09,10,9.550000000000001,9.73,6.45,9.5,7.29,7.22,8.75,9.56,8.35,5.61,9.35,10.08,7.82,10.96,5.25,8.93,10.2,7.79,8.81,4.54,9.300000000000001,4.36,8.369999999999999,2.94,7.28,5.42,8,6.73,8.81,9.18,10.58,5.69,9.73,10.87,9.09,10.67,8.94,10.45,9.4,7.63,8.73,7.44,9.82,4,8.31,9.869999999999999,7.5,5.64,2.66,9.199999999999999,8.529999999999999,7.96,9.199999999999999,10.94,9.859999999999999,10.63,8.140000000000001,3.4,9.83,7.31,10.55,8.76,6.46,10.97,8.94,9.25,5.88,10.45,10.91,4.9,10.91,8.699999999999999,3.97,10.48,11,4.61,8.630000000000001,4.8,8.710000000000001,10.96,9.56,8.289999999999999,4.15,5.13,3.5,6.3,11,9.460000000000001,3.15,7.96,10.05,9.17,10.06,10.8,10.08,9.460000000000001,6.65,9.119999999999999,4.38,11,7.5,8.44,10.36,4.18,6.8,8.890000000000001,10.18,7.82,4.08,9.18,9.369999999999999,10.83,9.880000000000001,8.199999999999999,9.85,10.29,11,7.94,8.6,6.39,6.38,3.71,10.67,3.74,10.92,8.9,9.789999999999999,8.73,10.92,5.5,9.9,7.97,9.94,6.87,5.25,6.7,10.23,8.359999999999999,9.67,6.88,5.36,8.85,10.83,8.17,9.890000000000001,6.77,6.62,5.17,10.81,9,10.8,8,10.65,10.25,10.5,8.4,5.23,9.92,9.5,3.33,9.92,8,6.93],["54.6%","59.8%","56.2%","51.8%","51.7%","52.6%","58.5%","57.8%","67.2%","53.8%","51.9%","46.5%","60.2%","55.4%","48.8%","43.9%","45.5%","45.3%","42.6%","46.7%","41.6%","48.5%","55.1%","51.5%","32.8%","26.4%","25.5%","40.0%","21.5%","34.7%","27.5%","39.4%","32.5%","22.0%","27.9%","39.0%","54.2%","44.2%","14.3%","14.0%","58.3%","38.1%","25.0%","38.5%","15.6%","37.8%","51.9%","38.6%","18.8%","45.0%","45.5%","52.7%","56.6%","41.8%","30.2%","20.8%","34.6%","27.1%","25.7%","27.7%","35.6%","25.6%","23.1%","35.9%","36.3%","24.1%","18.9%","21.1%","22.2%","32.5%","37.8%","22.9%","36.6%","30.1%","43.9%","42.9%","50.0%","26.1%","45.7%","37.9%","41.5%","32.6%","40.7%","32.9%","32.9%","24.3%","44.6%","29.5%","26.1%","42.4%","38.5%","17.5%","47.0%","43.2%","22.8%","34.9%","25.9%","42.6%","30.9%","34.1%","38.4%","14.3%","29.8%","47.4%","50.0%","19.3%","38.1%","36.8%","33.6%","34.9%","56.6%","40.6%","42.7%","52.5%","33.9%","49.1%","30.7%","46.2%","40.0%","52.6%","38.8%","23.2%","38.5%","45.7%","50.3%","34.4%","29.5%","18.5%","44.2%","32.4%","19.0%","42.9%","28.3%","36.7%","45.8%","25.6%","41.3%","14.1%","32.0%","45.0%","39.1%","18.1%","37.3%","36.9%","53.5%","33.3%","31.8%","35.4%","40.9%","34.4%","38.9%","28.4%","47.2%","54.5%","26.5%","38.5%","45.3%","29.2%","22.4%","28.6%","28.0%","43.5%","29.0%","48.5%","49.4%","30.2%","43.8%","41.0%","38.6%","32.1%","37.0%","25.6%","35.8%","52.0%","21.1%","25.9%","49.2%","37.2%","36.4%","39.0%","43.6%","32.6%"],[357,204,379,456,298,266,270,187,58,225,52,101,88,157,121,139,101,327,94,137,231,68,69,132,64,53,184,70,65,75,120,66,123,41,122,77,96,156,28,43,24,147,28,109,32,82,52,132,186,60,101,55,83,98,96,77,104,70,74,65,87,78,26,64,113,58,37,38,72,80,98,70,172,73,98,84,18,88,46,224,94,92,182,79,76,74,101,414,23,59,104,63,134,185,79,109,27,148,139,129,99,28,57,19,30,114,63,19,110,106,53,155,103,59,112,57,75,39,75,95,67,56,26,35,159,61,44,27,52,136,63,163,60,90,72,90,138,64,100,40,87,215,51,65,43,90,66,65,44,93,131,81,53,44,34,65,214,72,49,28,289,161,124,194,85,53,32,117,44,81,54,207,254,50,38,58,59,94,22,59,39,46],["46.3%","50.5%","46.9%","51.3%","52.6%","53.7%","43.5%","50.8%","59.6%","50.9%","56.5%","54.1%","44.0%","52.3%","45.2%","47.9%","38.6%","50.3%","54.2%","39.3%","46.6%","42.6%","48.4%","42.3%","30.3%","44.2%","29.8%","30.6%","23.4%","22.6%","38.5%","31.3%","27.9%","41.9%","31.1%","23.7%","38.5%","34.8%","16.1%","11.4%","45.8%","34.9%","12.0%","44.1%","29.6%","34.9%","30.6%","33.3%","21.0%","37.3%","36.7%","40.4%","37.5%","36.3%","27.1%","9.8%","27.6%","18.3%","28.2%","28.8%","28.6%","12.6%","16.7%","36.2%","42.1%","14.5%","38.1%","12.8%","16.9%","29.3%","22.6%","28.4%","36.0%","41.5%","30.8%","36.8%","25.0%","31.5%","26.5%","35.8%","37.8%","29.2%","35.1%","15.9%","27.8%","33.8%","35.2%","21.5%","19.2%","32.8%","34.4%","18.6%","40.6%","32.3%","19.4%","33.9%","9.5%","40.5%","29.5%","28.7%","32.3%","30.8%","26.2%","25.0%","36.4%","17.0%","23.3%","31.8%","25.7%","33.0%","38.6%","36.9%","33.6%","38.7%","31.3%","44.6%","26.2%","29.0%","24.1%","43.0%","23.5%","16.1%","40.0%","42.4%","40.8%","45.1%","47.6%","34.6%","42.9%","21.4%","15.6%","38.2%","28.6%","32.7%","40.3%","34.0%","30.3%","25.0%","27.6%","23.3%","30.8%","14.7%","30.0%","24.2%","43.5%","40.6%","32.3%","40.9%","6.8%","35.2%","20.5%","21.6%","50.0%","32.5%","30.3%","38.2%","30.9%","31.5%","16.7%","25.8%","23.4%","44.5%","22.3%","43.4%","39.1%","24.5%","37.9%","42.7%","34.8%","18.5%","31.0%","25.1%","36.1%","35.2%","34.8%","21.1%","51.7%","37.5%","27.8%","46.7%","31.7%","29.4%"],[354,198,382,460,291,270,276,197,52,224,46,98,84,153,115,140,101,328,96,140,236,61,64,123,66,52,188,72,64,84,122,67,129,43,119,76,91,161,31,44,24,146,25,102,27,86,49,141,205,67,98,52,80,102,96,82,105,71,71,66,98,87,30,69,114,62,42,39,65,82,93,67,178,65,104,87,16,89,49,240,90,89,191,82,72,68,108,423,26,61,96,59,128,189,62,124,21,148,146,129,99,26,61,16,33,135,60,22,105,115,57,157,113,62,115,56,80,31,79,100,68,56,20,33,152,51,42,26,49,145,64,173,63,107,72,97,132,60,98,43,91,225,50,66,46,96,65,66,44,105,132,88,50,40,33,68,204,73,60,31,295,164,121,182,64,53,29,110,46,81,58,219,269,54,46,57,60,96,18,60,41,51],[2505,2540,2501,2463,2477,2538,2446.5,2460.5,2448,2475,2550,2468,2479,2516,2468,2341.5,2339,2401,2442,2475,2437,2379,2481,2435,2438,2505,2351,2378,2416,2398,2364,2316,2361,2508,2374,2378.5,2405,2296,null,2179,2351,2461,2338.5,2342,2302,2340,2372.5,2465,2311,2504,2420,2361,2516,2306,2438,2315,2355,2351.5,2448,2521,2416,2261,2507,2450.5,2458,2326,2401,2539,2290,2351,2328.5,2320,2369,2497,2315,2344,2231,2344,2488,2343,2288,2487,2398,2387,2433,2391,2508,2365,2330,2485,2380,2389.5,2371,2354,2417.5,2416.5,null,2380,2377.5,2405,2475.5,2370.5,2511,2462,2387,2351,2401.5,2451,2449.5,2370,2562.5,2375,2440.5,2316,2430,2368,2469.5,2453,2391,2476,2380.5,2301,2151,2459,2343,2374,2410,2480.5,2368,2416,2315.5,2456,2450,2469,2365,2429.5,2318,2324.5,2504,2516,2390,2281,2370,2357.5,2430,2419,2353,2435.5,2450,2391,2451,2430.5,2390,2203,2474,2450,2343,2428,2316,2367,2371,2399,2463,2390,2401,2441,2267,2370,2315,2398,2416,2381,2413,2425,2446.5,2481,2415,2327,2314,2367,2384,2406.5],[2528.824512534819,2578.864864864865,2519.645408163266,2485.095338983051,2509.885993485342,2549.273684210526,2464.482014388489,2492.677884615385,2494.9,2497.089361702127,2587.547169811321,2507.24,2521.488888888889,2534.461077844312,2515.801801801802,2381.078125,2393.705882352941,2433.044728434505,2493.760869565217,2418.882352941177,2460.68932038835,2438.830508474576,2523.898550724638,2475.666666666667,2407.951219512195,2428.405405405405,2283.203883495145,2368.66,2396.103448275862,2303.333333333333,2304.05,2342.468085106383,2300.934210526316,2419.518518518519,2332.112676056338,2316.1875,2432.275862068966,2343.056,null,2156.636363636364,2444.96,2370.429906542056,2372.4,2267.64367816092,2290,2371.27868852459,2376.357142857143,2388.836734693878,2285.961538461539,2435.711538461539,2445.512195121951,2412.76,2504.87012987013,2347.794871794872,2396.072727272727,2300.166666666667,2285.292307692308,2315.78125,2388.871794871795,2437.135135135135,2371.966101694915,2255.129032258064,2428.636363636364,2373.958333333333,2418.213483146068,2363.434782608696,2317.739130434783,2522.461538461539,2196.185185185185,2272.86,2328.741379310345,2331.057142857143,2400.944881889764,2460.265306122449,2344.92,2367.911764705882,2250.923076923077,2311.235294117647,2406.235294117647,2369.53216374269,2340.219178082192,2397.071428571428,2318,2346.974358974359,2382.4,2373.219512195122,2444.746987951807,2317.469483568075,2354.909090909091,2406.2,2376.712328767123,2384.681818181818,2433.643478260869,2397.836879432624,2325.666666666667,2344.775,null,2427.634146341463,2288.360465116279,2364.864197530864,2448.614285714286,2362.333333333333,2408.424242424242,2382.461538461539,2462.888888888889,2338.511111111111,2338.815789473684,2422.785714285714,2369.609375,2333.6,2575.461538461539,2382.694214876033,2399.853658536585,2365.072727272727,2374.851351351351,2449.660377358491,2448.022727272727,2378.444444444444,2355.122448979592,2485.849462365592,2338.095238095238,2280.909090909091,2158,2373.8,2401.781690140845,2402.772727272727,2340.484848484848,2421.285714285714,2392.727272727273,2350.24,2320.681818181818,2391.227941176471,2383.742857142857,2438.161764705882,2369.677419354839,2369.892857142857,2373.886597938144,2309.375,2437,2469.464285714286,2407.048387096774,2265.388888888889,2307.705882352941,2316.7,2436.906976744186,2369.739130434783,2330.928571428572,2421.92,2422.761904761905,2324.753623188406,2385.320512820513,2389.166666666667,2430.72,2214.54054054054,2411.631578947368,2412.450980392157,2417.06875,2360.636363636364,2270.666666666667,2339.125,2336.02,2412.895104895105,2410.888888888889,2411.433526011561,2480.014925373134,2347.48275862069,2239.72,2448.063157894737,2317.424242424242,2331.634146341463,2331.473684210526,2335.37037037037,2359.441489361702,2460.511111111111,2414.375,2390.814814814815,2430.883333333333,2333.43661971831,2359.538461538461,2401.470588235294,2378.833333333333,2346.233333333333]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>name<\/th>\n      <th>title<\/th>\n      <th>fed<\/th>\n      <th>women_prize_money<\/th>\n      <th>best_Place<\/th>\n      <th>score<\/th>\n      <th>avg_BhC1<\/th>\n      <th>rating_best<\/th>\n      <th>N_participations<\/th>\n      <th>avg_games_played<\/th>\n      <th>win_white_pct<\/th>\n      <th>games_w_White<\/th>\n      <th>win_black_pct<\/th>\n      <th>games_w_Black<\/th>\n      <th>median_opponent_defeated<\/th>\n      <th>average_opponent_defeated<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[4,5,6,7,8,9,10,12,14,15,16]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"name","targets":1},{"name":"title","targets":2},{"name":"fed","targets":3},{"name":"women_prize_money","targets":4},{"name":"best_Place","targets":5},{"name":"score","targets":6},{"name":"avg_BhC1","targets":7},{"name":"rating_best","targets":8},{"name":"N_participations","targets":9},{"name":"avg_games_played","targets":10},{"name":"win_white_pct","targets":11},{"name":"games_w_White","targets":12},{"name":"win_black_pct","targets":13},{"name":"games_w_Black","targets":14},{"name":"median_opponent_defeated","targets":15},{"name":"average_opponent_defeated","targets":16}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
-</section>
 </section>
 <section id="most-tournament-wins-and-biggest-prize-money" class="level1" data-number="12">
 <h1 data-number="12"><span class="header-section-number">12</span> Most tournament wins and biggest prize money</h1>
 <p>Hikaru Nakamura is clearly number 1 with regards to tournament winnings (22) and prize money ($34350) and a winning percentage of 23.7% (22/93). Magnus Carlsen is number 2 with 13 won tournaments and a prize money of $22100. His winning percentage was 22.8% (13/57) slightly below Hikaru Nakamuras. Alireza Firouzja could be considered third place with 10% winning chance (6/60), a third place in total wins (6) and 4th place regarding prize money ($11500) only slightly behind Aleksei Sarana ($11750). There were six other players that won the tournament four or more times and all of them made it into the top 10 of highest prize money (see tables below).</p>
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>most_TT_wins <span class="ot">&lt;-</span> player_df <span class="sc">%&gt;%</span> <span class="fu">select</span>(name, title, fed, N_1st, N_participations) <span class="sc">%&gt;%</span> </span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">mutate</span>(<span class="at">winning_pct =</span> <span class="fu">percent</span>(N_1st <span class="sc">/</span> N_participations, <span class="at">accuracy =</span> <span class="fl">0.1</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">arrange</span>(<span class="fu">desc</span>(N_1st)) <span class="sc">%&gt;%</span> </span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">filter</span>(N_1st <span class="sc">&gt;</span> <span class="dv">3</span>)</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>           </span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(most_TT_wins)</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>highest_TT_prize <span class="ot">&lt;-</span> player_df <span class="sc">%&gt;%</span> <span class="fu">select</span>(name, title, fed, total_prize, N_participations) <span class="sc">%&gt;%</span> </span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a> <span class="fu">arrange</span>(<span class="fu">desc</span>(total_prize)) <span class="sc">%&gt;%</span> </span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a> <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">10</span>)</span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(highest_TT_prize)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>most_TT_wins <span class="ot">&lt;-</span> player_df <span class="sc">%&gt;%</span> <span class="fu">select</span>(name, title, fed, N_1st, N_participations) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">mutate</span>(<span class="at">winning_pct =</span> <span class="fu">percent</span>(N_1st <span class="sc">/</span> N_participations, <span class="at">accuracy =</span> <span class="fl">0.1</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">arrange</span>(<span class="fu">desc</span>(N_1st)) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">filter</span>(N_1st <span class="sc">&gt;</span> <span class="dv">3</span>)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>           </span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(most_TT_wins)</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>highest_TT_prize <span class="ot">&lt;-</span> player_df <span class="sc">%&gt;%</span> <span class="fu">select</span>(name, title, fed, total_prize, N_participations) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a> <span class="fu">arrange</span>(<span class="fu">desc</span>(total_prize)) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a> <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">10</span>)</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(highest_TT_prize)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
@@ -2807,10 +2591,10 @@ background: #f0f3f5;
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>TT <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(date_time) <span class="sc">%&gt;%</span> </span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(score <span class="sc">==</span> <span class="fu">max</span>(score)) <span class="sc">%&gt;%</span> </span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(date_time) <span class="sc">%&gt;%</span> </span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">==</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>TT <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(date_time) <span class="sc">%&gt;%</span> </span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(score <span class="sc">==</span> <span class="fu">max</span>(score)) <span class="sc">%&gt;%</span> </span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(date_time) <span class="sc">%&gt;%</span> </span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">==</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 2
@@ -2823,19 +2607,19 @@ background: #f0f3f5;
 </div>
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#print("2024-01-16_early")</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">#kable(draw1)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#print("2024-01-16_early")</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co">#kable(draw1)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Here are the results for the draw on 16 January:</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>draw1 <span class="ot">&lt;-</span> TT <span class="sc">%&gt;%</span> <span class="fu">filter</span>(date_time <span class="sc">==</span> <span class="st">"2024-01-16_early"</span>, number <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  select(date, time, name, title, fed, score, buchholz_cut_1, rating, games_played)</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(number, name, title, fed, score, buchholz_cut_1, rating, games_played)</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(draw1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>draw1 <span class="ot">&lt;-</span> TT <span class="sc">%&gt;%</span> <span class="fu">filter</span>(date_time <span class="sc">==</span> <span class="st">"2024-01-16_early"</span>, number <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  select(date, time, name, title, fed, score, buchholz_cut_1, rating, games_played)</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(number, name, title, fed, score, buchholz_cut_1, rating, games_played)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(draw1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
@@ -2920,11 +2704,11 @@ background: #f0f3f5;
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>draw2 <span class="ot">&lt;-</span> TT <span class="sc">%&gt;%</span> <span class="fu">filter</span>(date_time <span class="sc">==</span> <span class="st">"2024-02-13_early"</span>, number <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  select(date, time, name, title, fed, score, buchholz_cut_1, rating, games_played)</span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(number, name, title, fed, score, buchholz_cut_1, rating, games_played)</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(draw2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>draw2 <span class="ot">&lt;-</span> TT <span class="sc">%&gt;%</span> <span class="fu">filter</span>(date_time <span class="sc">==</span> <span class="st">"2024-02-13_early"</span>, number <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  select(date, time, name, title, fed, score, buchholz_cut_1, rating, games_played)</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(number, name, title, fed, score, buchholz_cut_1, rating, games_played)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(draw2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
@@ -3009,11 +2793,11 @@ background: #f0f3f5;
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>draw3 <span class="ot">&lt;-</span> TT <span class="sc">%&gt;%</span> <span class="fu">filter</span>(date_time <span class="sc">==</span> <span class="st">"2024-03-05_early"</span>, number <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  select(date, time, name, title, fed, score, buchholz_cut_1, rating, games_played)</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(number, name, title, fed, score, buchholz_cut_1, rating, games_played)</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(draw3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>draw3 <span class="ot">&lt;-</span> TT <span class="sc">%&gt;%</span> <span class="fu">filter</span>(date_time <span class="sc">==</span> <span class="st">"2024-03-05_early"</span>, number <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  select(date, time, name, title, fed, score, buchholz_cut_1, rating, games_played)</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(number, name, title, fed, score, buchholz_cut_1, rating, games_played)</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(draw3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
@@ -3098,16 +2882,16 @@ background: #f0f3f5;
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># How often is the first place tied, and what was the most common tie?</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>draw_distribution <span class="ot">&lt;-</span> TT <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(file_name) <span class="sc">%&gt;%</span> </span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(score <span class="sc">==</span> <span class="fu">max</span>(score)) <span class="sc">%&gt;%</span> </span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(file_name) <span class="sc">%&gt;%</span> <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(n) <span class="sc">%&gt;%</span> </span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percent =</span> <span class="fu">percent</span>((nn <span class="sc">/</span> <span class="fu">sum</span>(nn)), <span class="at">accuracy =</span> <span class="fl">0.1</span>))</span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(draw_distribution) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Player with same score"</span>, <span class="st">"N"</span>, <span class="st">"%"</span>)</span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(draw_distribution)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># How often is the first place tied, and what was the most common tie?</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>draw_distribution <span class="ot">&lt;-</span> TT <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(file_name) <span class="sc">%&gt;%</span> </span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(score <span class="sc">==</span> <span class="fu">max</span>(score)) <span class="sc">%&gt;%</span> </span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(file_name) <span class="sc">%&gt;%</span> <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(n) <span class="sc">%&gt;%</span> </span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percent =</span> <span class="fu">percent</span>((nn <span class="sc">/</span> <span class="fu">sum</span>(nn)), <span class="at">accuracy =</span> <span class="fl">0.1</span>))</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(draw_distribution) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Player with same score"</span>, <span class="st">"N"</span>, <span class="st">"%"</span>)</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(draw_distribution)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
@@ -3157,17 +2941,17 @@ background: #f0f3f5;
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>results_white <span class="ot">&lt;-</span> matches_df <span class="sc">%&gt;%</span> </span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(color <span class="sc">==</span> <span class="st">"white"</span>, result <span class="sc">==</span> <span class="st">"win"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(username, hero_name) <span class="sc">%&gt;%</span> </span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">average_opponent_rating =</span> <span class="fu">round</span>(<span class="fu">mean</span>(opponent_rating), <span class="dv">1</span>),</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">median_opponent_rating =</span> <span class="fu">median</span>(opponent_rating),</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">N_wins_White =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(N_wins_White <span class="sc">&gt;=</span> <span class="dv">30</span>) <span class="sc">%&gt;%</span> <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>username) <span class="sc">%&gt;%</span> </span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(average_opponent_rating)) <span class="sc">%&gt;%</span> </span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">10</span>)</span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(results_white)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>results_white <span class="ot">&lt;-</span> matches_df <span class="sc">%&gt;%</span> </span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(color <span class="sc">==</span> <span class="st">"white"</span>, result <span class="sc">==</span> <span class="st">"win"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(username, hero_name) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">average_opponent_rating =</span> <span class="fu">round</span>(<span class="fu">mean</span>(opponent_rating), <span class="dv">1</span>),</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">median_opponent_rating =</span> <span class="fu">median</span>(opponent_rating),</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">N_wins_White =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(N_wins_White <span class="sc">&gt;=</span> <span class="dv">30</span>) <span class="sc">%&gt;%</span> <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>username) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(average_opponent_rating)) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">10</span>)</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(results_white)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
@@ -3254,17 +3038,17 @@ background: #f0f3f5;
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>results_black <span class="ot">&lt;-</span> matches_df <span class="sc">%&gt;%</span> </span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(color <span class="sc">==</span> <span class="st">"black"</span>, result <span class="sc">==</span> <span class="st">"win"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(username, hero_name) <span class="sc">%&gt;%</span> </span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">average_opponent_rating =</span> <span class="fu">round</span>(<span class="fu">mean</span>(opponent_rating), <span class="dv">1</span>),</span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">median_opponent_rating =</span> <span class="fu">median</span>(opponent_rating),</span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">N_wins_White =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(N_wins_White <span class="sc">&gt;=</span> <span class="dv">30</span>) <span class="sc">%&gt;%</span> <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>username) <span class="sc">%&gt;%</span> </span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(average_opponent_rating)) <span class="sc">%&gt;%</span> </span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">10</span>)</span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(results_black)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>results_black <span class="ot">&lt;-</span> matches_df <span class="sc">%&gt;%</span> </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(color <span class="sc">==</span> <span class="st">"black"</span>, result <span class="sc">==</span> <span class="st">"win"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(username, hero_name) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">average_opponent_rating =</span> <span class="fu">round</span>(<span class="fu">mean</span>(opponent_rating), <span class="dv">1</span>),</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">median_opponent_rating =</span> <span class="fu">median</span>(opponent_rating),</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">N_wins_White =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(N_wins_White <span class="sc">&gt;=</span> <span class="dv">30</span>) <span class="sc">%&gt;%</span> <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>username) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(average_opponent_rating)) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">10</span>)</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(results_black)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
@@ -3354,12 +3138,12 @@ background: #f0f3f5;
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>score_top10 <span class="ot">&lt;-</span> player_df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(N_participations <span class="sc">&gt;=</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, title, fed, avg_score, median_score, max_score, avg_games_played, N_participations) <span class="sc">%&gt;%</span> </span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">arrange</span>(<span class="fu">desc</span>(avg_score)) <span class="sc">%&gt;%</span> </span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">10</span>)</span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(score_top10)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>score_top10 <span class="ot">&lt;-</span> player_df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(N_participations <span class="sc">&gt;=</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, title, fed, avg_score, median_score, max_score, avg_games_played, N_participations) <span class="sc">%&gt;%</span> </span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">arrange</span>(<span class="fu">desc</span>(avg_score)) <span class="sc">%&gt;%</span> </span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">10</span>)</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(score_top10)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
@@ -3494,12 +3278,12 @@ background: #f0f3f5;
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>buchholz_top10 <span class="ot">&lt;-</span> player_df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(N_participations <span class="sc">&gt;=</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, title, fed, avg_BhC1, median_BhC1, max_BhC1, N_participations, rating_best) <span class="sc">%&gt;%</span> </span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">arrange</span>(<span class="fu">desc</span>(median_BhC1)) <span class="sc">%&gt;%</span> </span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">10</span>)</span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(buchholz_top10)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>buchholz_top10 <span class="ot">&lt;-</span> player_df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(N_participations <span class="sc">&gt;=</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, title, fed, avg_BhC1, median_BhC1, max_BhC1, N_participations, rating_best) <span class="sc">%&gt;%</span> </span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">arrange</span>(<span class="fu">desc</span>(median_BhC1)) <span class="sc">%&gt;%</span> </span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">10</span>)</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(buchholz_top10)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">

@@ -1,0 +1,4 @@
+"0","winning_percentages <- games_color %>% filter(result_color %in% c(""win_White"", ""win_Black""))
+"
+"2","Error: object 'games_color' not found
+"

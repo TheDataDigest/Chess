@@ -33,6 +33,8 @@ execute:
 
 ### Setup
 ```{r, message=F, warning=F}
+rm(list =ls())
+
 # load helper functions
 source("../R/2_helper_functions.R")
 
@@ -59,10 +61,11 @@ week_streak <- readRDS(file = "../input/2024_df_RDS/week_streak_2024_df.RDS")
 ```
 
 
-
+Around 5000 player (5018 usernames) participated in 2024s 106 Title Tuesday Tournaments.
+The most on February 6 early (830) and the least December 31 late (410).
 
 ## 2024 AWARDS
-*I created ~14 different award categories:*
+*I created ~18 different award categories:*
 
 1. Most tournament participations and games played (Mikhail Golubev)
 2. Longest participation streak (Mikhail Golubev)
@@ -84,6 +87,10 @@ week_streak <- readRDS(file = "../input/2024_df_RDS/week_streak_2024_df.RDS")
 13. Biggest draw (3x 5 players, Duda, Martinez and Fedoseev twice)
 14. Defeating the strongest competition (Magnus Carlsen with white, Hikaru Nakamura with black pieces)
 15. Highest average score or Buchholtz Cut 1 (Hikaru Nakamura)
+16. Most common encounter (Jose Martinez)
+17. Best junior (Denis Lazavik)
+18. Best senior (Gata Kamsky)
+19. Best girl (Anna Shukhman)
 
 # Most tournament participations and games played
 In 2024 there were `r length(unique(TT$file_name))` Titled Tuesday tournaments with a total of `r nrow(player_df)` players participating.
@@ -515,7 +522,7 @@ player_df$women_prize_money[is.na(player_df$women_prize_money)] <- 0
 
 
 
-```{r, include = T}
+```{r}
 women_users <- TT %>% filter(gender == "Women") %>% pull(username) %>% unique()
 
 women_white <- winning_percentages %>% 
@@ -534,10 +541,9 @@ women_black <- winning_percentages %>%
   arrange(desc(win_black_pct)) %>% 
   left_join(player_df %>% select(username, name, title, fed)) %>% 
   select(username, name, games_w_Black, win_black_pct, title, fed) 
-
-
 ```
-```{r, include=TRUE}
+
+```{r}
 #average competition defeated, based on at least 10 games
 average_defeated_rating <- matches_df %>% filter(hero_name %in% women) %>% 
   filter(result == "win") %>% 
@@ -545,12 +551,8 @@ average_defeated_rating <- matches_df %>% filter(hero_name %in% women) %>%
   summarize(average_opponent_defeated = mean(opponent_rating, na.rm = T),
             median_opponent_defeated = median(opponent_rating, na.rm = T),
             N_games = n()) %>% filter(N_games >= 10) %>% ungroup()
-```
 
-
-```{r, include = T}
 #average competition faced, based on at least 10 games
-
 average_faced_rating <- matches_df %>% filter(hero_name %in% women) %>% 
   group_by(username, hero_name) %>% 
   summarize(average_opponent_faced = mean(opponent_rating, na.rm =T),
@@ -783,3 +785,234 @@ buchholz_top10 <- player_df %>% filter(N_participations >= 5) %>%
 kable(buchholz_top10)
 ```
 
+
+# Most common encounter
+Jose Martinez faced Hikaru Nakamura 16 times and Magnus Carlsen 16 times in 2024.
+There are four matches that happend 14 times including Nakmura (2x), Bortnyk (2x), Tuan Minh Le, Rustemov, Zhigalko and Bluebaum. 
+
+### Jose Eduardo Martinez Alcantara vs Hikaru Nakamura
+Martinez played Hikaru 16 times but only 3 times with the black pieces. All of those games he lost.
+With the white pieces he won 3/13 times (23.1%), he lost 7 times (53.8%) and drew 3 times.
+```{r}
+matches_df %>% filter(hero_name == "Jose Martinez", opponent_name == "Hikaru Nakamura") %>% 
+  count(color, result) %>% mutate(pct = n /sum(n) * 100)
+```
+
+### Jose Eduardo Martinez Alcantara vs Magnus Carlsen
+Martinez played Carlsen 16 times. 6 times with black winning one of the games and losing 5.
+And 10 times with white, winning half of them (5/10) losing 4 and drawing 1.
+```{r}
+matches_df %>% filter(hero_name == "Jose Martinez", opponent_name == "Magnus Carlsen") %>% 
+  count(color, result) %>% mutate(pct = n /sum(n) * 100)
+```
+
+In his 32 encounters against these two rapid super stars he won 9 games (9/32 = 28%) and lost 19 games (59%). So overall he is behind against them even though he had the white pieces 23 out of 32 times.
+But this award would be for the 2 most common encounters and the fun fact that he was involved in both of them.
+
+
+# Best junior (Denis Lazavik)
+
+```{r}
+junior <- c("Denis Lazavik", "Christopher Woojin Yoo", "Pranav V", "Reza Mahdavi", "Marco Materia", "Bharath Subramaniyam.H Harishankkar", "Mamedov Edgar", "Artin Ashraf", "Pranesh M", "Havard Haug")
+
+#junior %in% TT$name
+#junior %in% player_df$name
+
+junior_username <- player_df %>% filter(name %in% junior) %>% pull(username)
+
+junior_white <- winning_percentages %>% 
+  filter(username %in% junior_username) %>% 
+  filter(games_w_White >= 10,
+         result_color == "win_White") %>% 
+  arrange(desc(win_white_pct)) %>% 
+  left_join(player_df %>% select(username, name, title, fed)) %>% 
+  select(username, name, games_w_White, win_white_pct, title, fed) 
+
+
+junior_black <- winning_percentages %>% 
+  filter(username %in% junior_username) %>% 
+  filter(games_w_Black >= 10,
+         result_color == "win_Black") %>% 
+  arrange(desc(win_black_pct)) %>% 
+  left_join(player_df %>% select(username, name, title, fed)) %>% 
+  select(username, name, games_w_Black, win_black_pct, title, fed) 
+
+
+#average competition defeated, based on at least 10 games
+average_defeated_rating <- matches_df %>% filter(hero_name %in% junior) %>% 
+  filter(result == "win") %>% 
+  group_by(username, hero_name) %>% 
+  summarize(average_opponent_defeated = mean(opponent_rating, na.rm = T),
+            median_opponent_defeated = median(opponent_rating, na.rm = T),
+            N_games = n()) %>% filter(N_games >= 10) %>% ungroup()
+
+#average competition faced, based on at least 10 games
+average_faced_rating <- matches_df %>% filter(hero_name %in% junior) %>% 
+  group_by(username, hero_name) %>% 
+  summarize(average_opponent_faced = mean(opponent_rating, na.rm =T),
+            median_opponent_faced = median(opponent_rating, na.rm =T),
+            N_games = n()) %>% filter(N_games >= 10) %>% ungroup()
+```
+Denis Lazavik should get the award ahead of Christopher Woojin Yoo. He is only behind him with regards to winning streak (8 vs 10) and a slightly lower winning pct with white (74.43% vs 74.63%).
+
+But he has higher prize money (8800 vs 4500) better score (8.41 vs 7.84), higher average Buchholz_cut1, higher rating (3205 vs 3026) more participations (56 vs 51), more games played on average. Higher winning pct with black (64.9% vs 60.9%) and higher median opponent rating he defeated (2822 vs 2734).
+
+```{r}
+junior_df <- player_df %>% filter(name %in% junior) %>% 
+  left_join(average_defeated_rating) %>% 
+  left_join(average_faced_rating) %>% 
+  left_join(junior_white) %>% 
+  left_join(junior_black) %>% 
+  left_join(winning_streak) %>% 
+  select(name, title, fed, total_prize, best_Place, score, avg_BhC1, rating_best, N_participations,avg_games_played, winning_streak, win_white_pct ,games_w_White,win_black_pct ,games_w_Black, median_opponent_defeated, average_opponent_defeated) %>% 
+  arrange(desc(total_prize)) %>% 
+  filter(N_participations >= 10) %>% ungroup()
+#  slice_head(n=100) %>% ungroup()
+
+
+DT::datatable(junior_df)
+```
+
+# Best senior (Gata Kamsky)
+
+```{r}
+senior <- c("Gata Kamsky", "Rodrigo Vasquez", "Alexander Rustemov", "Alexei Shirov", "Nikolai Vlassov", "Mikhail Golubev", "Daniel Barria", "Vladislav Gontcharov", "Sergei Iskusnyh", "Igor Yagupov")
+
+#senior %in% TT$name
+#senior %in% player_df$name
+
+senior_username <- player_df %>% filter(name %in% senior) %>% pull(username)
+
+senior_white <- winning_percentages %>% 
+  filter(username %in% senior_username) %>% 
+  filter(games_w_White >= 10,
+         result_color == "win_White") %>% 
+  arrange(desc(win_white_pct)) %>% 
+  left_join(player_df %>% select(username, name, title, fed)) %>% 
+  select(username, name, games_w_White, win_white_pct, title, fed) 
+
+
+senior_black <- winning_percentages %>% 
+  filter(username %in% senior_username) %>% 
+  filter(games_w_Black >= 10,
+         result_color == "win_Black") %>% 
+  arrange(desc(win_black_pct)) %>% 
+  left_join(player_df %>% select(username, name, title, fed)) %>% 
+  select(username, name, games_w_Black, win_black_pct, title, fed) 
+
+
+#average competition defeated, based on at least 10 games
+average_defeated_rating <- matches_df %>% filter(hero_name %in% senior) %>% 
+  filter(result == "win") %>% 
+  group_by(username, hero_name) %>% 
+  summarize(average_opponent_defeated = mean(opponent_rating, na.rm = T),
+            median_opponent_defeated = median(opponent_rating, na.rm = T),
+            N_games = n()) %>% filter(N_games >= 10) %>% ungroup()
+
+#average competition faced, based on at least 10 games
+average_faced_rating <- matches_df %>% filter(hero_name %in% senior) %>% 
+  group_by(username, hero_name) %>% 
+  summarize(average_opponent_faced = mean(opponent_rating, na.rm =T),
+            median_opponent_faced = median(opponent_rating, na.rm =T),
+            N_games = n()) %>% filter(N_games >= 10) %>% ungroup()
+```
+Gata Kamsky is the only senior with a prize money given his best place was number 4 (early-april-02-2024).
+He has the highest average score (7.7) in the top 10 seniors and the best rating. 
+He has the highest winning streak (10 vs 7) and the best winning pct with black (54.74%) only Rodrigo Vasquez Schroeder has a slightly higher winning pct with white (67.54% vs 67.15%)
+He also has the highest rated opponents that he faced and defeated so a truly deserving award.
+
+```{r}
+senior_df <- player_df %>% filter(name %in% senior) %>% 
+  left_join(average_defeated_rating) %>% 
+  left_join(average_faced_rating) %>% 
+  left_join(senior_white) %>% 
+  left_join(senior_black) %>% 
+  left_join(winning_streak) %>% 
+  select(name, title, fed, total_prize, best_Place, score, avg_BhC1, rating_best, N_participations,avg_games_played, winning_streak, win_white_pct ,games_w_White,win_black_pct ,games_w_Black, median_opponent_defeated, average_opponent_defeated) %>% 
+  arrange(desc(total_prize)) %>% 
+  filter(N_participations >= 10) %>% ungroup()
+#  slice_head(n=100) %>% ungroup()
+
+
+DT::datatable(senior_df)
+```
+
+# Best girl (Anna Shukhman)
+
+```{r}
+girl <- c("Veronika Shubenkova", "Afruza Khamdamova", "Kalyani Sirin", "Megan Althea Paragua", "Anna Shukhman", "Bozhena Piddubna", "Nguyen Hong Nhung", "Diana Preobrazhenskaya", "Guldona Karimova", "Maria Teresa Jimenez Salas")
+
+player_df$name <- gsub(pattern = "AFRUZA Khamdamova", replacement = "Afruza Khamdamova", x = player_df$name, ignore.case = FALSE)
+player_df$name <- gsub(pattern = "BOZNENA PIDDUBNA", replacement = "Bozhena Piddubna", x = player_df$name)
+player_df$name <- gsub(pattern = "Nhung Hong Nguyen", replacement = "Nguyen Hong Nhung", x = player_df$name)
+player_df$name <- gsub(pattern = "Guldona Karimov", replacement = "Guldona Karimova", x = player_df$name)
+
+#girl %in% TT$name
+#girl %in% player_df$name
+
+matches_df$hero_name <- gsub(pattern = "AFRUZA Khamdamova", replacement = "Afruza Khamdamova", x = matches_df$hero_name, ignore.case = FALSE)
+matches_df$hero_name <- gsub(pattern = "BOZNENA PIDDUBNA", replacement = "Bozhena Piddubna", x = matches_df$hero_name)
+matches_df$hero_name <- gsub(pattern = "Nhung Hong Nguyen", replacement = "Nguyen Hong Nhung", x = matches_df$hero_name)
+matches_df$hero_name <- gsub(pattern = "Guldona Karimov", replacement = "Guldona Karimova", x = matches_df$hero_name)
+
+#girl %in% matches_df$hero_name
+winning_streak$name <- gsub(pattern = "AFRUZA Khamdamova", replacement = "Afruza Khamdamova", x = winning_streak$name, ignore.case = FALSE)
+winning_streak$name <- gsub(pattern = "BOZNENA PIDDUBNA", replacement = "Bozhena Piddubna", x = winning_streak$name)
+winning_streak$name <- gsub(pattern = "Nhung Hong Nguyen", replacement = "Nguyen Hong Nhung", x = winning_streak$name)
+winning_streak$name <- gsub(pattern = "Guldona Karimov", replacement = "Guldona Karimova", x = winning_streak$name)
+
+#girl %in% winning_streak$name
+
+girl_username <- player_df %>% filter(name %in% girl) %>% pull(username)
+
+girl_white <- winning_percentages %>% 
+  filter(username %in% girl_username) %>% 
+  filter(games_w_White >= 10,
+         result_color == "win_White") %>% 
+  arrange(desc(win_white_pct)) %>% 
+  left_join(player_df %>% select(username, name, title, fed)) %>% 
+  select(username, name, games_w_White, win_white_pct, title, fed) 
+
+
+girl_black <- winning_percentages %>% 
+  filter(username %in% girl_username) %>% 
+  filter(games_w_Black >= 10,
+         result_color == "win_Black") %>% 
+  arrange(desc(win_black_pct)) %>% 
+  left_join(player_df %>% select(username, name, title, fed)) %>% 
+  select(username, name, games_w_Black, win_black_pct, title, fed) 
+
+
+#average competition defeated, based on at least 10 games
+average_defeated_rating <- matches_df %>% filter(hero_name %in% girl) %>% 
+  filter(result == "win") %>% 
+  group_by(username, hero_name) %>% 
+  summarize(average_opponent_defeated = mean(opponent_rating, na.rm = T),
+            median_opponent_defeated = median(opponent_rating, na.rm = T),
+            N_games = n()) %>% filter(N_games >= 10) %>% ungroup()
+
+#average competition faced, based on at least 10 games
+average_faced_rating <- matches_df %>% filter(hero_name %in% girl) %>% 
+  group_by(username, hero_name) %>% 
+  summarize(average_opponent_faced = mean(opponent_rating, na.rm =T),
+            median_opponent_faced = median(opponent_rating, na.rm =T),
+            N_games = n()) %>% filter(N_games >= 10) %>% ungroup()
+```
+If we include this award, I think it would have to go to Anna Shukhman. Based on the top 10 from the leaderboard she does have the best place (41), the highest rating (2662) and the best average score (5.95 vs 4.16 from Veronika Shubenkova). She does have the fewest participations (only 19) which is why her leaderboard score is not higher because all of her 19 attempts went into the score. Veronika Shubenkova has the most participatinos (81) giving her more chances to produce her best 20 scores. It also gave her a winning streak of 6 which is one better than Anna Shukhman's 5 wins in a row. Their winning pct with white is quite close (46% to 45%) but Anna is better with black (54% vs 50%) and the competition she faced and defeated is ~70points higher rated than the competition that Veronika faced and defeated.
+Afruza Khamdamova is almost as good as Anna Shukhman but also only participated rarely (25).
+
+```{r}
+girl_df <- player_df %>% filter(name %in% girl) %>% 
+  left_join(average_defeated_rating) %>% 
+  left_join(average_faced_rating) %>% 
+  left_join(girl_white) %>% 
+  left_join(girl_black) %>% 
+  left_join(winning_streak) %>% 
+  select(name, title, fed, best_Place, score, avg_BhC1, rating_best, N_participations,avg_games_played, winning_streak, win_white_pct ,games_w_White,win_black_pct ,games_w_Black, median_opponent_defeated, average_opponent_defeated) %>% 
+  arrange(desc(score)) %>% 
+  filter(N_participations >= 10) %>% ungroup()
+#  slice_head(n=100) %>% ungroup()
+
+
+DT::datatable(girl_df)
+```

@@ -3,17 +3,17 @@
     "path": "E:/The Data Digest/GitHub/Chess/R/0_setup_load_clean_data_2024.R",
     "project_path": "R/0_setup_load_clean_data_2024.R",
     "type": "r_source",
-    "hash": "2620263817",
+    "hash": "0",
     "contents": "",
-    "dirty": false,
+    "dirty": true,
     "created": 1716460924631.0,
     "source_on_save": false,
     "relative_order": 1,
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "252,47",
-        "scrollLine": "216",
+        "cursorPosition": "247,2034",
+        "scrollLine": "218",
         "docOutlineVisible": "0"
     },
     "folds": "",
@@ -21,7 +21,7 @@
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1736368940033,
+    "last_content_update": 1736423318414,
     "read_only": false,
     "read_only_alternatives": []
 }

@@ -1,5 +1,0 @@
-"0","most_participations <- player_df %>% select(name, title, fed,  N_participations, total_games_played) %>% "
-"0"," arrange(desc(N_participations)) %>% "
-"0"," slice_head(n=10)"
-"0","  "
-"0","kable(most_participations)"
